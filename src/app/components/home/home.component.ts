@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,17 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class HomeComponent implements OnInit {
   posts:any;
-  day = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
-  month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-  constructor(private data: DataService) { }
+  lat:any;
+  lon: any;
+  constructor(private data: DataService, private location: LocationService) { }
 
   ngOnInit(): void {
-    this.getPosts(26.842294, 75.830585, 10000);
+    this.location.getPosition().then(pos=>
+      {
+        this.lon = pos.lng;
+        this.lat = pos.lat;
+        this.getPosts(this.lat, this.lon, 10000);
+      });
   }
   getPosts(latitude, longitude, radius) {
     this.data.getNearbyPosts(latitude, longitude, radius).subscribe(res => {

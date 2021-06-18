@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-map',
@@ -9,10 +10,10 @@ export class MapComponent implements OnInit {
   currLat: any;
   currLng: any;
 
-  constructor() { }
+  constructor(private location: LocationService) { }
 
   ngOnInit(): void {
-    this.getPosition().then(pos=>
+    this.location.getPosition().then(pos=>
       {
         this.currLng = pos.lng;
         this.currLat = pos.lat;
@@ -20,22 +21,5 @@ export class MapComponent implements OnInit {
       });
     
   }
-
-  getPosition(): Promise<any>
-  {
-    return new Promise((resolve, reject) => {
-
-      navigator.geolocation.getCurrentPosition(resp => {
-
-          resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
-        },
-        err => {
-          reject(err);
-        });
-    });
-
-  }
-
-
 
 }

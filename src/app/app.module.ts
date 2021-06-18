@@ -12,8 +12,9 @@ import { HomeComponent } from './components/home/home.component';
 import { MapComponent } from './components/map/map.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { DataService } from "../app/services/data.service";
+import { DataService } from "./services/data.service";
 import { googleMapsApiKey } from "../environments/environment";
+import { LocationService } from './services/location.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { googleMapsApiKey } from "../environments/environment";
     }),
     HttpClientModule
   ],
-  providers: [DataService],
+  providers: [DataService, LocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
