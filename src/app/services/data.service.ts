@@ -5,14 +5,17 @@ import { HttpClient, HttpParams } from "@angular/common/http";
   providedIn: 'root'
 })
 export class DataService {
-  url:string = "https://us-central1-localeyes-95d0d.cloudfunctions.net";
+  prodURL: string = "https://us-central1-localeyes-95d0d.cloudfunctions.net";
+  devURL: string = "http://localhost:5001/localeyes-95d0d/us-central1/localEyesFunctions";
   constructor(private http: HttpClient) { }
 
-  getNearbyPosts(lat, lon, radius, sortBy:string) {
+  getNearbyPosts(lat, lon, radius, sortBy="") {
     let params = new HttpParams()
     .set('lat', lat)
     .set('lon', lon)
     .set('radius', radius)
-    return this.http.get(`${this.url}/getNearbyPosts`, {params})
+    console.log(`${this.devURL}/getNearbyPosts, ${params}`);
+    
+    return this.http.get(`${this.devURL}/getNearbyPosts`, {params})
   }
 }
