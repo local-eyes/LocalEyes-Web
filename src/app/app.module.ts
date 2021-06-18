@@ -15,6 +15,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { DataService } from "./services/data.service";
 import { googleMapsApiKey } from "../environments/environment";
 import { LocationService } from './services/location.service';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LocationService } from './services/location.service';
     HomeComponent,
     MapComponent,
     PostComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,9 @@ import { LocationService } from './services/location.service';
     }),
     HttpClientModule
   ],
-  providers: [DataService, LocationService],
+  providers: [
+    DataService, 
+    LocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

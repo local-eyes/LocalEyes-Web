@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   posts:any;
   lat:any;
   lon: any;
+  loadComplete:boolean = false;
   constructor(private data: DataService, private location: LocationService) { }
 
   ngOnInit(): void {
@@ -21,12 +22,15 @@ export class HomeComponent implements OnInit {
         this.getPosts(this.lat, this.lon, 10000);
       });
   }
+
   getPosts(latitude, longitude, radius) {
     this.data.getNearbyPosts(latitude, longitude, radius).subscribe(res => {
       this.posts = res;
       console.log(this.posts);
+      this.loadComplete = true;
     })
   }
+  
   getDate(seconds:number) {
     const postTime = new Date(seconds * 1000);
     const postedOn = postTime.getTime();
