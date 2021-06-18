@@ -23,14 +23,7 @@
             </a>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-grid-list cols=2 rowHeight="fit" style="height: 100vh;">
-            <mat-grid-tile>
-                <router-outlet></router-outlet>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <app-map></app-map>
-            </mat-grid-tile>
-        </mat-grid-list>
+    <mat-sidenav-content style="min-height: 100vh;">
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

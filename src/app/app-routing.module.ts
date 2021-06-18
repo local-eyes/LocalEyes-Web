@@ -6,8 +6,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'post', component: PostComponent}
+  {path: 'profile/:uid', component: ProfileComponent},
+  {path: 'post/:id', component: PostComponent}
 ];
 
 @NgModule({

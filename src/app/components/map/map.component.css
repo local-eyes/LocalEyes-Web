@@ -1,5 +1,6 @@
 agm-map {
-    width: 100vh;
-    height: 100vh;
-    border-radius: 20px;
+    margin-top: 20px;
+    position: fixed;
+    width: 80vh;
+    height: 90vh;
 }
