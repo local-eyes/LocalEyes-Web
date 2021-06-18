@@ -1,0 +1,44 @@
+mat-sidenav-container {
+    min-height: 100vh;
+}
+
+mat-sidenav {
+    background-color: rgb(15, 15, 15);
+    color: white;
+    width: 300px;
+}
+
+mat-sidenav-closed {
+    width: 100vw;
+}
+
+mat-sidenav-content {
+    background-color: black;
+    color: white;
+    ;
+}
+
+a {
+    color: #62c9d5!important;
+}
+
+.mat-list-item {
+    font-size: 20px;
+}
+
+.mat-list-item:hover,
+.active {
+    background: #a8f6ff;
+    color: black!important;
+    width: auto;
+    border-radius: 40px;
+}
+
+.nav-logo img {
+    padding-left: 15%;
+    margin: 20px 0;
+}
+
+mat-divider {
+    border-top-color: rgba(255, 255, 255, 0.411);
+}

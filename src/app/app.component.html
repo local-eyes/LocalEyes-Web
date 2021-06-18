@@ -1,0 +1,37 @@
+<mat-sidenav-container>
+    <mat-sidenav mode="side" opened [fixedInViewport]="true">
+        <mat-nav-list class="p-3">
+            <a routerLink="" class="nav-logo">
+                <img src="../assets/imgs/LOgo-footer.png" alt="logo">
+            </a>
+            <mat-divider></mat-divider>
+            <a routerLink="" mat-list-item class="mt-2">
+                <mat-icon matListIcon>apartment</mat-icon>
+                <h1 matLine>Local</h1>
+            </a>
+            <a routerLink="" mat-list-item>
+                <mat-icon matListIcon>map_two_tone</mat-icon>
+                <h1 matLine>City</h1>
+            </a>
+            <a routerLink="post" mat-list-item>
+                <mat-icon matListIcon>explore_outline</mat-icon>
+                <h1 matLine>Explore</h1>
+            </a>
+            <a routerLink="profile" mat-list-item>
+                <mat-icon matListIcon>person_outline</mat-icon>
+                <h1 matLine>Profile</h1>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-grid-list cols=2 rowHeight="fit" style="height: 100vh;">
+            <mat-grid-tile>
+                <router-outlet></router-outlet>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <app-map></app-map>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <!-- <router-outlet></router-outlet> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>
