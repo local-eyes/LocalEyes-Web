@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
   providedIn: 'root'
 })
 export class DataService {
-  prodURL: string = "https://us-central1-localeyes-95d0d.cloudfunctions.net";
+  prodURL: string = "https://us-central1-localeyes-95d0d.cloudfunctions.net/localEyesFunctions";
   devURL: string = "http://localhost:5001/localeyes-95d0d/us-central1/localEyesFunctions";
   constructor(private http: HttpClient) { }
 

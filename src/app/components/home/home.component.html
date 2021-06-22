@@ -1,6 +1,6 @@
 <app-loader *ngIf="loadComplete==false"></app-loader>
 <div class="row w-100 m-auto" *ngIf="loadComplete==true">
-    <div class="col-6">
+    <div class="col-8">
         <div class="container">
             <div class="example-card" *ngFor="let post of posts; let i = index">
                 <mat-card class="bg-dark text-light">
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
-        <app-map></app-map>
+    <div class="col-2">
+        <app-profile></app-profile>
     </div>
 </div>

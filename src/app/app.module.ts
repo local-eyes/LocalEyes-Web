@@ -16,6 +16,7 @@ import { DataService } from "./services/data.service";
 import { googleMapsApiKey } from "../environments/environment";
 import { LocationService } from './services/location.service';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ExploreComponent } from './components/explore/explore.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     MapComponent,
     PostComponent,
     ProfileComponent,
-    LoaderComponent
+    LoaderComponent,
+    ExploreComponent
   ],
   imports: [
     BrowserModule,

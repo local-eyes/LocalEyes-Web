@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   posts:any;
   lat:any;
   lon: any;
+  radius: number = 10000;
   loadComplete:boolean = false;
   constructor(private data: DataService, private location: LocationService) { }
 
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
       {
         this.lon = pos.lng;
         this.lat = pos.lat;
-        this.getPosts(this.lat, this.lon, 10000);
+        this.getPosts(this.lat, this.lon, this.radius);
       });
   }
 
