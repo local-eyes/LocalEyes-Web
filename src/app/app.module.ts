@@ -12,8 +12,8 @@ import { HomeComponent } from './components/home/home.component';
 // import { MapComponent } from './components/map/map.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { DataService } from "./services/data.service";
-import { LocationService } from './services/location.service';
+import { DataService } from "./services/data/data.service";
+import { LocationService } from './services/location/location.service';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ExploreComponent } from './components/explore/explore.component';
 

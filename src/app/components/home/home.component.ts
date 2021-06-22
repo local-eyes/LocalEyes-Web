@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
-import { LocationService } from 'src/app/services/location.service';
+import { DataService } from 'src/app/services/data/data.service';
+import { LocationService } from 'src/app/services/location/location.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PostComponent } from '../post/post.component';
 
