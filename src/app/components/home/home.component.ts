@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { LocationService } from 'src/app/services/location.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ export class HomeComponent implements OnInit {
   lon: any;
   radius: number = 10000;
   loadComplete:boolean = false;
-  constructor(private data: DataService, private location: LocationService) { }
+  constructor(private data: DataService, private location: LocationService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.location.getPosition().then(pos=>
@@ -56,5 +58,9 @@ export class HomeComponent implements OnInit {
     } else {
       return `> 1 Minute ago`;
     } 
+  }
+
+  openPost(postId:string) {
+    this.dialog.open(PostComponent, {height: "90vh", width: "90vw", data: this.posts[postId], hasBackdrop: true});
   }
 }

@@ -1,1 +1,36 @@
-<p>post works!</p>
+<mat-card class="bg-dark text-light">
+    <mat-card-header>
+        <mat-chip-list aria-label="Fish selection">
+            <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+            <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+        </mat-chip-list>
+        <img src="{{post.author.image}}" mat-card-avatar>
+        <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+        <mat-card-subtitle class="text-secondary">• Living in {{post.author.locality}} since {{post.author.living_since}} Years</mat-card-subtitle>
+    </mat-card-header>
+    <h1 mat-dialog-title>{{post.content.title}}</h1>
+    <h4 mat-dialog-content> {{post.content.description}} </h4>
+    <mat-card-subtitle class="text-secondary">~ {{post.hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-actions class="row">
+        <button mat-icon-button class="col-6">
+            <mat-icon>celebration</mat-icon>
+            <!-- <img src="../../../assets/icons/clapping.png" alt="clap"> -->
+        </button>{{post.content.claps}}
+        <button mat-icon-button>
+            <mat-icon>forum</mat-icon>
+            <!-- <img src="../../../assets/icons/clapping.png" alt="clap"> -->
+        </button>{{post.answers.length}}
+        <mat-divider [vertical]="true" class="bg-light"></mat-divider>
+    </mat-card-actions>
+</mat-card>
+<div class="container m-auto" *ngIf="post.answers.length == 0"> Nothing to Show Yet. Be the first one to Answer</div>
+<mat-card *ngFor="let answer of post.answers; let i = index;" class="bg-dark text-light m-3">
+    <mat-card-header>
+        <img src="{{answer.author.image}}" mat-card-avatar>
+        <mat-card-title><a routerLink="profile/{{answer.author.uid}}">{{answer.author.fullname}}</a></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p> {{answer.body}} </p>
+    </mat-card-content>
+</mat-card>
