@@ -2,6 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 
+// Firebase
+import { firebaseConfig } from "../environments/environment";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+
 // import { AgmCoreModule } from "@agm/core";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +21,7 @@ import { DataService } from "./services/data/data.service";
 import { LocationService } from './services/location/location.service';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ExploreComponent } from './components/explore/explore.component';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -32,11 +38,15 @@ import { ExploreComponent } from './components/explore/explore.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [
     DataService, 
-    LocationService],
+    LocationService, 
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
