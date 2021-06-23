@@ -20,17 +20,22 @@
         <button mat-icon-button>
             <mat-icon>forum</mat-icon>
             <!-- <img src="../../../assets/icons/clapping.png" alt="clap"> -->
-        </button>{{post.answers.length}}
+        </button>{{answers.length}}
         <mat-divider [vertical]="true" class="bg-light"></mat-divider>
     </mat-card-actions>
 </mat-card>
-<div class="container m-auto" *ngIf="post.answers.length == 0"> Nothing to Show Yet. Be the first one to Answer</div>
-<mat-card *ngFor="let answer of post.answers; let i = index;" class="bg-dark text-light m-3">
+<div class="container m-auto" *ngIf="answersLoaded == false">
+    <app-loader></app-loader>
+</div>
+<h1 class="d-flex justify-content-center m-auto col-12" *ngIf="answersLoaded && answers.length == 0">
+    Nothing to Show. Be the first one to ANSWER.
+</h1>
+<mat-card *ngFor="let answer of answers; let i = index;" class="bg-dark text-light m-3">
     <mat-card-header>
-        <img src="{{answer.author.image}}" mat-card-avatar>
-        <mat-card-title><a routerLink="profile/{{answer.author.uid}}">{{answer.author.fullname}}</a></mat-card-title>
+        <img src="{{answer.image}}" mat-card-avatar>
+        <mat-card-title><a routerLink="profile/{{answer.uid}}">{{answer.fullname}}</a></mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <p> {{answer.body}} </p>
+        <p> {{answer.answer}} </p>
     </mat-card-content>
 </mat-card>

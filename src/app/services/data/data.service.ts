@@ -18,4 +18,11 @@ export class DataService {
     
     return this.http.get(`${this.devURL}/getNearbyPosts`, {params})
   }
+
+  getAnswers(postId: string) {
+    let params = new HttpParams()
+    .set('postId', postId)
+
+    return this.http.get(`${this.devURL}/answers`, {params})
+  }
 }
