@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "localeyes-95d0d": {
+      "hosting": {
+        "LocalEyes-Web": [
+          "localeyes-95d0d"
+        ]
+      }
+    }
+  }
+}
