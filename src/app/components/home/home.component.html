@@ -24,10 +24,17 @@
                     </a>
                     <mat-divider></mat-divider>
                     <mat-card-actions class="row">
-                        <button mat-icon-button (click)="incrementClaps(posts[i].id, i)" class="col-6">
+                        <button mat-icon-button (click)="incrementClaps(posts[i].id, i)" class="col-6" *ngIf="auth.user$ | async as user; else login">
                             <mat-icon>celebration</mat-icon>
                             {{posts[i].content.claps}}
                         </button>
+                        <ng-template #login>
+                            <button mat-icon-button (click)="openSignInChecker()" class="col-6">
+                                <mat-icon>celebration</mat-icon>
+                                {{posts[i].content.claps}}
+                            </button>
+                        </ng-template>
+
                         <mat-divider [vertical]="true" class="bg-light"></mat-divider>
                     </mat-card-actions>
                 </mat-card>

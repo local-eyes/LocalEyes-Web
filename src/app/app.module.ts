@@ -21,6 +21,7 @@ import { LocationService } from './services/location/location.service';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { AuthService } from './services/auth/auth.service';
+import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-checker.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AuthService } from './services/auth/auth.service';
     PostComponent,
     ProfileComponent,
     LoaderComponent,
-    ExploreComponent
+    ExploreComponent,
+    SignInCheckerComponent
   ],
   imports: [
     BrowserModule,

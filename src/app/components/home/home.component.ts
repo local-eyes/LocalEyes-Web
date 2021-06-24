@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostComponent } from '../post/post.component';
 import firestore from "firebase/app";
 import { AngularFirestore } from '@angular/fire/firestore';
+import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.component';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +23,8 @@ export class HomeComponent implements OnInit {
     private data: DataService, 
     private location: LocationService, 
     public dialog: MatDialog,
-    public af: AngularFirestore
+    public af: AngularFirestore,
+    public auth: AuthService
     ) { }
 
   ngOnInit(): void {
@@ -69,6 +72,10 @@ export class HomeComponent implements OnInit {
 
   openPost(postId:string) {
     this.dialog.open(PostComponent, {height: "90vh", width: "90vw", data: this.posts[postId], hasBackdrop: true});
+  }
+
+  openSignInChecker() {
+    this.dialog.open(SignInCheckerComponent);
   }
 
   incrementClaps(postToIncrease:string, i:number) {
