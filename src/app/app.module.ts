@@ -3,18 +3,17 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 
 // Firebase
-import { firebaseConfig } from "../environments/environment";
+import { environment, firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFirestoreModule, USE_EMULATOR as FIRESTORE_EMULATOR } from "@angular/fire/firestore";
 
-// import { AgmCoreModule } from "@agm/core";
+// Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HomeComponent } from './components/home/home.component';
-// import { MapComponent } from './components/map/map.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DataService } from "./services/data/data.service";
@@ -45,7 +44,11 @@ import { AuthService } from './services/auth/auth.service';
   providers: [
     DataService, 
     LocationService, 
-    AuthService
+    AuthService,
+    {
+      provide: FIRESTORE_EMULATOR,
+      useValue: environment.production ? undefined : ["localhost", 8080]
+    }
   ],
   bootstrap: [AppComponent]
 })

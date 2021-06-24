@@ -3,6 +3,8 @@ import { DataService } from 'src/app/services/data/data.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PostComponent } from '../post/post.component';
+import firestore from "firebase/app";
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,12 @@ export class HomeComponent implements OnInit {
   lon: any;
   radius: number = 10000;
   loadComplete:boolean = false;
-  constructor(private data: DataService, private location: LocationService, public dialog: MatDialog) { }
+  constructor(
+    private data: DataService, 
+    private location: LocationService, 
+    public dialog: MatDialog,
+    public af: AngularFirestore
+    ) { }
 
   ngOnInit(): void {
     this.location.getPosition().then(pos=>
@@ -62,5 +69,12 @@ export class HomeComponent implements OnInit {
 
   openPost(postId:string) {
     this.dialog.open(PostComponent, {height: "90vh", width: "90vw", data: this.posts[postId], hasBackdrop: true});
+  }
+
+  incrementClaps(postToIncrease:string, i:number) {
+    const incrementor = firestore.firestore.FieldValue.increment(1);
+    const postRef = this.af.doc(`localQuestions/${postToIncrease}`);
+    postRef.update({'content.claps': incrementor});
+    this.posts[i].content.claps += 1;
   }
 }

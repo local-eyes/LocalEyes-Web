@@ -1,6 +1,6 @@
 <mat-card class="bg-dark text-light">
     <mat-card-header>
-        <mat-chip-list aria-label="Fish selection">
+        <mat-chip-list aria-label="Post type">
             <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
             <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
         </mat-chip-list>

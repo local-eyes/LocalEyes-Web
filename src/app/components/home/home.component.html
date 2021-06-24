@@ -24,10 +24,10 @@
                     </a>
                     <mat-divider></mat-divider>
                     <mat-card-actions class="row">
-                        <button mat-icon-button class="col-6">
+                        <button mat-icon-button (click)="incrementClaps(posts[i].id, i)" class="col-6">
                             <mat-icon>celebration</mat-icon>
-                            <!-- <img src="../../../assets/icons/clapping.png" alt="clap"> -->
-                        </button>{{posts[i].content.claps}}
+                            {{posts[i].content.claps}}
+                        </button>
                         <mat-divider [vertical]="true" class="bg-light"></mat-divider>
                     </mat-card-actions>
                 </mat-card>

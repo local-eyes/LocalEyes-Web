@@ -17,10 +17,22 @@
                 <mat-icon matListIcon>explore_outline</mat-icon>
                 <h1 matLine>Explore</h1>
             </a>
-            <a routerLink="profile/me/" mat-list-item>
-                <mat-icon matListIcon>person_outline</mat-icon>
-                <h1 matLine>Profile</h1>
-            </a>
+            <div *ngIf="auth.user$ | async as user; else login">
+                <a routerLink="profile/me/" mat-list-item>
+                    <mat-icon matListIcon>person_outline</mat-icon>
+                    <h1 matLine>{{user.fullname}}</h1>
+                </a>
+                <a mat-list-item (click)="auth.signOut()">
+                    <mat-icon matListIcon>logout</mat-icon>
+                    <h1 matLine>Logout</h1>
+                </a>
+            </div>
+            <ng-template #login>
+                <a mat-list-item (click)="auth.googleSignIn()">
+                    <mat-icon matListIcon>login</mat-icon>
+                    <h1 matLine>Sign in with Google</h1>
+                </a>
+            </ng-template>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content style="min-height: 100vh;">
