@@ -6,6 +6,10 @@
 
 mat-card {
     border-radius: 20px;
+    border: 2px solid #62c9d575;
+}
+
+mat-card:hover {
     border: 2px solid #62c9d5;
 }
 

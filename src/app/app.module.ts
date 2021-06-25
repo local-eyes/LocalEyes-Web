@@ -23,6 +23,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { AuthService } from './services/auth/auth.service';
 import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-checker.component';
+import { NewComponent } from './components/new/new.component';
+import { CityComponent } from './components/city/city.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-che
     ProfileComponent,
     LoaderComponent,
     ExploreComponent,
-    SignInCheckerComponent
+    SignInCheckerComponent,
+    NewComponent,
+    CityComponent
   ],
   imports: [
     BrowserModule,
