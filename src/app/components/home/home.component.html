@@ -1,6 +1,10 @@
 <app-loader *ngIf="loadComplete==false"></app-loader>
 <div class="row w-100 m-auto" *ngIf="loadComplete==true">
     <div class="col-8">
+        <mat-button-toggle-group class="sorting-toggle m-auto col-6" #sortBy="matButtonToggleGroup">
+            <mat-button-toggle value="new" checked (change)="getPosts(lat, lon, radius, sortBy.value)">Newest</mat-button-toggle>
+            <mat-button-toggle value="popularity" (change)="getPosts(lat, lon, radius, sortBy.value)">Popular</mat-button-toggle>
+        </mat-button-toggle-group>
         <div class="container">
             <div class="example-card" *ngFor="let post of posts; let i = index">
                 <mat-card class="bg-dark text-light">

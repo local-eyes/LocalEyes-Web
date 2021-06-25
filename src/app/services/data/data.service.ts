@@ -9,11 +9,12 @@ export class DataService {
   devURL: string = "http://localhost:5001/localeyes-95d0d/us-central1/localEyesFunctions";
   constructor(private http: HttpClient) { }
 
-  getNearbyPosts(lat, lon, radius, sortBy="") {
+  getNearbyPosts(lat, lon, radius, sortBy) {
     let params = new HttpParams()
     .set('lat', lat)
     .set('lon', lon)
     .set('radius', radius)
+    .set('sortBy', sortBy)
     console.log(`${this.devURL}/getNearbyPosts, ${params}`);
     
     return this.http.get(`${this.devURL}/getNearbyPosts`, {params})

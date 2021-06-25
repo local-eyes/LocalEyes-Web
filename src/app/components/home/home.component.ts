@@ -36,16 +36,21 @@ export class HomeComponent implements OnInit {
       {
         this.lon = pos.lng;
         this.lat = pos.lat;
-        this.getPosts(this.lat, this.lon, this.radius);
+        this.getPosts(this.lat, this.lon, this.radius, null);
       });
   }
 
-  getPosts(latitude, longitude, radius) {
-    this.data.getNearbyPosts(latitude, longitude, radius).subscribe(res => {
+  getPosts(latitude, longitude, radius, sortBy) {
+    this.data.getNearbyPosts(latitude, longitude, radius, sortBy).subscribe(res => {
       this.posts = res;
       console.log(this.posts);
       this.loadComplete = true;
     })
+  }
+
+  log(value) {
+    console.log(value);
+    
   }
   
   getDate(seconds:number) {
