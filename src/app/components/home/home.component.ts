@@ -7,6 +7,8 @@ import firestore from "firebase/app";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Clipboard } from "@angular/cdk/clipboard";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-home',
@@ -24,7 +26,9 @@ export class HomeComponent implements OnInit {
     private location: LocationService, 
     public dialog: MatDialog,
     public af: AngularFirestore,
-    public auth: AuthService
+    public auth: AuthService,
+    private clipboard: Clipboard,
+    private snackbar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
@@ -83,5 +87,14 @@ export class HomeComponent implements OnInit {
     const postRef = this.af.doc(`localQuestions/${postToIncrease}`);
     postRef.update({'content.claps': incrementor});
     this.posts[i].content.claps += 1;
+  }
+
+  copyToClipboard(id:string) {
+    this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "top", horizontalPosition: "end", duration: 3000});
+    if (location.hostname === "localhost") {
+      this.clipboard.copy(`http://localhost:4200/post/${id}`);
+    } else {
+      this.clipboard.copy("Coming Soon");
+    }
   }
 }

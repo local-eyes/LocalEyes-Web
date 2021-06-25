@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
+import { ClipboardModule } from "@angular/cdk/clipboard";
 
 // Firebase
 import { environment, firebaseConfig } from "../environments/environment";
@@ -41,7 +42,8 @@ import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-che
     MaterialModule,
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ClipboardModule
   ],
   providers: [
     DataService, 

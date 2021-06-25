@@ -23,15 +23,31 @@
                         </mat-card-content>
                     </a>
                     <mat-divider></mat-divider>
-                    <mat-card-actions class="row">
-                        <button mat-icon-button (click)="incrementClaps(posts[i].id, i)" class="col-6" *ngIf="auth.user$ | async as user; else login">
-                            <mat-icon>celebration</mat-icon>
-                            {{posts[i].content.claps}}
-                        </button>
-                        <ng-template #login>
-                            <button mat-icon-button (click)="openSignInChecker()" class="col-6">
+                    <mat-card-actions class="row d-flex justify-content-around">
+                        <div *ngIf="auth.user$ | async as user; else login">
+                            <button mat-icon-button (click)="incrementClaps(posts[i].id, i)" class="col-6">
                                 <mat-icon>celebration</mat-icon>
                                 {{posts[i].content.claps}}
+                            </button>
+                            <button mat-icon-button class="col-6 ml-2">
+                                <mat-icon>forum</mat-icon>
+                                {{posts[i].answers}}
+                            </button>
+                            <button mat-icon-button class="col-6 ml-2">
+                                <mat-icon>share</mat-icon>
+                            </button>
+                        </div>
+                        <ng-template #login>
+                            <button mat-icon-button color="primary" (click)="openSignInChecker()" class="col-6">
+                                <mat-icon>celebration</mat-icon>
+                                {{posts[i].content.claps}}
+                            </button>
+                            <button mat-icon-button color="primary" (click)="openSignInChecker()" class="col-6 ml-2">
+                                <mat-icon>forum</mat-icon>
+                                {{posts[i].answers}}
+                            </button>
+                            <button mat-icon-button (click)="copyToClipboard(posts[i].id)" class="col-6 ml-2">
+                                <mat-icon>share</mat-icon>
                             </button>
                         </ng-template>
 

@@ -8,7 +8,7 @@ import { DataService } from 'src/app/services/data/data.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  answers:any = [];
+  answers:any;
   answersLoaded:boolean = false;
   constructor(@Inject(MAT_DIALOG_DATA) public post: any, private data: DataService) { }
 
