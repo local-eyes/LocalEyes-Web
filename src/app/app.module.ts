@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { ClipboardModule } from "@angular/cdk/clipboard";
+import { FormsModule } from "@angular/forms";
 
 // Firebase
 import { environment, firebaseConfig } from "../environments/environment";
@@ -47,7 +48,8 @@ import { CityComponent } from './components/city/city.component';
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    ClipboardModule
+    ClipboardModule,
+    FormsModule
   ],
   providers: [
     DataService, 

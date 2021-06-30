@@ -15,15 +15,22 @@ export class DataService {
     .set('lon', lon)
     .set('radius', radius)
     .set('sortBy', sortBy)
-    console.log(`${this.devURL}/getNearbyPosts, ${params}`);
+    console.log(`${this.prodURL}/getNearbyPosts, ${params}`);
     
-    return this.http.get(`${this.devURL}/getNearbyPosts`, {params})
+    return this.http.get(`${this.prodURL}/getNearbyPosts`, {params})
+  }
+
+  getCityPosts(city) {
+    let params = new HttpParams()
+    .set('city', city)
+    console.log(`${this.prodURL}/getCityPosts, ${params}`);
+    return this.http.get(`${this.prodURL}/getCityPosts`, {params})
   }
 
   getAnswers(postId: string) {
     let params = new HttpParams()
     .set('postId', postId)
 
-    return this.http.get(`${this.devURL}/answers`, {params})
+    return this.http.get(`${this.prodURL}/answers`, {params})
   }
 }

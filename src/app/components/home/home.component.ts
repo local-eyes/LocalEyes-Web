@@ -16,10 +16,11 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  posts:any;
+  radius:any = 1500;
+  nearbyPosts:any;
+  cityPosts:any;
   lat:any;
   lon: any;
-  radius: number = 10000;
   loadComplete:boolean = false;
   constructor(
     private data: DataService, 
@@ -37,13 +38,21 @@ export class HomeComponent implements OnInit {
         this.lon = pos.lng;
         this.lat = pos.lat;
         this.getPosts(this.lat, this.lon, this.radius, null);
+        this.getCity("jaipur");
       });
   }
 
+  getCity (city:String) {
+    this.data.getCityPosts(city).subscribe(res => {
+      this.cityPosts = res;
+      console.log("City Posts", this.cityPosts);
+    })
+  }
   getPosts(latitude, longitude, radius, sortBy) {
+    this.loadComplete = false;
     this.data.getNearbyPosts(latitude, longitude, radius, sortBy).subscribe(res => {
-      this.posts = res;
-      console.log(this.posts);
+      this.nearbyPosts = res;
+      console.log("Nearby Posts", this.nearbyPosts);
       this.loadComplete = true;
     })
   }
@@ -79,8 +88,12 @@ export class HomeComponent implements OnInit {
     } 
   }
 
-  openPost(postId:string) {
-    this.dialog.open(PostComponent, {height: "90vh", width: "90vw", data: this.posts[postId], hasBackdrop: true});
+  openPost(collection:string, postId:string) {
+    if (collection === "local") {
+      this.dialog.open(PostComponent, {height: "90vh", width: "90vw", data: this.nearbyPosts[postId], hasBackdrop: true});
+    } else {
+      this.dialog.open(PostComponent, {height: "90vh", width: "90vw", data: this.cityPosts[postId], hasBackdrop: true});
+    }
   }
 
   openSignInChecker() {
@@ -91,7 +104,7 @@ export class HomeComponent implements OnInit {
     const incrementor = firestore.firestore.FieldValue.increment(1);
     const postRef = this.af.doc(`localQuestions/${postToIncrease}`);
     postRef.update({'content.claps': incrementor});
-    this.posts[i].content.claps += 1;
+    this.nearbyPosts[i].content.claps += 1;
   }
 
   copyToClipboard(id:string) {
@@ -101,5 +114,9 @@ export class HomeComponent implements OnInit {
     } else {
       this.clipboard.copy("Coming Soon");
     }
+  }
+
+  formatThumb(value:number) {
+    return value + 'mtr'
   }
 }

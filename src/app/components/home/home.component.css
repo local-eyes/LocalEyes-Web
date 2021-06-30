@@ -28,3 +28,7 @@ a {
 .example-header-image {
     background-size: cover;
 }
+
+.mat-tab-label .mat-tab-label-content {
+    color: white !important
+}
