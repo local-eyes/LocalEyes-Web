@@ -38,7 +38,7 @@
                                         <mat-icon>forum</mat-icon>
                                         {{nearbyPosts[i].answers}}
                                     </button>
-                                    <button mat-icon-button (click)="copyToClipboard(nearbyPosts[i].id)" class="col-6 ml-2">
+                                    <button mat-icon-button (click)="copyToClipboard('local', nearbyPosts[i].id)" class="col-6 ml-2">
                                         <mat-icon>share</mat-icon>
                                     </button>
                                 </div>
@@ -52,7 +52,7 @@
                                             <mat-icon>forum</mat-icon>
                                             {{nearbyPosts[i].answers}}
                                         </button>
-                                        <button mat-icon-button (click)="copyToClipboard(nearbyPosts[i].id)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="copyToClipboard('local', nearbyPosts[i].id)" class="col-6 ml-2">
                                             <mat-icon>share</mat-icon>
                                         </button>
                                     </div>
@@ -95,7 +95,7 @@
                                         <mat-icon>forum</mat-icon>
                                         {{cityPosts[i].answers}}
                                     </button>
-                                    <button mat-icon-button (click)="copyToClipboard(cityPosts[i].id)" class="col-6 ml-2">
+                                    <button mat-icon-button (click)="copyToClipboard('city', cityPosts[i].id)" class="col-6 ml-2">
                                         <mat-icon>share</mat-icon>
                                     </button>
                                 </div>
@@ -109,7 +109,7 @@
                                             <mat-icon>forum</mat-icon>
                                             {{cityPosts[i].answers}}
                                         </button>
-                                        <button mat-icon-button (click)="copyToClipboard(cityPosts[i].id)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="copyToClipboard('city', cityPosts[i].id)" class="col-6 ml-2">
                                             <mat-icon>share</mat-icon>
                                         </button>
                                     </div>

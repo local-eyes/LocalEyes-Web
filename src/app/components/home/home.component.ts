@@ -107,10 +107,10 @@ export class HomeComponent implements OnInit {
     this.nearbyPosts[i].content.claps += 1;
   }
 
-  copyToClipboard(id:string) {
+  copyToClipboard(collection: string, id:string) {
     this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "top", horizontalPosition: "end", duration: 3000});
     if (location.hostname === "localhost") {
-      this.clipboard.copy(`http://localhost:4200/post/${id}`);
+      this.clipboard.copy(`http://localhost:4200/post/${collection}/${id}`);
     } else {
       this.clipboard.copy("Coming Soon");
     }
