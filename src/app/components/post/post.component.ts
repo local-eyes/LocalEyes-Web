@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Clipboard } from "@angular/cdk/clipboard";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -23,12 +24,14 @@ export class PostComponent implements OnInit {
     private clipboard: Clipboard,
     public af: AngularFirestore,
     public dialog: MatDialog,
-    public auth: AuthService
+    public auth: AuthService,
+    public router: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
     console.log(this.post);
     this.fetchAnswers(this.post.id);
+    console.log(this.router.snapshot.params['id']);
   }
 
   fetchAnswers(postId){

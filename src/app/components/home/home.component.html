@@ -1,18 +1,18 @@
 <app-loader *ngIf="loadComplete==false"></app-loader>
 <div class="row w-100 m-auto" *ngIf="loadComplete==true">
-    <mat-tab-group backgroundColor="primary" color="primary" mat-align-tabs="center">
-        <mat-tab label="local">
-            <div class="col-8 mt-2">
+    <div class="col-8 mt-2">
+        <mat-tab-group backgroundColor="primary" color="primary" mat-align-tabs="center">
+            <mat-tab label="local">
                 <mat-button-toggle-group class="sorting-toggle m-auto col-6" #sortBy="matButtonToggleGroup">
                     <mat-button-toggle value="new" checked (change)="getPosts(lat, lon, radius, sortBy.value)">Newest</mat-button-toggle>
                     <mat-button-toggle value="popularity" (change)="getPosts(lat, lon, radius, sortBy.value)">Popular</mat-button-toggle>
                 </mat-button-toggle-group>
                 Radius:
-                <mat-slider min="400" step="100" [(ngModel)]="radius" [displayWith]="formatThumb" (change)="getPosts(lat, lon, radius, null)" thumbLabel max="2000"></mat-slider>
+                <mat-slider min="400" step="100" [(ngModel)]="radius" [displayWith]="formatThumb" (change)="getPosts(lat, lon, radius, null)" thumbLabel max="10000"></mat-slider>
                 <div class="container">
                     <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
-                        <mat-card class="bg-dark text-light">
-                            <mat-card-header>
+                        <mat-card class="bg-dark text-light" style="cursor: pointer;">
+                            <mat-card-header (click)="openPost('local', i)">
                                 <mat-chip-list aria-label="Fish selection">
                                     <mat-chip *ngIf="nearbyPosts[i].type=='announcement'" color="accent" selected class="text-capitalize">{{nearbyPosts[i].type}}</mat-chip>
                                     <mat-chip *ngIf="nearbyPosts[i].type=='question'" color="primary" selected class="text-capitalize">{{nearbyPosts[i].type}}</mat-chip>
@@ -21,15 +21,12 @@
                                 <mat-card-title><a routerLink="profile/{{nearbyPosts[i].author.uid}}">{{nearbyPosts[i].author.name}}</a></mat-card-title>
                                 <mat-card-subtitle class="text-secondary">• {{getDate(nearbyPosts[i].postedOn._seconds)}}</mat-card-subtitle>
                             </mat-card-header>
-                            <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-                            <a (click)="openPost('local', i)" routerLink="">
-                                <mat-card-content>
-                                    <h2>
-                                        {{nearbyPosts[i].content.title}}
-                                    </h2>
-                                    <mat-card-subtitle class="text-secondary">~ {{nearbyPosts[i].hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
-                                </mat-card-content>
-                            </a>
+                            <mat-card-content (click)="openPost('local', i)">
+                                <h2>
+                                    {{nearbyPosts[i].content.title}}
+                                </h2>
+                                <mat-card-subtitle class="text-secondary">~ {{nearbyPosts[i].hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
+                            </mat-card-content>
                             <mat-divider></mat-divider>
                             <mat-card-actions>
                                 <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
@@ -64,10 +61,8 @@
                         </mat-card>
                     </div>
                 </div>
-            </div>
-        </mat-tab>
-        <mat-tab label="city">
-            <div class="col-8">
+            </mat-tab>
+            <mat-tab label="city">
                 <div class="container">
                     <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                         <mat-card class="bg-dark text-light">
@@ -123,7 +118,7 @@
                         </mat-card>
                     </div>
                 </div>
-            </div>
-        </mat-tab>
-    </mat-tab-group>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </div>

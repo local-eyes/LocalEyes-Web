@@ -16,7 +16,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  radius:any = 1500;
+  radius:any = 6000;
   nearbyPosts:any;
   cityPosts:any;
   lat:any;
