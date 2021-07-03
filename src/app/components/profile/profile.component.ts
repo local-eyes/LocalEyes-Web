@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,16 +9,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 uid: string;
+personData: any;
+dataLoaded: boolean = false
 private routeSub: any;
-  constructor(public route: ActivatedRoute) { }
+  constructor(public route: ActivatedRoute, private data: DataService) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params['uid']);
     this.routeSub = this.route.params.subscribe(param => {
-      console.log(param);
       this.uid = param['uid'];
       console.log(this.uid);
+      this.getProfileFromService(this.uid);
     })
+  }
+
+  getProfileFromService(uid: string) {
+    this.data.getProfile(uid).subscribe(res => {
+      this.personData = res;
+      console.log(this.personData);
+      this.dataLoaded = true;
+    });
   }
 
   ngOnDestroy(): void {

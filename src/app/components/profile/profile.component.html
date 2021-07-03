@@ -1,1 +1,11 @@
-<p>profile works!</p>
+<app-loader *ngIf="dataLoaded==false"></app-loader>
+<div *ngIf="personData">
+    <div *ngFor="let person of personData | keyvalue">
+        {{person.key}} ==> {{personData[person.key]}}
+    </div>
+    <!-- <pre>{{ personData | json }}</pre> -->
+    <img mat-card-avatar src="{{personData.imageURL}}" alt="img">
+    <h1>{{personData.fullname}}</h1>
+    <h4>Living in {{personData.locality}} since {{personData.living_since}} </h4>
+    <p>Account created on {{personData.createdOn._seconds | date }} </p>
+</div>

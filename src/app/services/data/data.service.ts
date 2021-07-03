@@ -41,4 +41,11 @@ export class DataService {
 
     return this.http.get(`${prodURL}/getPost`, {params})
   }
+
+  getProfile(uid:string) {
+    let params = new HttpParams()
+    .set('uid', uid)
+
+    return this.http.get(`${prodURL}/getProfile`, {params})
+  }
 }

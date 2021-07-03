@@ -16,7 +16,7 @@ export class AuthService {
     private afs: AngularFirestore,
     private router: Router
   ) {
-    afAuth.useEmulator("http://localhost:9099");
+    // afAuth.useEmulator("http://localhost:9099");
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
