@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import firestore from 'firebase/app'
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { DataService } from 'src/app/services/data/data.service';
+import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-direct-link',
@@ -9,28 +15,52 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DirectLinkComponent implements OnInit, OnDestroy {
 postData: any;
+commentsData: any;
 routeSub: any;
 collection: string;
 postId: string;
+loadComplete: boolean = false;
+answersLoaded: boolean = false;
+
   constructor(
-    private af: AngularFirestore,
-    public router: ActivatedRoute
+    public router: ActivatedRoute,
+    private data: DataService,
+    public auth: AuthService,
+    public af: AngularFirestore,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
     this.routeSub = this.router.params.subscribe(params => {
-      this.collection = params['collection'];
-      this.postId = params['id'];
+      this.collection = params['collection']
+      this.postId = params['id']
+      console.log(`${this.collection}/${this.postId}`);
       this.getPostByPostId(this.collection, this.postId);
-      console.log(this.postData);
     })
   }
 
   getPostByPostId(collection:string, id:string) {
-    let postQuery = this.af.collection(collection).doc(id).get()
-    postQuery.subscribe(post => {
-      console.log(post);
+    this.data.getSinglePost(id, collection).subscribe(res => {
+      this.postData = res;
+      console.log(this.postData);
+      this.loadComplete = true;
     })
+    this.data.getAnswers(id).subscribe(comments => {
+      this.commentsData = comments;
+      console.log(this.commentsData);
+      this.answersLoaded = true
+    })
+  }
+
+  incrementClaps(postToIncrease:string, collection:string) {
+    const incrementor = firestore.firestore.FieldValue.increment(1);
+    const postRef = this.af.doc(`${collection}/${postToIncrease}`);
+    postRef.update({'content.claps': incrementor});
+    this.postData.content.claps += 1;
+  }
+
+  openSignInChecker() {
+    this.dialog.open(SignInCheckerComponent);
   }
 
   ngOnDestroy(): void {

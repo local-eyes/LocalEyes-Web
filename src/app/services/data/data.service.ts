@@ -33,4 +33,12 @@ export class DataService {
 
     return this.http.get(`${this.prodURL}/answers`, {params})
   }
+
+  getSinglePost(postId:string, collection: string) {
+    let params = new HttpParams()
+    .set('collection', collection)
+    .set('postId', postId)
+
+    return this.http.get(`${this.prodURL}/getPost`, {params})
+  }
 }
