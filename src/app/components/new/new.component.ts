@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new.component.css']
 })
 export class NewComponent implements OnInit {
-
+title: string = "Create New Post";
+postingIn:string = "local"
   constructor() { }
 
   ngOnInit(): void {

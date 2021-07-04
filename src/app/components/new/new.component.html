@@ -1,1 +1,28 @@
-<p>new works!</p>
+<h1 class="header mt-4">{{title}}</h1>
+<mat-divider style="background-color:white"></mat-divider>
+<!-- <mat-form-field appearance="outline" class="m-3">
+    <mat-label style="color: lightyellow;">Posting In</mat-label>
+    <mat-select [(value)]="postingIn">
+        <mat-option value="local">Local Feed</mat-option>
+        <mat-option value="city">City Feed</mat-option>
+    </mat-select>
+</mat-form-field> -->
+<mat-form-field appearance="outline">
+    <mat-label style="color: lightyellow;">Posting In</mat-label>
+    <mat-select [(value)]="postingIn">
+        <mat-option value="local">Local Feed</mat-option>
+        <mat-option value="city">City Feed</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-card class="bg-dark text-light w-75">
+    <mat-card-content class="d-flex flex-column">
+        <mat-form-field appearance="outline">
+            <mat-label style="color: lightyellow;">Title</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label style="color: lightyellow;">Description</mat-label>
+            <textarea matInput></textarea>
+        </mat-form-field>
+    </mat-card-content>
+</mat-card>

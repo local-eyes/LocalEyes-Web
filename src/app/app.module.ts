@@ -25,7 +25,6 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { AuthService } from './services/auth/auth.service';
 import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-checker.component';
 import { NewComponent } from './components/new/new.component';
-import { CityComponent } from './components/city/city.component';
 import { DirectLinkComponent } from './components/direct-link/direct-link.component';
 
 @NgModule({
@@ -39,7 +38,6 @@ import { DirectLinkComponent } from './components/direct-link/direct-link.compon
     ExploreComponent,
     SignInCheckerComponent,
     NewComponent,
-    CityComponent,
     DirectLinkComponent
   ],
   imports: [
