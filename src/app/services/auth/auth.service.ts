@@ -33,7 +33,7 @@ export class AuthService {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await firebase.auth().signInWithPopup(provider)
 
-    return this.updateUserData(credential.user);
+    return this.updateUserData(credential.user.uid);
   }
 
   async signOut() {
@@ -42,7 +42,7 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
-  private updateUserData({uid}: User){
+  private updateUserData(uid){
     const userRef = this.afs.doc(`users/${uid}`).get().subscribe(data => {
       this.userData = data.data()
       console.log(this.userData);
