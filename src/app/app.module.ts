@@ -2,30 +2,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { ClipboardModule } from "@angular/cdk/clipboard";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Firebase
 import { environment, firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule, USE_EMULATOR as FIRESTORE_EMULATOR } from "@angular/fire/firestore";
+import { MaterialModule } from './material/material.module';
 
 // Components
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { DataService } from "./services/data/data.service";
-import { LocationService } from './services/location/location.service';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ExploreComponent } from './components/explore/explore.component';
-import { AuthService } from './services/auth/auth.service';
 import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-checker.component';
 import { NewComponent } from './components/new/new.component';
 import { DirectLinkComponent } from './components/direct-link/direct-link.component';
+
+// Services
+import { AuthService } from './services/auth/auth.service';
+import { DataService } from "./services/data/data.service";
+import { LocationService } from './services/location/location.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { DirectLinkComponent } from './components/direct-link/direct-link.compon
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     ClipboardModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     DataService, 
