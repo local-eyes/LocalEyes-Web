@@ -30,7 +30,7 @@
                             <mat-divider></mat-divider>
                             <mat-card-actions>
                                 <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-                                    <button mat-icon-button (click)="incrementClaps(nearbyPosts[i].id, i)" class="col-6">
+                                    <button mat-icon-button (click)="incrementClaps('local', nearbyPosts[i].id, i)" class="col-6">
                                         <mat-icon>celebration</mat-icon>
                                         {{nearbyPosts[i].content.claps}}
                                     </button>
@@ -87,7 +87,7 @@
                             <mat-divider></mat-divider>
                             <mat-card-actions>
                                 <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-                                    <button mat-icon-button (click)="incrementClaps(cityPosts[i].id, i)" class="col-6">
+                                    <button mat-icon-button (click)="incrementClaps('city', cityPosts[i].id, i)" class="col-6">
                                         <mat-icon>celebration</mat-icon>
                                         {{cityPosts[i].content.claps}}
                                     </button>

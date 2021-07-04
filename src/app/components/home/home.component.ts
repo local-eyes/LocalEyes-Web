@@ -100,9 +100,9 @@ export class HomeComponent implements OnInit {
     this.dialog.open(SignInCheckerComponent);
   }
 
-  incrementClaps(postToIncrease:string, i:number) {
+  incrementClaps(collection:string, postToIncrease:string, i:number) {
     const incrementor = firestore.firestore.FieldValue.increment(1);
-    const postRef = this.af.doc(`localQuestions/${postToIncrease}`);
+    const postRef = this.af.doc(`${collection}/${postToIncrease}`);
     postRef.update({'content.claps': incrementor});
     this.nearbyPosts[i].content.claps += 1;
   }

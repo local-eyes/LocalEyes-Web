@@ -1,7 +1,10 @@
 export interface User {
-    uid: string,
+    createdOn?: any,
     email: string
-    photoURL?: string,
-    displayName?: string,
-    isNewUser?: boolean
+    displayName: string,
+    photoURL: string,
+    is_completed?: boolean,
+    living_since?: number,
+    locality?: string,
+    uid: string,
 };

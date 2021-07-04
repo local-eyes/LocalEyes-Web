@@ -11,6 +11,7 @@ import { User } from './user.model';
 })
 export class AuthService {
   user$: Observable<User>
+  userData:any;
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -41,14 +42,11 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
-  private updateUserData({uid, email, displayName, photoURL}: User){
-    const data = {
-      uid,
-      email, 
-      displayName,
-      photoURL
-    }
-    console.log(data);
-    window.localStorage.setItem("user", JSON.stringify(data));
+  private updateUserData({uid}: User){
+    const userRef = this.afs.doc(`users/${uid}`).get().subscribe(data => {
+      this.userData = data.data()
+      console.log(this.userData);
+      window.localStorage.setItem("user", JSON.stringify(this.userData))
+    })
   }
 }

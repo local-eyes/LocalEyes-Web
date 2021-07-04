@@ -18,7 +18,7 @@
                 <h1 matLine>Explore</h1>
             </a>
             <div *ngIf="auth.user$ | async as user; else login">
-                <a routerLink="profile/me/" mat-list-item>
+                <a routerLink="profile/{{user.uid}}/" mat-list-item>
                     <mat-icon matListIcon>person_outline</mat-icon>
                     <h1 matLine>{{user.fullname}}</h1>
                 </a>

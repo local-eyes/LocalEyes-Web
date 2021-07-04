@@ -57,10 +57,10 @@ import { DirectLinkComponent } from './components/direct-link/direct-link.compon
     DataService, 
     LocationService, 
     AuthService,
-    {
-      provide: FIRESTORE_EMULATOR,
-      useValue: environment.production ? undefined : ["localhost", 8080]
-    }
+    // {
+    //   provide: FIRESTORE_EMULATOR,
+    //   useValue: environment.production ? undefined : ["localhost", 8080]
+    // }
   ],
   bootstrap: [AppComponent]
 })
