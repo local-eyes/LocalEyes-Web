@@ -1,5 +1,5 @@
 <app-loader *ngIf="loadComplete==false"></app-loader>
-<mat-card class="bg-dark text-light">
+<mat-card *ngIf="loadComplete==true" class="bg-dark text-light">
     <mat-card-header>
         <mat-chip-list aria-label="PostData type">
             <mat-chip *ngIf="postData.type=='announcement'" color="accent" selected class="text-capitalize">{{postData.type}}</mat-chip>

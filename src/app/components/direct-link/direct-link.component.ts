@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import firestore from 'firebase/app'
@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './direct-link.component.html',
   styleUrls: ['./direct-link.component.css']
 })
-export class DirectLinkComponent implements OnInit, OnDestroy {
+export class DirectLinkComponent implements OnInit {
 postData: any;
 commentsData: any;
 routeSub: any;
@@ -31,12 +31,10 @@ answersLoaded: boolean = false;
     ) { }
 
   ngOnInit(): void {
-    this.routeSub = this.router.params.subscribe(params => {
-      this.collection = params['collection']
-      this.postId = params['id']
-      console.log(`${this.collection}/${this.postId}`);
-      this.getPostByPostId(this.collection, this.postId);
-    })
+    this.collection = this.router.snapshot.paramMap.get('collection');
+    this.postId = this.router.snapshot.paramMap.get('id');
+    console.log(`${this.collection}/${this.postId}`);
+    this.getPostByPostId(this.collection, this.postId);
   }
 
   getPostByPostId(collection:string, id:string) {
@@ -61,10 +59,6 @@ answersLoaded: boolean = false;
 
   openSignInChecker() {
     this.dialog.open(SignInCheckerComponent);
-  }
-
-  ngOnDestroy(): void {
-    this.routeSub.unsubscribe();
   }
 
 }
