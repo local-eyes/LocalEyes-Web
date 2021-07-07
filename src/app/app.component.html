@@ -9,13 +9,13 @@
                 <mat-icon matListIcon>apartment</mat-icon>
                 <h1 matLine>Local</h1>
             </a>
-            <a routerLink="" mat-list-item>
-                <mat-icon matListIcon>map_two_tone</mat-icon>
-                <h1 matLine>City</h1>
-            </a>
             <a routerLink="explore" mat-list-item>
                 <mat-icon matListIcon>explore_outline</mat-icon>
                 <h1 matLine>Explore</h1>
+            </a>
+            <a routerLink="unanswered" mat-list-item>
+                <mat-icon matListIcon>local_library</mat-icon>
+                <h1 matLine>For You</h1>
             </a>
             <div *ngIf="auth.user$ | async as user; else login">
                 <a routerLink="profile/{{user.uid}}/" mat-list-item>

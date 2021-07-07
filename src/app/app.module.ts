@@ -28,6 +28,7 @@ import { DirectLinkComponent } from './components/direct-link/direct-link.compon
 import { AuthService } from './services/auth/auth.service';
 import { DataService } from "./services/data/data.service";
 import { LocationService } from './services/location/location.service';
+import { ForYouComponent } from './components/for-you/for-you.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LocationService } from './services/location/location.service';
     ExploreComponent,
     SignInCheckerComponent,
     NewComponent,
-    DirectLinkComponent
+    DirectLinkComponent,
+    ForYouComponent
   ],
   imports: [
     BrowserModule,

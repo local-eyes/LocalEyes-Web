@@ -9,7 +9,7 @@ export class DataService {
   devURL: string = "http://localhost:5001/localeyes-95d0d/us-central1/localEyesFunctions";
   constructor(private http: HttpClient) { }
 
-  getNearbyPosts(lat, lon, radius, sortBy) {
+  getNearbyPosts(lat:any, lon:any, radius:any, sortBy:string) {
     let params = new HttpParams()
     .set('lat', lat)
     .set('lon', lon)
@@ -20,7 +20,7 @@ export class DataService {
     return this.http.get(`${prodURL}/getNearbyPosts`, {params})
   }
 
-  getCityPosts(city) {
+  getCityPosts(city:string) {
     let params = new HttpParams()
     .set('city', city)
     console.log(`${prodURL}/getCityPosts, ${params}`);
@@ -47,5 +47,21 @@ export class DataService {
     .set('uid', uid)
 
     return this.http.get(`${prodURL}/getProfile`, {params})
+  }
+
+  getNearbyUnanswered(lat:any, lon:any, radius:any) {
+    let params = new HttpParams()
+    .set('lat', lat)
+    .set('lon', lon)
+    .set('radius', radius)
+
+    return this.http.get(`${prodURL}/getNearbyUnanswered`, {params})
+  }
+
+  getCityUnanswered(city:string) {
+    let params = new HttpParams()
+    .set('city', city)
+
+    return this.http.get(`${prodURL}/getCityUnanswered`, {params})
   }
 }

@@ -11,11 +11,11 @@ import { Clipboard } from "@angular/cdk/clipboard";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-for-you',
+  templateUrl: './for-you.component.html',
+  styleUrls: ['./for-you.component.css']
 })
-export class HomeComponent implements OnInit {
+export class ForYouComponent implements OnInit {
   radius:any = 6000;
   nearbyPosts:any;
   cityPosts:any;
@@ -43,25 +43,19 @@ export class HomeComponent implements OnInit {
   }
 
   getCity (city:string) {
-    this.data.getCityPosts(city).subscribe(res => {
+    this.data.getCityUnanswered(city).subscribe(res => {
       this.cityPosts = res;
-      console.log("City Posts", this.cityPosts);
+      console.log("City Unanswered Posts", this.cityPosts);
     })
   }
   getPosts(latitude, longitude, radius, sortBy) {
     this.loadComplete = false;
-    this.data.getNearbyPosts(latitude, longitude, radius, sortBy).subscribe(res => {
+    this.data.getNearbyUnanswered(latitude, longitude, radius).subscribe(res => {
       this.nearbyPosts = res;
-      console.log("Nearby Posts", this.nearbyPosts);
+      console.log("Nearby Unanswered Posts", this.nearbyPosts);
       this.loadComplete = true;
     })
   }
-
-  log(value) {
-    console.log(value);
-    
-  }
-  
   getDate(seconds:number) {
     const postTime = new Date(seconds * 1000);
     const postedOn = postTime.getTime();
