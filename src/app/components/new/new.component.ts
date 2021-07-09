@@ -14,6 +14,7 @@ import { Router } from "@angular/router";
 export class NewComponent implements OnInit {
 title: string = "Create New Post";
 postingIn = "local";
+postType = "question";
 
 author: any;
 
@@ -36,7 +37,7 @@ success: boolean;
     ) { }
 
   ngOnInit(): void {
-    this.getUserData();
+    this.author = this.auth.userData;
     this.getUserLocation();
     this.localPost = this.fb.group({
       answers: 0,
@@ -53,42 +54,63 @@ success: boolean;
           Validators.required,
           Validators.minLength(10)
         ]],
-        description: '',
+        description: [''],
       }),
       position: {
         geohash: this.hash,
         geopoint: this.point
       },
       postedOn: firestore.firestore.Timestamp.now(),
-      type: ['question', [
+      type: [this.postType, [
         Validators.required
       ]]
     })
     this.cityPost = this.fb.group({
       answers: 0,
-      author: this.author,
+      author: {
+        image: this.author.imageURL,
+        living_since: this.author.living_since,
+        locality: this.author.locality,
+        name: this.author.fullname,
+        uid: this.author.uid
+      },
       content: this.fb.group({
         claps: 1,
         title: ['', [
           Validators.required,
           Validators.minLength(10)
         ]],
-        description: '',
+        description: [''],
       }),
-      city: 'Jaipur',
+      city: 'jaipur',
       postedOn: firestore.firestore.Timestamp.now(),
-      type: ['question', [
+      type: [this.postType, [
         Validators.required
       ]]
-    })
+    });
+    this.localPost.valueChanges.subscribe(val => {
+      if (val.type == 'announcement') {
+        // this.localPost.controls['content.description'].setValidators([Validators.required])
+        this.localPost.get('content.description').setValidators([Validators.required, Validators.minLength(10)]);
+      }
+    });
   }
+  
 
-  get postTitle() {
+  get localTitle() {
     return this.localPost.get('content.title')
   }
 
-  getUserData(){
-    this.author = this.auth.userData;
+  get localDesc() {
+    return this.localPost.get('content.description')
+  }
+
+  get cityTitle() {
+    return this.cityPost.get('content.title')
+  }
+
+  get cityDesc() {
+    return this.cityPost.get('content.description')
   }
 
   getUserLocation() {
@@ -105,6 +127,20 @@ success: boolean;
     const formValue = this.localPost.value;
     try {
       await this.afs.collection("local").add(formValue);
+      this.success = true
+      this.router.navigate([""]);
+    } catch (error) {
+      console.log(error);
+    }
+    this.loading = false;
+  }
+
+  async postToCityFeed(){
+    this.loading = true;
+
+    const formValue = this.cityPost.value;
+    try {
+      await this.afs.collection("city").add(formValue);
       this.success = true
       this.router.navigate([""]);
     } catch (error) {
