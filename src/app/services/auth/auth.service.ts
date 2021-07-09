@@ -21,6 +21,9 @@ export class AuthService {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
+          this.afs.doc<User>(`users/${user.uid}`).get().subscribe(userData => {
+            this.userData = userData.data();
+          })
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
         } else {
           return of(null)
@@ -38,15 +41,12 @@ export class AuthService {
 
   async signOut() {
     await firebase.auth().signOut();
-    window.localStorage.removeItem("user");
     return this.router.navigate(['/']);
   }
 
   private updateUserData(uid){
     const userRef = this.afs.doc(`users/${uid}`).get().subscribe(data => {
       this.userData = data.data()
-      console.log(this.userData);
-      window.localStorage.setItem("user", JSON.stringify(this.userData))
     })
   }
 }
