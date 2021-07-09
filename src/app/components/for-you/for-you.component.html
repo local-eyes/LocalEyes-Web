@@ -1,4 +1,4 @@
-<div *ngIf="!isMobile; else mobileTemplate">
+<div *ngIf="isMobile != 'true'; else mobileTemplate">
     <mat-toolbar style="background-color: black; color: white;">
         <div style="margin-bottom: 7px;">{{title}}</div>
     </mat-toolbar>

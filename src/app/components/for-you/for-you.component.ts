@@ -9,7 +9,6 @@ import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.compo
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Clipboard } from "@angular/cdk/clipboard";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-for-you',
@@ -24,7 +23,7 @@ export class ForYouComponent implements OnInit {
   lon: any;
   loadComplete:boolean = false;
   deviceInfo: any;
-  isMobile: boolean;
+  isMobile = localStorage.getItem('isMobile');
   constructor(
     private data: DataService, 
     private location: LocationService, 
@@ -32,11 +31,8 @@ export class ForYouComponent implements OnInit {
     public af: AngularFirestore,
     public auth: AuthService,
     private clipboard: Clipboard,
-    private snackbar: MatSnackBar,
-    private deviceDetector: DeviceDetectorService
-    ) { 
-      this.detectDevice();
-    }
+    private snackbar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
     this.location.getPosition().then(pos=>
@@ -48,10 +44,6 @@ export class ForYouComponent implements OnInit {
       });
   }
 
-  detectDevice() {
-    this.deviceInfo = this.deviceDetector.getDeviceInfo();
-    this.isMobile = this.deviceDetector.isMobile();
-  }
   getCity (city:string) {
     this.data.getCityUnanswered(city).subscribe(res => {
       this.cityPosts = res;

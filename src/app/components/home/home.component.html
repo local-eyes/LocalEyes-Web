@@ -1,4 +1,4 @@
-<div *ngIf="!isMobile; else mobileTemplate">
+<div *ngIf="isMobile != 'true'; else mobileTemplate">
     <mat-toolbar style="background-color: black; color: white;">
         <div style="margin-bottom: 7px;">{{title}}</div>
     </mat-toolbar>
@@ -134,7 +134,9 @@
         <div class="m-3">
             <mat-icon>menu</mat-icon>
         </div>
-        <div style="margin-bottom: 7px;">{{title}}</div>
+        <div style="margin-bottom: 7px;">
+            <h1>{{title}}</h1>
+        </div>
     </mat-toolbar>
     <mat-tab-group backgroundColor="primary" color="primary" mat-align-tabs="center">
         <mat-tab label="Local">
