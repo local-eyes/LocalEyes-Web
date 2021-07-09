@@ -15,6 +15,7 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 const MaterialComponents = [
   MatButtonModule,
@@ -31,8 +32,9 @@ const MaterialComponents = [
   MatTabsModule,
   MatFormFieldModule,
   MatInputModule,
+  MatToolbarModule,
   MatSelectModule,
-  MatSliderModule
+  MatSliderModule,
 ]
 
 @NgModule({

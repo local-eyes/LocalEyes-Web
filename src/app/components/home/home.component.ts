@@ -9,6 +9,7 @@ import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.compo
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Clipboard } from "@angular/cdk/clipboard";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,9 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  deviceInfo = null;
+  isMobile: boolean;
+  title = "Home";
   radius:any = 6000;
   nearbyPosts:any;
   cityPosts:any;
@@ -29,8 +33,10 @@ export class HomeComponent implements OnInit {
     public af: AngularFirestore,
     public auth: AuthService,
     private clipboard: Clipboard,
-    private snackbar: MatSnackBar
-    ) { }
+    private snackbar: MatSnackBar,
+    private deviceDetector: DeviceDetectorService) {
+      this.detectDevice();
+    }
 
   ngOnInit(): void {
     this.location.getPosition().then(pos=>
@@ -40,6 +46,11 @@ export class HomeComponent implements OnInit {
         this.getPosts(this.lat, this.lon, this.radius, null);
         this.getCity("jaipur");
       });
+  }
+
+  detectDevice() {
+    this.deviceInfo = this.deviceDetector.getDeviceInfo();
+    this.isMobile = this.deviceDetector.isMobile();
   }
 
   getCity (city:string) {
@@ -90,9 +101,9 @@ export class HomeComponent implements OnInit {
 
   openPost(collection:string, postId:string) {
     if (collection === "local") {
-      this.dialog.open(PostComponent, {height: "90vh", width: "90vw", data: this.nearbyPosts[postId], hasBackdrop: true});
+      this.dialog.open(PostComponent, {height: "90vh", width: "100vw", data: this.nearbyPosts[postId], hasBackdrop: true});
     } else {
-      this.dialog.open(PostComponent, {height: "90vh", width: "90vw", data: this.cityPosts[postId], hasBackdrop: true});
+      this.dialog.open(PostComponent, {height: "90vh", width: "100vw", data: this.cityPosts[postId], hasBackdrop: true});
     }
   }
 

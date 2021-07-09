@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container *ngIf="!isMobile; else mobileNav">
     <mat-sidenav mode="side" opened [fixedInViewport]="true">
         <mat-nav-list class="p-3">
             <a routerLink="" class="nav-logo">
@@ -40,6 +40,45 @@
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content style="min-height: 100vh;">
-        <router-outlet></router-outlet>
+        <div class="row w-100 m-auto">
+            <div class="col-8 mt-2">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
+<ng-template #mobileNav>
+    <router-outlet></router-outlet>
+    <div style="height: 80px;"></div>
+    <mat-toolbar class="bottom-nav d-flex justify-content-center">
+        <div class="row w-100">
+            <div class="col-3 d-flex justify-content-center">
+                <a routerLink="">
+                    <mat-icon>home</mat-icon>
+                </a>
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                <a routerLink="explore">
+                    <mat-icon>map</mat-icon>
+                </a>
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                <a routerLink="unanswered">
+                    <mat-icon>local_library</mat-icon>
+                </a>
+            </div>
+            <div class="col-3 d-flex justify-content-center" *ngIf="auth.user$ | async as user; else loginMobile">
+                <a routerLink="profile/{{user.uid}}">
+                    <mat-icon>account_circle</mat-icon>
+                </a>
+            </div>
+            <ng-template #loginMobile>
+                <div class="col-3 d-flex justify-content-center">
+                    <a (click)="openSignInChecker()">
+                        <mat-icon>account_circle</mat-icon>
+                    </a>
+                </div>
+            </ng-template>
+        </div>
+    </mat-toolbar>
+</ng-template>

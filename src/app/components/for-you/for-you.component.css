@@ -1,6 +1,6 @@
 .example-card {
-    min-width: 90%!important;
-    max-width: 90%!important;
+    min-width: 98%!important;
+    max-width: 98%!important;
     margin: 10px;
 }
 
@@ -13,7 +13,12 @@ mat-card:hover {
     border: 2px solid #62c9d5;
 }
 
-a {
+.bg-light a {
+    text-decoration: none;
+    color: black;
+}
+
+.bg-dark a {
     text-decoration: none;
     color: white;
 }
@@ -25,10 +30,35 @@ a {
     align-items: center;
 }
 
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+    padding-right: 0!important;
+    padding-left: 0!important;
+}
+
 .example-header-image {
     background-size: cover;
 }
 
 .mat-tab-label .mat-tab-label-content {
     color: white !important
+}
+
+.mat-standard-chip {
+    min-height: 24px;
+}
+
+.fab {
+    background-color: #022b35;
+    position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    bottom: 90px;
+    z-index: 9999;
+    right: 10px;
 }

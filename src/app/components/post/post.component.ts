@@ -8,6 +8,7 @@ import { Clipboard } from "@angular/cdk/clipboard";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-post',
@@ -17,6 +18,8 @@ import { ActivatedRoute } from '@angular/router';
 export class PostComponent implements OnInit {
   answers:any;
   answersLoaded:boolean = false;
+  deviceInfo = null;
+  isMobile: boolean;
   constructor(
     @Inject(MAT_DIALOG_DATA) public post: any, 
     private data: DataService,
@@ -25,13 +28,21 @@ export class PostComponent implements OnInit {
     public af: AngularFirestore,
     public dialog: MatDialog,
     public auth: AuthService,
-    public router: ActivatedRoute
-    ) { }
+    public router: ActivatedRoute,
+    private deviceDetector: DeviceDetectorService
+    ) { 
+      this.detectDevice();
+    }
 
   ngOnInit(): void {
     console.log(this.post);
     this.fetchAnswers(this.post.id);
     console.log(this.router.snapshot.params['id']);
+  }
+
+  detectDevice() {
+    this.deviceInfo = this.deviceDetector.getDeviceInfo();
+    this.isMobile = this.deviceDetector.isMobile();
   }
 
   fetchAnswers(postId){
