@@ -4,7 +4,7 @@ import firestore from 'firebase/app'
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { geohashForLocation } from "geofire-common";
-
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-new',
@@ -31,7 +31,8 @@ success: boolean;
   constructor( 
     private afs: AngularFirestore, 
     private fb: FormBuilder,
-    public auth: AuthService
+    public auth: AuthService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -103,8 +104,9 @@ success: boolean;
 
     const formValue = this.localPost.value;
     try {
-      await console.log(formValue);
+      await this.afs.collection("local").add(formValue);
       this.success = true
+      this.router.navigate([""]);
     } catch (error) {
       console.log(error);
     }
