@@ -13,15 +13,22 @@ export class AppComponent implements OnInit{
   title = 'LocalEyes';
   deviceInfo = null;
   isMobile: boolean;
+  userData: any;
   constructor(public auth: AuthService, private deviceDetector: DeviceDetectorService, private dialog: MatDialog) {
     this.detectDevice();
   }
   ngOnInit() {
+    this.getUserData();
+  }
+
+  getUserData() {
+    this.userData = this.auth.userData;
   }
 
   detectDevice() {
     this.deviceInfo = this.deviceDetector.getDeviceInfo();
     this.isMobile = this.deviceDetector.isMobile();
+    localStorage.setItem("isMobile", `${this.isMobile}`)
   }
 
   openSignInChecker() {

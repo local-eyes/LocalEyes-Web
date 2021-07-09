@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/fire
 import firestore from 'firebase/app'
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { LocationService } from 'src/app/services/location/location.service';
 import { geohashForLocation } from "geofire-common";
 
 
@@ -16,8 +15,7 @@ export class NewComponent implements OnInit {
 title: string = "Create New Post";
 postingIn = "local";
 
-isProfileComplete: boolean;
-author: object;
+author: any;
 
 localPost: FormGroup;
 cityPost: FormGroup;
@@ -33,8 +31,7 @@ success: boolean;
   constructor( 
     private afs: AngularFirestore, 
     private fb: FormBuilder,
-    public auth: AuthService,
-    public location: LocationService
+    public auth: AuthService
     ) { }
 
   ngOnInit(): void {
@@ -42,7 +39,13 @@ success: boolean;
     this.getUserLocation();
     this.localPost = this.fb.group({
       answers: 0,
-      author: this.author,
+      author: {
+        image: this.author.imageURL,
+        living_since: this.author.living_since,
+        locality: this.author.locality,
+        name: this.author.fullname,
+        uid: this.author.uid
+      },
       content: this.fb.group({
         claps: 1,
         title: ['', [
@@ -84,27 +87,15 @@ success: boolean;
   }
 
   getUserData(){
-    this.auth.user$.subscribe(user => {
-      this.isProfileComplete = user.is_completed;
-      this.author= {
-        image: user.imageURL,
-        name: user.fullname,
-        uid: user.uid,
-        locality: user.locality,
-        living_since: user.living_since,
-      };
-    })
-    console.log(this.author);
+    this.author = this.auth.userData;
   }
 
   getUserLocation() {
-    this.location.getPosition().then(position => {
-      this.lat = position.lat;
-      this.lon = position.lng;
-      this.point = new firestore.firestore.GeoPoint(this.lat, this.lon)
-      this.hash = geohashForLocation([position.lat, position.lng]);
-      console.log(this.lon, this.lat, this.point, this.hash);
-    })
+    this.lat = parseFloat(localStorage.getItem("latitude"))
+    this.lon = parseFloat(localStorage.getItem("longitude"))
+    this.point = new firestore.firestore.GeoPoint(this.lat, this.lon)
+    this.hash = geohashForLocation([this.lat, this.lon]);
+    console.log(this.lon, this.lat, this.point, this.hash);
   }
 
   async postToLocalFeed(){

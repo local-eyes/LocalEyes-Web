@@ -1,5 +1,5 @@
 <h1 class="header mt-4">{{title}}</h1>
-<div *ngIf="!isProfileComplete; else createPost">
+<div *ngIf="!author.is_completed; else createPost">
     <h1>Profile Not Completed</h1>
 </div>
 <mat-divider style="background-color:white"></mat-divider>
@@ -19,7 +19,7 @@
                 <mat-option value="city">City Feed</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-card class="bg-dark text-light w-75">
+        <mat-card class="bg-dark text-light w-100">
             <mat-card-content class="d-flex flex-column">
                 <div formGroupName="content" class="d-flex flex-column">
                     <mat-form-field appearance="outline">
