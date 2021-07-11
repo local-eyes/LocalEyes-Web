@@ -48,14 +48,12 @@ export class HomeComponent implements OnInit {
   getCity (city:string) {
     this.data.getCityPosts(city).subscribe(res => {
       this.cityPosts = res;
-      console.log("City Posts", this.cityPosts);
     })
   }
   getPosts(latitude, longitude, radius, sortBy) {
     this.loadComplete = false;
     this.data.getNearbyPosts(latitude, longitude, radius, sortBy).subscribe(res => {
       this.nearbyPosts = res;
-      console.log("Nearby Posts", this.nearbyPosts);
       this.loadComplete = true;
     })
   }

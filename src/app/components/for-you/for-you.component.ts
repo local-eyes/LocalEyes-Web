@@ -47,14 +47,12 @@ export class ForYouComponent implements OnInit {
   getCity (city:string) {
     this.data.getCityUnanswered(city).subscribe(res => {
       this.cityPosts = res;
-      console.log("City Unanswered Posts", this.cityPosts);
     })
   }
   getPosts(latitude, longitude, radius, sortBy) {
     this.loadComplete = false;
     this.data.getNearbyUnanswered(latitude, longitude, radius).subscribe(res => {
       this.nearbyPosts = res;
-      console.log("Nearby Unanswered Posts", this.nearbyPosts);
       this.loadComplete = true;
     })
   }

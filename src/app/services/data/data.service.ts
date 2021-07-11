@@ -15,15 +15,14 @@ export class DataService {
     .set('lon', lon)
     .set('radius', radius)
     .set('sortBy', sortBy)
-    console.log(`${prodURL}/getNearbyPosts, ${params}`);
-    
+
     return this.http.get(`${prodURL}/getNearbyPosts`, {params})
   }
 
   getCityPosts(city:string) {
     let params = new HttpParams()
     .set('city', city)
-    console.log(`${prodURL}/getCityPosts, ${params}`);
+    
     return this.http.get(`${prodURL}/getCityPosts`, {params})
   }
 

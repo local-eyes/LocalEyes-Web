@@ -118,7 +118,6 @@ success: boolean;
     this.lon = parseFloat(localStorage.getItem("longitude"))
     this.point = new firestore.firestore.GeoPoint(this.lat, this.lon)
     this.hash = geohashForLocation([this.lat, this.lon]);
-    console.log(this.lon, this.lat, this.point, this.hash);
   }
 
   async postToLocalFeed(){

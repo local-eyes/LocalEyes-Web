@@ -16,14 +16,12 @@ private routeSub: any;
 
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get('uid');
-    console.log(this.uid);
     this.getProfileFromService(this.uid);
   }
 
   getProfileFromService(uid: string) {
     this.data.getProfile(uid).subscribe(res => {
       this.personData = res;
-      console.log(this.personData);
       this.dataLoaded = true;
     });
   }
