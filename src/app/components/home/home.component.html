@@ -1,5 +1,5 @@
 <div *ngIf="isMobile != 'true'; else mobileTemplate">
-    <mat-toolbar style="background-color: black; color: white;">
+    <mat-toolbar style="background-color: black; color: white; position: fixed; top: 0; z-index: 999;">
         <div style="margin-bottom: 7px;">{{title}}</div>
     </mat-toolbar>
     <mat-tab-group backgroundColor="primary" color="primary" mat-align-tabs="center">
@@ -130,7 +130,7 @@
     <a routerLink="create" class="fab" mat-fab aria-label="Example icon button with a delete icon">
         <img src="../../../assets/imgs/LOgo-13.png" alt="ask" height="100px" style="height:40px; margin: -5px; position: relative;">
     </a>
-    <mat-toolbar style="background-color: black; color: white;">
+    <mat-toolbar style="background-color: black; color: white; position: fixed; top:0; z-index: 999;">
         <div class="m-3">
             <mat-icon>menu</mat-icon>
         </div>
@@ -150,7 +150,7 @@
             <div class="container" *ngIf="loadComplete==true">
                 <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                     <mat-card class="bg-light text-dark" style="cursor: pointer;">
-                        <mat-card-header (click)="openPost('local', i)">
+                        <mat-card-header>
                             <a routerLink="profile/{{nearbyPosts[i].author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{nearbyPosts[i].author.image}});"></a>
                             <mat-card-title><a routerLink="profile/{{nearbyPosts[i].author.uid}}">{{nearbyPosts[i].author.name}}</a></mat-card-title>
                             <mat-card-subtitle class="text-secondary">• {{getDate(nearbyPosts[i].postedOn._seconds)}}</mat-card-subtitle>

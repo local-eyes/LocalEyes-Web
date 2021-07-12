@@ -41,13 +41,15 @@
     </mat-sidenav>
     <mat-sidenav-content style="min-height: 100vh;">
         <div class="row w-100 m-auto">
-            <div class="col-8 mt-2">
+            <div class="col-8">
+                <div style="margin-top: 50px!important;" class="gutter"></div>
                 <router-outlet></router-outlet>
             </div>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
 <ng-template #mobileNav>
+    <div style="margin-top: 50px!important;" class="gutter"></div>
     <router-outlet></router-outlet>
     <div style="height: 80px;"></div>
     <mat-toolbar class="bottom-nav d-flex justify-content-center">

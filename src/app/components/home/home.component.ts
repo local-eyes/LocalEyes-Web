@@ -16,8 +16,8 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  deviceInfo = null;
   title = "Home";
+  deviceInfo = null;
   radius:any = 6000;
   nearbyPosts:any;
   cityPosts:any;
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     public af: AngularFirestore,
     public auth: AuthService,
     private clipboard: Clipboard,
-    private snackbar: MatSnackBar,
+    private snackbar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
