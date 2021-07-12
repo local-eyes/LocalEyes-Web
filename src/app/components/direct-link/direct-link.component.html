@@ -1,12 +1,20 @@
+<mat-toolbar style="background-color: black; color: white;">
+    <div class="m-3">
+        <mat-icon>menu</mat-icon>
+    </div>
+    <div style="margin-bottom: 7px;">
+        <h1>{{title}}</h1>
+    </div>
+</mat-toolbar>
 <app-loader *ngIf="loadComplete==false"></app-loader>
-<mat-card *ngIf="loadComplete==true" class="bg-dark text-light">
+<mat-card *ngIf="loadComplete==true" [ngClass]="{'bg-dark text-light': isMobile!='true', 'bg-light text-dark': isMobile == 'true'}">
     <mat-card-header>
         <mat-chip-list aria-label="PostData type">
             <mat-chip *ngIf="postData.type=='announcement'" color="accent" selected class="text-capitalize">{{postData.type}}</mat-chip>
             <mat-chip *ngIf="postData.type=='question'" color="primary" selected class="text-capitalize">{{postData.type}}</mat-chip>
         </mat-chip-list>
         <img src="{{postData.author.image}}" mat-card-avatar>
-        <mat-card-title><a routerLink="/profile/{{postData.author.uid}}">{{postData.author.name}}</a></mat-card-title>
+        <mat-card-title><a [ngClass]="{'text-light': isMobile!='true', 'text-dark': isMobile == 'true'}" routerLink="/profile/{{postData.author.uid}}">{{postData.author.name}}</a></mat-card-title>
         <mat-card-subtitle class="text-secondary">• Living in <span class="highlight text-capitalize">{{postData.author.locality}}</span> since {{postData.author.living_since}} Years</mat-card-subtitle>
     </mat-card-header>
     <h1 mat-dialog-title>{{postData.content.title}}</h1>
@@ -14,7 +22,7 @@
     <mat-divider></mat-divider>
     <mat-card-actions>
         <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-            <button mat-icon-button (click)="incrementClaps(postId, collection)" class="col-6">
+            <button mat-icon-button (click)="incrementClaps(collection, postId)" class="col-6">
                 <mat-icon>celebration</mat-icon>
                 {{postData.content.claps}}
             </button>
@@ -22,7 +30,7 @@
                 <mat-icon>forum</mat-icon>
                 {{postData.answers}}
             </button>
-            <button mat-icon-button (click)="copyToClipboard(postId)" class="col-6 ml-2">
+            <button mat-icon-button (click)="copyToClipboard(collection, postId)" class="col-6 ml-2">
                 <mat-icon>share</mat-icon>
             </button>
         </div>
@@ -49,10 +57,10 @@
 <h1 class="d-flex justify-content-center m-auto col-12" *ngIf="answersLoaded && commentsData.length == 0">
     Nothing to Show. Be the first one to ANSWER.
 </h1>
-<mat-card *ngFor="let answer of commentsData; let i = index;" class="bg-dark text-light m-3">
+<mat-card *ngFor="let answer of commentsData; let i = index;" [ngClass]="{'bg-dark text-light m-3': isMobile!='true', 'bg-light text-dark m-3': isMobile == 'true'}">
     <mat-card-header>
         <img src="{{answer.author.image}}" mat-card-avatar>
-        <mat-card-title><a routerLink="profile/{{answer.author.uid}}">{{answer.author.fullname}}</a></mat-card-title>
+        <mat-card-title><a [ngClass]="{'text-light': isMobile!='true', 'text-dark': isMobile == 'true'}" routerLink="profile/{{answer.author.uid}}">{{answer.author.fullname}}</a></mat-card-title>
         <mat-card-subtitle class="text-secondary">• Living in <span class="highlight text-capitalize">{{answer.author.locality}}</span> since {{answer.author.living_since}} Years</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>

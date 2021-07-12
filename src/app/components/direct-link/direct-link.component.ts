@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Clipboard } from "@angular/cdk/clipboard";
 
 
 @Component({
@@ -14,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./direct-link.component.css']
 })
 export class DirectLinkComponent implements OnInit {
+title: string = "Post"
 postData: any;
 commentsData: any;
 routeSub: any;
@@ -21,13 +24,17 @@ collection: string;
 postId: string;
 loadComplete: boolean = false;
 answersLoaded: boolean = false;
+isMobile = localStorage.getItem('isMobile');
 
   constructor(
     public router: ActivatedRoute,
     private data: DataService,
     public auth: AuthService,
     public af: AngularFirestore,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackbar: MatSnackBar,
+    private clipboard: Clipboard
+
     ) { }
 
   ngOnInit(): void {
@@ -55,6 +62,15 @@ answersLoaded: boolean = false;
     const postRef = this.af.doc(`${collection}/${postToIncrease}`);
     postRef.update({'content.claps': incrementor});
     this.postData.content.claps += 1;
+  }
+
+  copyToClipboard(collection: string, id:string) {
+    this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "top", horizontalPosition: "end", duration: 3000});
+    if (location.hostname === "localhost") {
+      this.clipboard.copy(`http://localhost:4200/post/${collection}/${id}`);
+    } else {
+      this.clipboard.copy(`http://local-eyes.tech/post/${collection}/${id}`);
+    }
   }
 
   openSignInChecker() {
