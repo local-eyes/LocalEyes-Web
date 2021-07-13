@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./explore.component.css']
 })
 export class ExploreComponent implements OnInit {
-
+isMobile = localStorage.getItem('isMobile');
   constructor() { }
 
   ngOnInit(): void {
