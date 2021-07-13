@@ -24,6 +24,8 @@ export class ForYouComponent implements OnInit {
   loadComplete:boolean = false;
   deviceInfo: any;
   isMobile = localStorage.getItem('isMobile');
+  user:any;
+  title = "Unanswered Questions";
   constructor(
     private data: DataService, 
     private location: LocationService, 
@@ -35,6 +37,7 @@ export class ForYouComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.user = this.auth.userData;
     this.location.getPosition().then(pos=>
       {
         this.lon = pos.lng;

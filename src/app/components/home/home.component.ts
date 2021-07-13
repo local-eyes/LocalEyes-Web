@@ -16,6 +16,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  mobileNavOpened = false;
   title = "Home";
   deviceInfo = null;
   radius:any = 6000;
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   lat:any;
   lon: any;
   loadComplete:boolean = false;
-  isMobile = localStorage.getItem('isMobile')
+  isMobile = localStorage.getItem('isMobile');
   constructor(
     private data: DataService, 
     private location: LocationService, 

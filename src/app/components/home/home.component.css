@@ -1,3 +1,19 @@
+mat-sidenav {
+    background-color: white;
+    color: black;
+    width: 300px;
+}
+
+mat-sidenav-closed {
+    width: 100vw;
+}
+
+mat-sidenav-content {
+    background-color: white;
+    color: black;
+    ;
+}
+
 .example-card {
     min-width: 98%!important;
     max-width: 98%!important;
@@ -61,4 +77,14 @@ mat-card:hover {
     bottom: 90px;
     z-index: 9999;
     right: 10px;
+}
+
+.mobileUserImage {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%);
+    border-radius: 50%;
+    margin: 30px 0;
+    border: 2px solid #62c9d5
 }
