@@ -8,6 +8,7 @@ import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.compo
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Clipboard } from "@angular/cdk/clipboard";
+import { Location } from "@angular/common";
 
 
 @Component({
@@ -33,8 +34,8 @@ isMobile = localStorage.getItem('isMobile');
     public af: AngularFirestore,
     public dialog: MatDialog,
     private snackbar: MatSnackBar,
-    private clipboard: Clipboard
-
+    private clipboard: Clipboard,
+    private _location: Location
     ) { }
 
   ngOnInit(): void {
@@ -57,9 +58,9 @@ isMobile = localStorage.getItem('isMobile');
     })
   }
 
-  incrementClaps(postToIncrease:string, collection:string) {
+  incrementClaps() {
     const incrementor = firestore.firestore.FieldValue.increment(1);
-    const postRef = this.af.doc(`${collection}/${postToIncrease}`);
+    const postRef = this.af.collection(this.collection).doc(this.postId);
     postRef.update({'content.claps': incrementor});
     this.postData.content.claps += 1;
   }
@@ -75,6 +76,10 @@ isMobile = localStorage.getItem('isMobile');
 
   openSignInChecker() {
     this.dialog.open(SignInCheckerComponent);
+  }
+
+  goBack() {
+    this._location.back();
   }
 
 }

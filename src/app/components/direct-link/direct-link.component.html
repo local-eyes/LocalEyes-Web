@@ -1,8 +1,8 @@
 <mat-toolbar style="background-color: black; color: white; z-index: 999; top: 0; position: fixed;">
     <div class="m-3">
-        <a routerLink="">
+        <button mat-button (click)="goBack()">
             <mat-icon>arrow_back_ios_new</mat-icon>
-        </a>
+        </button>
     </div>
     <div style="margin-bottom: 7px;">
         <h1>{{title}}</h1>
@@ -24,7 +24,7 @@
     <mat-divider></mat-divider>
     <mat-card-actions>
         <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-            <button mat-icon-button (click)="incrementClaps(collection, postId)" class="col-6">
+            <button mat-icon-button (click)="incrementClaps()" class="col-6">
                 <mat-icon>celebration</mat-icon>
                 {{postData.content.claps}}
             </button>

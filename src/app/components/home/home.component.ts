@@ -106,7 +106,11 @@ export class HomeComponent implements OnInit {
     const incrementor = firestore.firestore.FieldValue.increment(1);
     const postRef = this.af.doc(`${collection}/${postToIncrease}`);
     postRef.update({'content.claps': incrementor});
+    if (collection == 'local') {
     this.nearbyPosts[i].content.claps += 1;
+    } else {
+      this.cityPosts[i].content.claps += 1;
+    }
   }
 
   copyToClipboard(collection: string, id:string) {
@@ -114,7 +118,7 @@ export class HomeComponent implements OnInit {
     if (location.hostname === "localhost") {
       this.clipboard.copy(`http://localhost:4200/post/${collection}/${id}`);
     } else {
-      this.clipboard.copy(`http://local-eyes.tech/post/${collection}/${id}`);
+      this.clipboard.copy(`https://local-eyes.tech/app/post/${collection}/${id}`);
     }
   }
 

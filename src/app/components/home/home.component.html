@@ -201,16 +201,16 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
                                         <button mat-icon-button (click)="incrementClaps('local', nearbyPosts[i].id, i)" class="col-6">
-                                                    <mat-icon>celebration</mat-icon>
-                                                    {{nearbyPosts[i].content.claps}}
-                                                </button>
-                                        <button mat-icon-button (click)="openPost('local', i)" class="col-6 ml-2">
-                                                    <mat-icon>forum</mat-icon>
-                                                    {{nearbyPosts[i].answers}}
-                                                </button>
+                                            <mat-icon>celebration</mat-icon>
+                                            {{nearbyPosts[i].content.claps}}
+                                        </button>
+                                        <a mat-icon-button routerLink="post/local/{{nearbyPosts[i].id}}" class="col-6 ml-2">
+                                            <mat-icon>forum</mat-icon>
+                                            {{nearbyPosts[i].answers}}
+                                        </a>
                                         <button mat-icon-button (click)="copyToClipboard('local', nearbyPosts[i].id)" class="col-6 ml-2">
-                                                    <mat-icon>share</mat-icon>
-                                                </button>
+                                            <mat-icon>share</mat-icon>
+                                        </button>
                                     </div>
                                     <ng-template #login>
                                         <div class="row d-flex justify-content-around">
@@ -258,16 +258,16 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
                                         <button mat-icon-button (click)="incrementClaps('city', cityPosts[i].id, i)" class="col-6">
-                                                    <mat-icon>celebration</mat-icon>
-                                                    {{cityPosts[i].content.claps}}
-                                                </button>
-                                        <button mat-icon-button (click)="openPost('city', i)" class="col-6 ml-2">
-                                                    <mat-icon>forum</mat-icon>
-                                                    {{cityPosts[i].answers}}
-                                                </button>
+                                            <mat-icon>celebration</mat-icon>
+                                            {{cityPosts[i].content.claps}}
+                                        </button>
+                                        <a mat-icon-button routerLink="post/city/{{cityPosts[i].id}}" class="col-6 ml-2">
+                                            <mat-icon>forum</mat-icon>
+                                            {{cityPosts[i].answers}}
+                                        </a>
                                         <button mat-icon-button (click)="copyToClipboard('city', cityPosts[i].id)" class="col-6 ml-2">
-                                                    <mat-icon>share</mat-icon>
-                                                </button>
+                                            <mat-icon>share</mat-icon>
+                                        </button>
                                     </div>
                                     <ng-template #login>
                                         <div class="row d-flex justify-content-around">
