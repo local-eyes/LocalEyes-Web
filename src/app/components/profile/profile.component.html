@@ -1,11 +1,36 @@
-<app-loader *ngIf="dataLoaded==false"></app-loader>
-<div *ngIf="personData">
-    <div *ngFor="let person of personData | keyvalue">
-        {{person.key}} ==> {{personData[person.key]}}
+<app-loader *ngIf="dataLoaded==false; else showProfile"></app-loader>
+<ng-template #showProfile>
+    <div class="header">
+        <img src="{{personData.imageURL}}" alt="UserImage" class="user-image">
+        <h1 class="user-name text-capitalize">{{personData.fullname}}</h1>
+        <h3 class="user-email text-secondary">{{personData.email}}</h3>
+        <mat-divider></mat-divider>
+        <h2 class="bio text-capitalize">{{personData.bio}}</h2>
+        <!-- <div class="location-info d-flex flex-row justify-content-start my-3"> -->
+        <div class="location-info row my-3">
+            <div class="location-info-tag col-5 d-flex">
+                <mat-icon>place</mat-icon>
+                <p class="ms-2 highlight">{{personData.locality}}</p>
+            </div>
+            <div class="location-info-tag col-5 d-flex">
+                <mat-icon>hourglass_bottom</mat-icon>
+                <p class="ms-2">Since {{personData.living_since}} Years</p>
+            </div>
+            <div class="location-info-tag col-5 d-flex text-secondary">
+                <mat-icon>date_range</mat-icon>
+                <p class="ms-2">Joined {{getDate(personData.createdOn._seconds)}}</p>
+            </div>
+        </div>
+        <button mat-raised-button color="primary">
+            Edit Profile
+        </button>
     </div>
-    <!-- <pre>{{ personData | json }}</pre> -->
-    <img mat-card-avatar src="{{personData.imageURL}}" alt="img">
-    <h1>{{personData.fullname}}</h1>
-    <h4>Living in {{personData.locality}} since {{personData.living_since}} </h4>
-    <p>Account created on {{personData.createdOn._seconds | date }} </p>
-</div>
+
+    <div class="tabs bg-secondary">
+        <mat-tab-group mat-stretch-tabs backgroundColor="primary" color="primary" mat-align-tabs="center">
+            <mat-tab label="Local Posts"></mat-tab>
+            <mat-tab label="City Posts"></mat-tab>
+            <mat-tab label="Answers"></mat-tab>
+        </mat-tab-group>
+    </div>
+</ng-template>
