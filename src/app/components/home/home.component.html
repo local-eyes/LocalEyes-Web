@@ -64,7 +64,7 @@
                 </div>
             </div>
         </mat-tab>
-        <mat-tab label="City">
+        <mat-tab label="City" (click)="getCity('jaipur')">
             <div class="container">
                 <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                     <mat-card class="bg-dark text-light">

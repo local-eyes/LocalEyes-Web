@@ -48,6 +48,25 @@ export class DataService {
     return this.http.get(`${prodURL}/getProfile`, {params})
   }
 
+  getUserLocalFeed(uid:string) {
+    let params = new HttpParams()
+    .set('uid', uid)
+
+    return this.http.get(`${prodURL}/getUserLocalFeed`, {params})
+  }
+  getUserCityFeed(uid:string) {
+    let params = new HttpParams()
+    .set('uid', uid)
+
+    return this.http.get(`${prodURL}/getUserCityFeed`, {params})
+  }
+  getAnswersFeed(uid:string) {
+    let params = new HttpParams()
+    .set('uid', uid)
+
+    return this.http.get(`${prodURL}/getUserAnswers`, {params})
+  }
+
   getNearbyUnanswered(lat:any, lon:any, radius:any) {
     let params = new HttpParams()
     .set('lat', lat)
