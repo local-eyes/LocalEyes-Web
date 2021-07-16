@@ -2,7 +2,7 @@
     <mat-toolbar style="background-color: black; color: white; position: fixed; top: 0; z-index: 999;">
         <div style="margin-bottom: 7px;">{{title}}</div>
     </mat-toolbar>
-    <mat-tab-group backgroundColor="primary" color="primary" mat-align-tabs="center">
+    <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" backgroundColor="primary" color="primary" mat-align-tabs="center">
         <mat-tab label="Local">
             <mat-button-toggle-group class="sorting-toggle m-auto col-6" #sortBy="matButtonToggleGroup">
                 <mat-button-toggle value="new" (change)="getPosts(lat, lon, radius, sortBy.value)">Newest</mat-button-toggle>
@@ -15,32 +15,32 @@
                 <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                     <mat-card class="bg-dark text-light" style="cursor: pointer;">
                         <mat-card-header (click)="openPost('local', i)">
-                            <a routerLink="profile/{{nearbyPosts[i].author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{nearbyPosts[i].author.image}});"></a>
-                            <mat-card-title><a routerLink="profile/{{nearbyPosts[i].author.uid}}">{{nearbyPosts[i].author.name}}</a></mat-card-title>
-                            <mat-card-subtitle class="text-secondary">• {{getDate(nearbyPosts[i].postedOn._seconds)}}</mat-card-subtitle>
+                            <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                            <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                            <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content (click)="openPost('local', i)">
                             <h2>
-                                {{nearbyPosts[i].content.title}}
+                                {{post.content.title}}
                             </h2>
                             <mat-chip-list aria-label="Fish selection">
-                                <mat-chip *ngIf="nearbyPosts[i].type=='announcement'" color="accent" selected class="text-capitalize">{{nearbyPosts[i].type}}</mat-chip>
-                                <mat-chip *ngIf="nearbyPosts[i].type=='question'" color="primary" selected class="text-capitalize">{{nearbyPosts[i].type}}</mat-chip>
+                                <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
                             </mat-chip-list>
-                            <mat-card-subtitle class="text-secondary">~ {{nearbyPosts[i].hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
+                            <mat-card-subtitle class="text-secondary">~ {{post.hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
                         </mat-card-content>
                         <mat-divider></mat-divider>
                         <mat-card-actions>
                             <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-                                <button mat-icon-button (click)="incrementClaps('local', nearbyPosts[i].id, i)" class="col-6">
+                                <button mat-icon-button (click)="incrementClaps('local', post.id, i)" class="col-6">
                                             <mat-icon>celebration</mat-icon>
-                                            {{nearbyPosts[i].content.claps}}
+                                            {{post.content.claps}}
                                         </button>
                                 <button mat-icon-button (click)="openPost('local', i)" class="col-6 ml-2">
                                             <mat-icon>forum</mat-icon>
-                                            {{nearbyPosts[i].answers}}
+                                            {{post.answers}}
                                         </button>
-                                <button mat-icon-button (click)="copyToClipboard('local', nearbyPosts[i].id)" class="col-6 ml-2">
+                                <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
                                             <mat-icon>share</mat-icon>
                                         </button>
                             </div>
@@ -48,13 +48,13 @@
                                 <div class="row d-flex justify-content-around">
                                     <button mat-icon-button (click)="openSignInChecker()" class="col-6">
                                                 <mat-icon>celebration</mat-icon>
-                                                {{nearbyPosts[i].content.claps}}
+                                                {{post.content.claps}}
                                             </button>
                                     <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
                                                 <mat-icon>forum</mat-icon>
-                                                {{nearbyPosts[i].answers}}
+                                                {{post.answers}}
                                             </button>
-                                    <button mat-icon-button (click)="copyToClipboard('local', nearbyPosts[i].id)" class="col-6 ml-2">
+                                    <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
                                                 <mat-icon>share</mat-icon>
                                             </button>
                                 </div>
@@ -70,34 +70,34 @@
                     <mat-card class="bg-dark text-light">
                         <mat-card-header>
                             <mat-chip-list aria-label="Fish selection">
-                                <mat-chip *ngIf="cityPosts[i].type=='announcement'" color="accent" selected class="text-capitalize">{{cityPosts[i].type}}</mat-chip>
-                                <mat-chip *ngIf="cityPosts[i].type=='question'" color="primary" selected class="text-capitalize">{{cityPosts[i].type}}</mat-chip>
+                                <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
                             </mat-chip-list>
-                            <a routerLink="profile/{{cityPosts[i].author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{cityPosts[i].author.image}});"></a>
-                            <mat-card-title><a routerLink="profile/{{cityPosts[i].author.uid}}">{{cityPosts[i].author.name}}</a></mat-card-title>
-                            <mat-card-subtitle class="text-secondary">• {{getDate(cityPosts[i].postedOn._seconds)}}</mat-card-subtitle>
+                            <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                            <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                            <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                         </mat-card-header>
                         <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                         <a (click)="openPost('city', i)" routerLink="">
                             <mat-card-content>
                                 <h2>
-                                    {{cityPosts[i].content.title}}
+                                    {{post.content.title}}
                                 </h2>
-                                <mat-card-subtitle class="text-secondary">Posted in {{cityPosts[i].city}}</mat-card-subtitle>
+                                <mat-card-subtitle class="text-secondary">Posted in {{post.city}}</mat-card-subtitle>
                             </mat-card-content>
                         </a>
                         <mat-divider></mat-divider>
                         <mat-card-actions>
                             <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-                                <button mat-icon-button (click)="incrementClaps('city', cityPosts[i].id, i)" class="col-6">
+                                <button mat-icon-button (click)="incrementClaps('city', post.id, i)" class="col-6">
                                             <mat-icon>celebration</mat-icon>
-                                            {{cityPosts[i].content.claps}}
+                                            {{post.content.claps}}
                                         </button>
                                 <button mat-icon-button (click)="openPost('city', i)" class="col-6 ml-2">
                                             <mat-icon>forum</mat-icon>
-                                            {{cityPosts[i].answers}}
+                                            {{post.answers}}
                                         </button>
-                                <button mat-icon-button (click)="copyToClipboard('city', cityPosts[i].id)" class="col-6 ml-2">
+                                <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
                                             <mat-icon>share</mat-icon>
                                         </button>
                             </div>
@@ -105,13 +105,13 @@
                                 <div class="row d-flex justify-content-around">
                                     <button mat-icon-button (click)="openSignInChecker()" class="col-6">
                                                 <mat-icon>celebration</mat-icon>
-                                                {{cityPosts[i].content.claps}}
+                                                {{post.content.claps}}
                                             </button>
                                     <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
                                                 <mat-icon>forum</mat-icon>
-                                                {{cityPosts[i].answers}}
+                                                {{post.answers}}
                                             </button>
-                                    <button mat-icon-button (click)="copyToClipboard('city', cityPosts[i].id)" class="col-6 ml-2">
+                                    <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
                                                 <mat-icon>share</mat-icon>
                                             </button>
                                 </div>
@@ -168,7 +168,7 @@
                     <h1>{{title}}</h1>
                 </div>
             </mat-toolbar>
-            <mat-tab-group backgroundColor="primary" color="primary" mat-align-tabs="center">
+            <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" backgroundColor="primary" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
                     <mat-button-toggle-group class="sorting-toggle m-auto col-6" #sortBy="matButtonToggleGroup">
                         <mat-button-toggle value="new" (change)="getPosts(lat, lon, radius, sortBy.value)">Newest</mat-button-toggle>
@@ -181,34 +181,34 @@
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
                                 <mat-card-header>
-                                    <a routerLink="profile/{{nearbyPosts[i].author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{nearbyPosts[i].author.image}});"></a>
-                                    <mat-card-title><a routerLink="profile/{{nearbyPosts[i].author.uid}}">{{nearbyPosts[i].author.name}}</a></mat-card-title>
-                                    <mat-card-subtitle class="text-secondary">• {{getDate(nearbyPosts[i].postedOn._seconds)}}</mat-card-subtitle>
+                                    <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                    <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                                    <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                                 </mat-card-header>
-                                <a routerLink="post/local/{{nearbyPosts[i].id}}">
+                                <a routerLink="post/local/{{post.id}}">
                                     <mat-card-content>
                                         <h2>
-                                            {{nearbyPosts[i].content.title}}
+                                            {{post.content.title}}
                                         </h2>
                                         <mat-chip-list aria-label="Fish selection">
-                                            <mat-chip *ngIf="nearbyPosts[i].type=='announcement'" color="accent" selected class="text-capitalize">{{nearbyPosts[i].type}}</mat-chip>
-                                            <mat-chip *ngIf="nearbyPosts[i].type=='question'" color="primary" selected class="text-capitalize">{{nearbyPosts[i].type}}</mat-chip>
+                                            <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                            <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
                                         </mat-chip-list>
-                                        <mat-card-subtitle class="text-secondary">~ {{nearbyPosts[i].hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
+                                        <mat-card-subtitle class="text-secondary">~ {{post.hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
                                     </mat-card-content>
                                 </a>
                                 <mat-divider></mat-divider>
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-                                        <button mat-icon-button (click)="incrementClaps('local', nearbyPosts[i].id, i)" class="col-6">
+                                        <button mat-icon-button (click)="incrementClaps('local', post.id, i)" class="col-6">
                                             <mat-icon>celebration</mat-icon>
-                                            {{nearbyPosts[i].content.claps}}
+                                            {{post.content.claps}}
                                         </button>
-                                        <a mat-icon-button routerLink="post/local/{{nearbyPosts[i].id}}" class="col-6 ml-2">
+                                        <a mat-icon-button routerLink="post/local/{{post.id}}" class="col-6 ml-2">
                                             <mat-icon>forum</mat-icon>
-                                            {{nearbyPosts[i].answers}}
+                                            {{post.answers}}
                                         </a>
-                                        <button mat-icon-button (click)="copyToClipboard('local', nearbyPosts[i].id)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
                                             <mat-icon>share</mat-icon>
                                         </button>
                                     </div>
@@ -216,13 +216,13 @@
                                         <div class="row d-flex justify-content-around">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
                                                         <mat-icon>celebration</mat-icon>
-                                                        {{nearbyPosts[i].content.claps}}
+                                                        {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
                                                         <mat-icon>forum</mat-icon>
-                                                        {{nearbyPosts[i].answers}}
+                                                        {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('local', nearbyPosts[i].id)" class="col-6 ml-2">
+                                            <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
                                                         <mat-icon>share</mat-icon>
                                                     </button>
                                         </div>
@@ -238,34 +238,34 @@
                             <mat-card class="bg-light text-dark">
                                 <mat-card-header>
                                     <mat-chip-list aria-label="Fish selection">
-                                        <mat-chip *ngIf="cityPosts[i].type=='announcement'" color="accent" selected class="text-capitalize">{{cityPosts[i].type}}</mat-chip>
-                                        <mat-chip *ngIf="cityPosts[i].type=='question'" color="primary" selected class="text-capitalize">{{cityPosts[i].type}}</mat-chip>
+                                        <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                        <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
                                     </mat-chip-list>
-                                    <a routerLink="profile/{{cityPosts[i].author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{cityPosts[i].author.image}});"></a>
-                                    <mat-card-title><a routerLink="profile/{{cityPosts[i].author.uid}}">{{cityPosts[i].author.name}}</a></mat-card-title>
-                                    <mat-card-subtitle class="text-secondary">• {{getDate(cityPosts[i].postedOn._seconds)}}</mat-card-subtitle>
+                                    <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                    <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                                    <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                                 </mat-card-header>
                                 <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-                                <a routerLink="post/city/{{cityPosts[i].id}}">
+                                <a routerLink="post/city/{{post.id}}">
                                     <mat-card-content>
                                         <h2>
-                                            {{cityPosts[i].content.title}}
+                                            {{post.content.title}}
                                         </h2>
-                                        <mat-card-subtitle class="text-secondary">Posted in {{cityPosts[i].city}}</mat-card-subtitle>
+                                        <mat-card-subtitle class="text-secondary">Posted in {{post.city}}</mat-card-subtitle>
                                     </mat-card-content>
                                 </a>
                                 <mat-divider></mat-divider>
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-                                        <button mat-icon-button (click)="incrementClaps('city', cityPosts[i].id, i)" class="col-6">
+                                        <button mat-icon-button (click)="incrementClaps('city', post.id, i)" class="col-6">
                                             <mat-icon>celebration</mat-icon>
-                                            {{cityPosts[i].content.claps}}
+                                            {{post.content.claps}}
                                         </button>
-                                        <a mat-icon-button routerLink="post/city/{{cityPosts[i].id}}" class="col-6 ml-2">
+                                        <a mat-icon-button routerLink="post/city/{{post.id}}" class="col-6 ml-2">
                                             <mat-icon>forum</mat-icon>
-                                            {{cityPosts[i].answers}}
+                                            {{post.answers}}
                                         </a>
-                                        <button mat-icon-button (click)="copyToClipboard('city', cityPosts[i].id)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
                                             <mat-icon>share</mat-icon>
                                         </button>
                                     </div>
@@ -273,13 +273,13 @@
                                         <div class="row d-flex justify-content-around">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
                                                         <mat-icon>celebration</mat-icon>
-                                                        {{cityPosts[i].content.claps}}
+                                                        {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
                                                         <mat-icon>forum</mat-icon>
-                                                        {{cityPosts[i].answers}}
+                                                        {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('city', cityPosts[i].id)" class="col-6 ml-2">
+                                            <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
                                                         <mat-icon>share</mat-icon>
                                                     </button>
                                         </div>

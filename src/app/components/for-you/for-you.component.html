@@ -4,7 +4,7 @@
             <h1>Unanswered Questions</h1>
         </div>
     </mat-toolbar>
-    <mat-tab-group backgroundColor="primary" color="primary" mat-align-tabs="center">
+    <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" backgroundColor="primary" color="primary" mat-align-tabs="center">
         <mat-tab label="Local">
             <mat-button-toggle-group class="sorting-toggle m-auto col-6" #sortBy="matButtonToggleGroup">
                 <mat-button-toggle value="new" (change)="getPosts(lat, lon, radius, sortBy.value)">Newest</mat-button-toggle>

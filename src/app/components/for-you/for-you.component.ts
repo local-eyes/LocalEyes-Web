@@ -26,6 +26,7 @@ export class ForYouComponent implements OnInit {
   isMobile = localStorage.getItem('isMobile');
   user:any;
   title = "Unanswered Questions";
+  cityLoaded = false;
   constructor(
     private data: DataService, 
     private location: LocationService, 
@@ -43,7 +44,6 @@ export class ForYouComponent implements OnInit {
         this.lon = pos.lng;
         this.lat = pos.lat;
         this.getPosts(this.lat, this.lon, this.radius, null);
-        this.getCity("jaipur");
       });
   }
 
@@ -116,4 +116,12 @@ export class ForYouComponent implements OnInit {
   formatThumb(value:number) {
     return value + 'mtr'
   }
+
+  loadData(tabIndex:number) {
+    if (tabIndex === 1 && this.cityLoaded == false) {
+      this.getCity("jaipur");
+      this.cityLoaded = true;
+    }
+  }
+
 }

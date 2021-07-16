@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   lat:any;
   lon: any;
   loadComplete:boolean = false;
+  cityLoaded = false;
   isMobile = localStorage.getItem('isMobile');
   constructor(
     private data: DataService, 
@@ -42,7 +43,6 @@ export class HomeComponent implements OnInit {
         this.lon = pos.lng;
         this.lat = pos.lat;
         this.getPosts(this.lat, this.lon, this.radius, null);
-        this.getCity("jaipur");
       });
   }
 
@@ -124,5 +124,12 @@ export class HomeComponent implements OnInit {
 
   formatThumb(value:number) {
     return value + 'mtr'
+  }
+
+  loadData(tabIndex:number) {
+    if (tabIndex === 1 && this.cityLoaded == false) {
+      this.getCity("jaipur");
+      this.cityLoaded = true;
+    }
   }
 }
