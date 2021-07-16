@@ -1,3 +1,7 @@
+.header {
+    margin-left: 7rem;
+}
+
 .header img {
     border-radius: 15%;
     border: 6px solid #62c9d5;
@@ -12,8 +16,31 @@
     border: 2px solid #62c9d5;
 }
 
-.header {
-    margin-left: 7rem;
+.mobile-header {
+    margin-left: 0;
+    color: white;
+}
+
+.mobile-header button {
+    border-radius: 20px;
+    background: transparent;
+    color: #021d20;
+    border: 2px solid #62c9d5;
+    margin-bottom: 20px;
+}
+
+.mobile-header img {
+    border-radius: 15%;
+    border: 6px solid #62c9d5;
+    margin-bottom: 1.5rem;
+    height: 20rem;
+    display: flex;
+    align-self: center;
+}
+
+.mobile-header .bio {
+    color: black;
+    font-weight: lighter;
 }
 
 .bio {
@@ -28,4 +55,67 @@
 .user-name {
     font-size: 40px;
     font-weight: 500;
+}
+
+.mobile-header .user-name {
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.example-card {
+    margin: 10px;
+}
+
+mat-card {
+    border-radius: 20px;
+    border: 2px solid #62c9d575;
+}
+
+mat-card:hover {
+    border: 2px solid #62c9d5;
+}
+
+.bg-light a {
+    text-decoration: none;
+    color: black;
+}
+
+.bg-dark a {
+    text-decoration: none;
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+    padding-right: 0!important;
+    padding-left: 0!important;
+}
+
+.example-header-image {
+    background-size: cover;
+}
+
+.mat-tab-label .mat-tab-label-content {
+    color: white !important
+}
+
+.mat-standard-chip {
+    min-height: 24px;
+}
+
+.row {
+    margin-right: 0;
 }
