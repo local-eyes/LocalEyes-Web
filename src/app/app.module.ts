@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Firebase
 import { environment, firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
+import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFirestoreModule, USE_EMULATOR as FIRESTORE_EMULATOR } from "@angular/fire/firestore";
 import { MaterialModule } from './material/material.module';
 
@@ -29,6 +30,7 @@ import { AuthService } from './services/auth/auth.service';
 import { DataService } from "./services/data/data.service";
 import { LocationService } from './services/location/location.service';
 import { ForYouComponent } from './components/for-you/for-you.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { ForYouComponent } from './components/for-you/for-you.component';
     SignInCheckerComponent,
     NewComponent,
     DirectLinkComponent,
-    ForYouComponent
+    ForYouComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { ForYouComponent } from './components/for-you/for-you.component';
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     ClipboardModule,
     FormsModule,
     ReactiveFormsModule
