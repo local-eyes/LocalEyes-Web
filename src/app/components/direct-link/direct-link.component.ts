@@ -82,4 +82,8 @@ isMobile = localStorage.getItem('isMobile');
     this._location.back();
   }
 
+  addComment(newComment: string) {
+    this.commentsData.unshift(newComment)
+  }
+
 }

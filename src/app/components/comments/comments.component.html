@@ -1,1 +1,11 @@
-<p>comments works!</p>
+<form [formGroup]="comment" (ngSubmit)="postComment()">
+    <div class="row m-auto">
+        <mat-form-field appearance="outline" class="w-75">
+            <mat-label style="color: lightyellow;">Description</mat-label>
+            <textarea matInput placeholder="Type your comment" formControlName="answer"></textarea>
+        </mat-form-field>
+        <div class="m-auto d-flex flex-column w-25 justify-content-center">
+            <button mat-raised-button [disabled]="comment.invalid" color="primary" type="submit" class="m-auto w-50">Ask OUT!!</button>
+        </div>
+    </div>
+</form>

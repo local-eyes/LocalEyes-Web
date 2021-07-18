@@ -70,4 +70,9 @@ export class PostComponent implements OnInit {
   openSignInChecker() {
     this.dialog.open(SignInCheckerComponent);
   }
+
+  addComment(newComment: string) {
+    this.answers.unshift(newComment)
+  }
+
 }

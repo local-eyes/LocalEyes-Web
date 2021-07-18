@@ -53,7 +53,10 @@
         </ng-template>
     </mat-card-actions>
 </mat-card>
-<app-comments></app-comments>
+<app-comments (newCommentEvent)="addComment($event)" *ngIf="postData.city === null; else city" [docRef]="'local'" [postId]="postData.id"></app-comments>
+<ng-template #city>
+    <app-comments (newCommentEvent)="addComment($event)" [docRef]="'city'" [postId]="postData.id"></app-comments>
+</ng-template>
 <div class="container m-auto" *ngIf="answersLoaded == false">
     <app-loader></app-loader>
 </div>
