@@ -4,12 +4,13 @@
     </mat-toolbar>
     <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" backgroundColor="primary" color="primary" mat-align-tabs="center">
         <mat-tab label="Local">
-            <mat-button-toggle-group class="sorting-toggle m-auto col-6" #sortBy="matButtonToggleGroup">
-                <mat-button-toggle value="new" (change)="getPosts(lat, lon, radius, sortBy.value)">Newest</mat-button-toggle>
-                <mat-button-toggle value="popularity" (change)="getPosts(lat, lon, radius, sortBy.value)">Popular</mat-button-toggle>
-            </mat-button-toggle-group>
-            Radius:
-            <mat-slider min="400" step="100" [(ngModel)]="radius" [displayWith]="formatThumb" (change)="getPosts(lat, lon, radius, null)" thumbLabel max="10000"></mat-slider>
+            <div class="bg-dark w-100 my-2" style="border-radius: 20px; align-items: center; border: 1px solid #62c9d575;">
+                <a [routerLink]="['/create']" [queryParams]="{ feed: 'local'}" class="d-flex flex-row justify-content-st px-4 py-2">
+                    <mat-icon style="margin-top: 5px;">maps_ugc</mat-icon>
+                    <input type="text" class="w-100 mx-4" placeholder="Create Post" style="background-color: rgb(19, 19, 19); border: 1px solid #1c1c1c; border-radius: 9px;">
+                    <button mat-button>Post</button>
+                </a>
+            </div>
             <app-loader *ngIf="loadComplete==false"></app-loader>
             <div class="container" *ngIf="loadComplete==true">
                 <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
@@ -65,6 +66,13 @@
             </div>
         </mat-tab>
         <mat-tab label="City" (click)="getCity('jaipur')">
+            <div class="bg-dark w-100 my-2" style="border-radius: 20px; align-items: center; border: 1px solid #62c9d575;">
+                <a [routerLink]="['/create']" [queryParams]="{ feed: 'city'}" class="d-flex flex-row justify-content-st px-4 py-2">
+                    <mat-icon style="margin-top: 5px;">maps_ugc</mat-icon>
+                    <input type="text" class="w-100 mx-4" placeholder="Create Post" style="background-color: rgb(19, 19, 19); border: 1px solid #1c1c1c; border-radius: 9px;">
+                    <button mat-button>Post</button>
+                </a>
+            </div>
             <div class="container">
                 <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                     <mat-card class="bg-dark text-light">

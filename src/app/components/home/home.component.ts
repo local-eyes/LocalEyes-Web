@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   mobileNavOpened = false;
   title = "Home";
   deviceInfo = null;
-  radius:any = 6000;
+  radius:any = 8000;
   nearbyPosts:any;
   cityPosts:any;
   lat:any;
