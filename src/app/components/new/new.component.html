@@ -1,10 +1,19 @@
-<h1 class="header mt-4">{{title}}</h1>
+<mat-toolbar style="background-color: black; color: white; z-index: 999; top: 0; position: fixed;">
+    <div class="m-3">
+        <button mat-button (click)="goBack()">
+            <mat-icon>arrow_back_ios_new</mat-icon>
+        </button>
+    </div>
+    <div style="margin-bottom: 7px;">
+        <h1>{{title}}</h1>
+    </div>
+</mat-toolbar>
 <div *ngIf="!author.is_completed; else createPost">
     <h1>Profile Not Completed</h1>
 </div>
 <mat-divider style="background-color:white"></mat-divider>
 <ng-template #createPost>
-    <form [formGroup]="localPost" class="w-100" *ngIf="postingIn=='local'" (ngSubmit)="postToLocalFeed()">
+    <form [formGroup]="localPost" class="w-100 my-4" *ngIf="postingIn=='local'" (ngSubmit)="postToLocalFeed()">
         <mat-form-field appearance="outline">
             <mat-label style="color: lightyellow;">Posting In</mat-label>
             <mat-select [(value)]="postingIn">
@@ -14,6 +23,13 @@
         </mat-form-field>
         <mat-card class="bg-dark text-light w-100">
             <mat-card-content class="d-flex flex-column">
+                <mat-form-field appearance="outline">
+                    <mat-label style="color: lightyellow;">Type</mat-label>
+                    <mat-select [(value)]="postType" formControlName="type">
+                        <mat-option value="question">Question</mat-option>
+                        <mat-option value="announcement">Announcement</mat-option>
+                    </mat-select>
+                </mat-form-field>
                 <div formGroupName="content" class="d-flex flex-column">
                     <mat-form-field appearance="outline">
                         <mat-label style="color: lightyellow;">Title</mat-label>
@@ -27,18 +43,11 @@
                         <textarea matInput placeholder="(optional)" formControlName="description"></textarea>
                     </mat-form-field>
                 </div>
-                <mat-form-field appearance="outline">
-                    <mat-label style="color: lightyellow;">Type</mat-label>
-                    <mat-select [(value)]="postType" formControlName="type">
-                        <mat-option value="question">Question</mat-option>
-                        <mat-option value="announcement">Announcement</mat-option>
-                    </mat-select>
-                </mat-form-field>
             </mat-card-content>
         </mat-card>
         <button mat-raised-button [disabled]="localPost.invalid" color="primary" type="submit">Ask OUT!!</button>
     </form>
-    <form [formGroup]="cityPost" class="w-100" *ngIf="postingIn=='city'" (ngSubmit)="postToCityFeed()">
+    <form [formGroup]="cityPost" class="w-100 my-4" *ngIf="postingIn=='city'" (ngSubmit)="postToCityFeed()">
         <mat-form-field appearance="outline">
             <mat-label style="color: lightyellow;">Posting In</mat-label>
             <mat-select [(value)]="postingIn">
@@ -48,20 +57,6 @@
         </mat-form-field>
         <mat-card class="bg-dark text-light">
             <mat-card-content class="d-flex flex-column">
-                <div formGroupName="content" class="d-flex flex-column">
-                    <mat-form-field appearance="outline">
-                        <mat-label style="color: lightyellow;">Title</mat-label>
-                        <input matInput placeholder="What would you ask in your City?" formControlName="title">
-                        <mat-error *ngIf="title.invalid || title.touched">
-                            Title is Required!
-                        </mat-error>
-                        <mat-hint align="start">Be concise and clear about your thoughts</mat-hint>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label style="color: lightyellow;">Description</mat-label>
-                        <textarea matInput placeholder="(optional)" formControlName="description"></textarea>
-                    </mat-form-field>
-                </div>
                 <mat-form-field appearance="outline">
                     <mat-label style="color: lightyellow;">Type</mat-label>
                     <mat-select formControlName="type">
@@ -69,6 +64,19 @@
                         <mat-option value="announcement">Announcement</mat-option>
                     </mat-select>
                 </mat-form-field>
+                <div formGroupName="content" class="d-flex flex-column">
+                    <mat-form-field appearance="outline">
+                        <mat-label style="color: lightyellow;">Title</mat-label>
+                        <input matInput placeholder="What would you ask in your City?" formControlName="title">
+                        <mat-error *ngIf="title.invalid || title.touched">
+                            Title is Required!
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label style="color: lightyellow;">Description</mat-label>
+                        <textarea matInput placeholder="(optional)" formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
             </mat-card-content>
         </mat-card>
         <button mat-raised-button [disabled]="cityPost.invalid" color="primary">Ask OUT!!</button>

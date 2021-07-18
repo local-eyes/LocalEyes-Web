@@ -4,7 +4,8 @@ import firestore from 'firebase/app'
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { geohashForLocation } from "geofire-common";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new',
@@ -13,7 +14,7 @@ import { Router } from "@angular/router";
 })
 export class NewComponent implements OnInit {
 title: string = "Create New Post";
-postingIn = "local";
+postingIn? = this.route.snapshot.queryParamMap.get('feed') || "local";
 postType = "question";
 
 author: any;
@@ -33,7 +34,9 @@ success: boolean;
     private afs: AngularFirestore, 
     private fb: FormBuilder,
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    public _location: Location
     ) { }
 
   ngOnInit(): void {
@@ -146,5 +149,9 @@ success: boolean;
       console.log(error);
     }
     this.loading = false;
+  }
+
+  goBack() {
+    this._location.back();
   }
 }
