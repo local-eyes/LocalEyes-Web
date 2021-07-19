@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Firebase
-import { environment, firebaseConfig } from "../environments/environment";
+import { firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFirestoreModule, USE_EMULATOR as FIRESTORE_EMULATOR } from "@angular/fire/firestore";
@@ -24,6 +24,7 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-checker.component';
 import { NewComponent } from './components/new/new.component';
 import { DirectLinkComponent } from './components/direct-link/direct-link.component';
+import { FileUploadComponent } from "./components/file-upload/file-upload.component";
 
 // Services
 import { AuthService } from './services/auth/auth.service';
@@ -31,6 +32,7 @@ import { DataService } from "./services/data/data.service";
 import { LocationService } from './services/location/location.service';
 import { ForYouComponent } from './components/for-you/for-you.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { DropZoneDirective } from './drop-zone.directive';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { CommentsComponent } from './components/comments/comments.component';
     NewComponent,
     DirectLinkComponent,
     ForYouComponent,
-    CommentsComponent
+    CommentsComponent,
+    DropZoneDirective,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
