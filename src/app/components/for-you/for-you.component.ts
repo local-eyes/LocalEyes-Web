@@ -38,6 +38,7 @@ export class ForYouComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    window.scroll(0, 0);
     this.user = this.auth.userData;
     this.location.getPosition().then(pos=>
       {

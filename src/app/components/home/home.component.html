@@ -28,7 +28,9 @@
                             <h2>
                                 {{post.content.title}}
                             </h2>
-                            <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}">
+                            <div class="d-flex justify-content-center">
+                                <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
+                            </div>
                             <mat-card-subtitle class="text-secondary">~ {{post.hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
                         </mat-card-content>
                         <mat-divider></mat-divider>
@@ -91,7 +93,9 @@
                                 <h2>
                                     {{post.content.title}}
                                 </h2>
-                                <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}">
+                                <div class="d-flex justify-content-center">
+                                    <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
+                                </div>
                                 <mat-card-subtitle class="text-secondary">Posted in {{post.city}}</mat-card-subtitle>
                             </mat-card-content>
                         </a>

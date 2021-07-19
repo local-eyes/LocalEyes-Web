@@ -51,6 +51,9 @@
                                 <h2>
                                     {{post.content.title}}
                                 </h2>
+                                <div class="d-flex justify-content-center">
+                                    <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
+                                </div>
                                 <mat-chip-list aria-label="Fish selection">
                                     <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
                                     <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
@@ -102,6 +105,9 @@
                                 <h2>
                                     {{post.content.title}}
                                 </h2>
+                                <div class="d-flex justify-content-center">
+                                    <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
+                                </div>
                                 <mat-chip-list aria-label="Fish selection">
                                     <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
                                     <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
@@ -171,7 +177,6 @@
                     <h3 class="user-email text-secondary">{{personData.email}}</h3>
                     <mat-divider></mat-divider>
                     <h2 class="bio text-capitalize">{{personData.bio}}</h2>
-                    <!-- <div class="location-info d-flex flex-row justify-content-start my-3"> -->
                     <div class="location-info row">
                         <div class="location-info-tag col-5 d-flex text-dark">
                             <mat-icon>place</mat-icon>
@@ -207,6 +212,9 @@
                                         <h2>
                                             {{post.content.title}}
                                         </h2>
+                                        <div class="d-flex justify-content-center">
+                                            <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
+                                        </div>
                                         <mat-chip-list aria-label="Fish selection">
                                             <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
                                             <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
@@ -260,6 +268,9 @@
                                         <h2>
                                             {{post.content.title}}
                                         </h2>
+                                        <div class="d-flex justify-content-center">
+                                            <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
+                                        </div>
                                         <mat-chip-list aria-label="Fish selection">
                                             <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
                                             <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>

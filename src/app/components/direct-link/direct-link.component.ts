@@ -39,6 +39,7 @@ isMobile = localStorage.getItem('isMobile');
     ) { }
 
   ngOnInit(): void {
+    window.scroll(0, 0);
     this.collection = this.router.snapshot.paramMap.get('collection');
     this.postId = this.router.snapshot.paramMap.get('id');
     console.log(`${this.collection}/${this.postId}`);

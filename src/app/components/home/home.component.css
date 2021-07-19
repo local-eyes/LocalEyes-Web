@@ -88,3 +88,8 @@ mat-card:hover {
     margin: 30px 0;
     border: 2px solid #62c9d5
 }
+
+.post-image {
+    width: calc(80% + 32px);
+    margin-bottom: 0px;
+}

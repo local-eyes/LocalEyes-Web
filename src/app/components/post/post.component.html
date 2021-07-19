@@ -10,6 +10,9 @@
     </mat-card-header>
     <h1 mat-dialog-title>{{post.content.title}}</h1>
     <h4 mat-dialog-content> {{post.content.description}} </h4>
+    <div class="d-flex justify-content-center" style="background: black;">
+        <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image">
+    </div>
     <mat-card-subtitle *ngIf="post.hitMetadata" class="text-secondary">~ {{post.hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
     <mat-card-subtitle *ngIf="post.city != null" class="text-secondary">~ Posted in {{post.city}} </mat-card-subtitle>
     <mat-divider></mat-divider>

@@ -6,3 +6,12 @@ a {
 mat-divider {
     background-color: white;
 }
+
+.post-image {
+    width: calc(50% + 32px);
+    margin-bottom: 0px;
+}
+
+.mat-card-image:first-child {
+    margin-top: 0px;
+}
