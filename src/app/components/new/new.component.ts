@@ -63,6 +63,7 @@ success: boolean;
         geohash: this.hash,
         geopoint: this.point
       },
+      city: null,
       postedOn: firestore.firestore.Timestamp.now(),
       type: [this.postType, [
         Validators.required
@@ -86,6 +87,7 @@ success: boolean;
         description: [''],
       }),
       city: 'jaipur',
+      position: null,
       postedOn: firestore.firestore.Timestamp.now(),
       type: [this.postType, [
         Validators.required

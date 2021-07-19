@@ -16,6 +16,10 @@
                 <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                     <mat-card class="bg-dark text-light" style="cursor: pointer;">
                         <mat-card-header (click)="openPost('local', i)">
+                            <mat-chip-list aria-label="Fish selection">
+                                <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                            </mat-chip-list>
                             <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
                             <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
                             <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
@@ -24,10 +28,7 @@
                             <h2>
                                 {{post.content.title}}
                             </h2>
-                            <mat-chip-list aria-label="Fish selection">
-                                <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                            </mat-chip-list>
+                            <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}">
                             <mat-card-subtitle class="text-secondary">~ {{post.hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
                         </mat-card-content>
                         <mat-divider></mat-divider>
@@ -85,12 +86,12 @@
                             <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
                             <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                         </mat-card-header>
-                        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                         <a (click)="openPost('city', i)" routerLink="">
                             <mat-card-content>
                                 <h2>
                                     {{post.content.title}}
                                 </h2>
+                                <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}">
                                 <mat-card-subtitle class="text-secondary">Posted in {{post.city}}</mat-card-subtitle>
                             </mat-card-content>
                         </a>
@@ -198,6 +199,7 @@
                                         <h2>
                                             {{post.content.title}}
                                         </h2>
+                                        <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}">
                                         <mat-chip-list aria-label="Fish selection">
                                             <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
                                             <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
@@ -259,6 +261,7 @@
                                         <h2>
                                             {{post.content.title}}
                                         </h2>
+                                        <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}">
                                         <mat-card-subtitle class="text-secondary">Posted in {{post.city}}</mat-card-subtitle>
                                     </mat-card-content>
                                 </a>

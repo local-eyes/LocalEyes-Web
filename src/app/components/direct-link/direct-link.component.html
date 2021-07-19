@@ -21,6 +21,7 @@
     </mat-card-header>
     <h1 mat-dialog-title>{{postData.content.title}}</h1>
     <h4 mat-dialog-content> {{postData.content.description}} </h4>
+    <img *ngIf="postData.content.image" mat-card-image src="{{postData.content.image}}">
     <mat-divider></mat-divider>
     <mat-card-actions>
         <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
@@ -53,9 +54,9 @@
         </ng-template>
     </mat-card-actions>
 </mat-card>
-<app-comments (newCommentEvent)="addComment($event)" *ngIf="postData.city === null; else city" [docRef]="'local'" [postId]="postData.id"></app-comments>
+<app-comments *ngIf="postData && postData.city == null; else city" (newCommentEvent)="addComment($event)" [docRef]="'local'" [postId]="postId"></app-comments>
 <ng-template #city>
-    <app-comments (newCommentEvent)="addComment($event)" [docRef]="'city'" [postId]="postData.id"></app-comments>
+    <app-comments *ngIf="postData" (newCommentEvent)="addComment($event)" [docRef]="'city'" [postId]="postId"></app-comments>
 </ng-template>
 <div class="container m-auto" *ngIf="answersLoaded == false">
     <app-loader></app-loader>
