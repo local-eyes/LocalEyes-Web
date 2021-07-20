@@ -9,15 +9,15 @@
                 <mat-icon matListIcon>apartment</mat-icon>
                 <h1 matLine>Local</h1>
             </a>
-            <a routerLink="explore" mat-list-item>
-                <mat-icon matListIcon>explore_outline</mat-icon>
-                <h1 matLine>Explore</h1>
-            </a>
             <a routerLink="unanswered" mat-list-item>
                 <mat-icon matListIcon>local_library</mat-icon>
                 <h1 matLine>For You</h1>
             </a>
             <div *ngIf="auth.user$ | async as user; else login">
+                <a routerLink="notifications" mat-list-item>
+                    <mat-icon matListIcon>notifications</mat-icon>
+                    <h1 matLine>Notifications</h1>
+                </a>
                 <a routerLink="profile/{{user.uid}}/" mat-list-item>
                     <mat-icon matListIcon>person_outline</mat-icon>
                     <h1 matLine>{{user.fullname}}</h1>
@@ -60,13 +60,13 @@
                 </a>
             </div>
             <div class="col-3 d-flex justify-content-center">
-                <a routerLink="explore">
-                    <mat-icon>map</mat-icon>
+                <a routerLink="unanswered">
+                    <mat-icon>local_library</mat-icon>
                 </a>
             </div>
             <div class="col-3 d-flex justify-content-center">
-                <a routerLink="unanswered">
-                    <mat-icon>local_library</mat-icon>
+                <a routerLink="notifications">
+                    <mat-icon>notifications</mat-icon>
                 </a>
             </div>
             <div class="col-3 d-flex justify-content-center" *ngIf="auth.user$ | async as user; else loginMobile">

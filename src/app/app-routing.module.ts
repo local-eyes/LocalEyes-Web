@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'profile/:uid', component: ProfileComponent},
   {path: 'post/:collection/:id', component: DirectLinkComponent},
-  {path: 'explore', component: ExploreComponent},
+  {path: 'notifications', component: ExploreComponent},
   {path: 'create', component: NewComponent, canActivate: [GuardGuard]},
   {path: 'unanswered', component: ForYouComponent}
 ];
