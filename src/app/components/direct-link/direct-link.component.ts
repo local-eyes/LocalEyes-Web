@@ -84,6 +84,7 @@ isMobile = localStorage.getItem('isMobile');
   }
 
   addComment(newComment: string) {
+    this.postData.answers += 1;
     this.commentsData.unshift(newComment)
   }
 
