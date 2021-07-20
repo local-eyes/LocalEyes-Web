@@ -1,7 +1,21 @@
-<h1 mat-dialog-title>Action Restricted.</h1>
-<mat-dialog-content>
-    <h3>You need to Sign in first to perform this action.</h3>
-    <button mat-raised-button (click)="auth.googleSignIn()">
+<div *ngIf="type; else signIn">
+    <h1 mat-dialog-title>Are You Sure?</h1>
+    <mat-dialog-content>
+        <h3>Are you sure you want to leave your Neighborhood?.</h3>
+        <button mat-raised-button color="primary" (click)="closeDialog()">
+            Go Back
+        </button>
+        <button mat-raised-button (click)="logOut()">
+            Yes
+        </button>
+    </mat-dialog-content>
+</div>
+<ng-template #signIn>
+    <h1 mat-dialog-title>Action Restricted.</h1>
+    <mat-dialog-content>
+        <h3>You need to Sign in first to perform this action.</h3>
+        <button mat-raised-button (click)="auth.googleSignIn()">
         Continue with Google
     </button>
-</mat-dialog-content>
+    </mat-dialog-content>
+</ng-template>

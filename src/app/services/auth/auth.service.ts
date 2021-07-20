@@ -6,6 +6,7 @@ import firebase from "firebase/app";
 import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { User } from './user.model';
+import { MatDialog } from '@angular/material/dialog';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     // afAuth.useEmulator("http://localhost:9099");
     this.user$ = this.afAuth.authState.pipe(
@@ -34,7 +36,8 @@ export class AuthService {
 
   async googleSignIn(){ 
     const provider = new firebase.auth.GoogleAuthProvider();
-    const credential = await firebase.auth().signInWithPopup(provider)
+    const credential = await firebase.auth().signInWithPopup(provider);
+    this.dialog.closeAll();
 
     return this.updateUserData(credential.user.uid);
   }

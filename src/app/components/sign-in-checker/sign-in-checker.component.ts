@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -8,9 +9,22 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class SignInCheckerComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public type: any,
+    private dialog: MatDialog, 
+    public auth: AuthService) { }
 
   ngOnInit(): void {
+    console.log(this.type);
+  }
+
+  closeDialog() {
+    this.dialog.closeAll();
+  }
+  
+  logOut() {
+    this.auth.signOut();
+    this.dialog.closeAll();
   }
 
 }
