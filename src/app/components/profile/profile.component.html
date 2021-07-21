@@ -1,171 +1,188 @@
 <app-loader *ngIf="dataLoaded==false; else showProfile"></app-loader>
 <ng-template #showProfile>
-    <mat-toolbar style="background-color: black; color: white; z-index: 999; top: 0; position: fixed;">
-        <div class="m-3">
-            <button mat-button (click)="goBack()">
-                <mat-icon>arrow_back_ios_new</mat-icon>
-            </button>
-        </div>
-        <div style="margin-bottom: 7px;">
-            <h1>{{title}}</h1>
-        </div>
-    </mat-toolbar>
-    <div *ngIf="isMobile=='false'; else mobileTemplate" class="wrapper" style="border: 2px solid #0a4b52; background-color: #021b20;">
-        <div class="header">
-            <img src="{{personData.imageURL}}" alt="UserImage" class="user-image my-2">
-            <h1 class="user-name text-capitalize">{{personData.fullname}}</h1>
-            <h3 class="user-email text-secondary">{{personData.email}}</h3>
-            <mat-divider></mat-divider>
-            <h2 class="bio text-capitalize">{{personData.bio}}</h2>
-            <!-- <div class="location-info d-flex flex-row justify-content-start my-3"> -->
-            <div class="location-info row my-3">
-                <div class="location-info-tag col-5 d-flex">
-                    <mat-icon>place</mat-icon>
-                    <p class="ms-2 highlight">{{personData.locality}}</p>
+    <div class="row w-100 m-auto">
+        <div class="col-8" style="border: 1px solid white; border-radius: 15px;">
+            <mat-toolbar style="background-color: black; color: white; top: 0; z-index: 999;">
+                <div class="m-3">
+                    <button mat-button (click)="goBack()">
+                        <mat-icon>arrow_back_ios_new</mat-icon>
+                    </button>
                 </div>
-                <div class="location-info-tag col-5 d-flex">
-                    <mat-icon>hourglass_bottom</mat-icon>
-                    <p class="ms-2">Since {{personData.living_since}} Years</p>
+                <div style="margin-bottom: 7px;">
+                    <h1>{{title}}</h1>
                 </div>
-                <div class="location-info-tag col-5 d-flex text-secondary">
-                    <mat-icon>date_range</mat-icon>
-                    <p class="ms-2">Joined {{getJoiningDate(personData.createdOn._seconds)}}</p>
+            </mat-toolbar>
+            <div *ngIf="isMobile=='false'; else mobileTemplate" class="wrapper" style="border: 2px solid #0a4b52; background-color: #021b20;">
+                <div class="header">
+                    <img src="{{personData.imageURL}}" alt="UserImage" class="user-image my-2">
+                    <h1 class="user-name text-capitalize">{{personData.fullname}}</h1>
+                    <h3 class="user-email text-secondary">{{personData.email}}</h3>
+                    <mat-divider></mat-divider>
+                    <h2 class="bio text-capitalize">{{personData.bio}}</h2>
+                    <!-- <div class="location-info d-flex flex-row justify-content-start my-3"> -->
+                    <div class="location-info row my-3">
+                        <div class="location-info-tag col-5 d-flex">
+                            <mat-icon>place</mat-icon>
+                            <p class="ms-2 highlight">{{personData.locality}}</p>
+                        </div>
+                        <div class="location-info-tag col-5 d-flex">
+                            <mat-icon>hourglass_bottom</mat-icon>
+                            <p class="ms-2">Since {{personData.living_since}} Years</p>
+                        </div>
+                        <div class="location-info-tag col-5 d-flex text-secondary">
+                            <mat-icon>date_range</mat-icon>
+                            <p class="ms-2">Joined {{getJoiningDate(personData.createdOn._seconds)}}</p>
+                        </div>
+                    </div>
+                    <button *ngIf="currentUser == personData.uid" mat-raised-button color="primary">
+                        Edit Profile
+                    </button>
+                </div>
+
+                <div class="tabs">
+                    <mat-tab-group (selectedTabChange)="loadData($event.index)" dynamicHeight mat-stretch-tabs backgroundColor="primary" color="primary" mat-align-tabs="center">
+                        <mat-tab label="Local Posts">
+                            <div class="example-card" *ngFor="let post of localFeed; let i = index">
+                                <mat-card class="bg-dark text-light" style="cursor: pointer;">
+                                    <mat-card-header (click)="openPost('local', i)">
+                                        <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                        <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                                        <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content (click)="openPost('local', i)">
+                                        <h2>
+                                            {{post.content.title}}
+                                        </h2>
+                                        <div class="d-flex justify-content-center">
+                                            <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
+                                        </div>
+                                        <mat-chip-list aria-label="Fish selection">
+                                            <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                            <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                        </mat-chip-list>
+                                    </mat-card-content>
+                                    <mat-divider></mat-divider>
+                                    <mat-card-actions>
+                                        <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
+                                            <button mat-icon-button class="col-6">
+                                                                <mat-icon svgIcon="claps-white"></mat-icon>
+                                                                {{post.content.claps}}
+                                                            </button>
+                                            <button (click)="openPost('local', i)" mat-icon-button class="col-6 ml-2">
+                                                                <mat-icon>forum</mat-icon>
+                                                                {{post.answers}}
+                                                            </button>
+                                            <button mat-icon-button class="col-6 ml-2">
+                                                                <mat-icon>share</mat-icon>
+                                                            </button>
+                                        </div>
+                                        <ng-template #login>
+                                            <div class="row d-flex justify-content-around">
+                                                <button mat-icon-button class="col-6">
+                                                                    <mat-icon svgIcon="claps-white"></mat-icon>
+                                                                    {{post.content.claps}}
+                                                                </button>
+                                                <button mat-icon-button class="col-6 ml-2">
+                                                                    <mat-icon>forum</mat-icon>
+                                                                    {{post.answers}}
+                                                                </button>
+                                                <button mat-icon-button class="col-6 ml-2">
+                                                                    <mat-icon>share</mat-icon>
+                                                                </button>
+                                            </div>
+                                        </ng-template>
+                                    </mat-card-actions>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="City Posts">
+                            <div class="example-card" *ngFor="let post of cityFeed; let i = index">
+                                <mat-card class="bg-dark text-light" style="cursor: pointer;">
+                                    <mat-card-header (click)="openPost('city', i)">
+                                        <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                        <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                                        <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content (click)="openPost('city', i)">
+                                        <h2>
+                                            {{post.content.title}}
+                                        </h2>
+                                        <div class="d-flex justify-content-center">
+                                            <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
+                                        </div>
+                                        <mat-chip-list aria-label="Fish selection">
+                                            <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                            <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                        </mat-chip-list>
+                                    </mat-card-content>
+                                    <mat-divider></mat-divider>
+                                    <mat-card-actions>
+                                        <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
+                                            <button mat-icon-button class="col-6">
+                                                                <mat-icon svgIcon="claps-white"></mat-icon>
+                                                                {{post.content.claps}}
+                                                            </button>
+                                            <button (click)="openPost('city', i)" mat-icon-button class="col-6 ml-2">
+                                                                <mat-icon>forum</mat-icon>
+                                                                {{post.answers}}
+                                                            </button>
+                                            <button mat-icon-button class="col-6 ml-2">
+                                                                <mat-icon>share</mat-icon>
+                                                            </button>
+                                        </div>
+                                        <ng-template #login>
+                                            <div class="row d-flex justify-content-around">
+                                                <button mat-icon-button class="col-6">
+                                                                    <mat-icon svgIcon="claps-white"></mat-icon>
+                                                                    {{post.content.claps}}
+                                                                </button>
+                                                <button mat-icon-button class="col-6 ml-2">
+                                                                    <mat-icon>forum</mat-icon>
+                                                                    {{post.answers}}
+                                                                </button>
+                                                <button mat-icon-button class="col-6 ml-2">
+                                                                    <mat-icon>share</mat-icon>
+                                                                </button>
+                                            </div>
+                                        </ng-template>
+                                    </mat-card-actions>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Answers">
+                            <div class="example-card" *ngFor="let post of answers; let i = index">
+                                <mat-card class="bg-dark text-light" style="cursor: pointer;">
+                                    <a routerLink="/post/{{post.docRef}}/{{post.pId}}">
+                                        <mat-card-header>
+                                            <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                            <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.fullname}}</a></mat-card-title>
+                                            <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
+                                        </mat-card-header>
+                                        <mat-card-content>
+                                            <h2>
+                                                {{post.answer}}
+                                            </h2>
+                                        </mat-card-content>
+                                    </a>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
                 </div>
             </div>
-            <button *ngIf="currentUser == personData.uid" mat-raised-button color="primary">
-                Edit Profile
-            </button>
         </div>
-
-        <div class="tabs">
-            <mat-tab-group (selectedTabChange)="loadData($event.index)" dynamicHeight mat-stretch-tabs backgroundColor="primary" color="primary" mat-align-tabs="center">
-                <mat-tab label="Local Posts">
-                    <div class="example-card" *ngFor="let post of localFeed; let i = index">
-                        <mat-card class="bg-dark text-light" style="cursor: pointer;">
-                            <mat-card-header (click)="openPost('local', i)">
-                                <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
-                                <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
-                                <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content (click)="openPost('local', i)">
-                                <h2>
-                                    {{post.content.title}}
-                                </h2>
-                                <div class="d-flex justify-content-center">
-                                    <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
-                                </div>
-                                <mat-chip-list aria-label="Fish selection">
-                                    <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                    <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                </mat-chip-list>
-                            </mat-card-content>
-                            <mat-divider></mat-divider>
-                            <mat-card-actions>
-                                <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-                                    <button mat-icon-button class="col-6">
-                                                        <mat-icon svgIcon="claps-white"></mat-icon>
-                                                        {{post.content.claps}}
-                                                    </button>
-                                    <button (click)="openPost('local', i)" mat-icon-button class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
-                                                        {{post.answers}}
-                                                    </button>
-                                    <button mat-icon-button class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
-                                                    </button>
-                                </div>
-                                <ng-template #login>
-                                    <div class="row d-flex justify-content-around">
-                                        <button mat-icon-button class="col-6">
-                                                            <mat-icon svgIcon="claps-white"></mat-icon>
-                                                            {{post.content.claps}}
-                                                        </button>
-                                        <button mat-icon-button class="col-6 ml-2">
-                                                            <mat-icon>forum</mat-icon>
-                                                            {{post.answers}}
-                                                        </button>
-                                        <button mat-icon-button class="col-6 ml-2">
-                                                            <mat-icon>share</mat-icon>
-                                                        </button>
-                                    </div>
-                                </ng-template>
-                            </mat-card-actions>
-                        </mat-card>
-                    </div>
-                </mat-tab>
-                <mat-tab label="City Posts">
-                    <div class="example-card" *ngFor="let post of cityFeed; let i = index">
-                        <mat-card class="bg-dark text-light" style="cursor: pointer;">
-                            <mat-card-header (click)="openPost('city', i)">
-                                <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
-                                <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
-                                <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content (click)="openPost('city', i)">
-                                <h2>
-                                    {{post.content.title}}
-                                </h2>
-                                <div class="d-flex justify-content-center">
-                                    <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image my-2">
-                                </div>
-                                <mat-chip-list aria-label="Fish selection">
-                                    <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                    <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                </mat-chip-list>
-                            </mat-card-content>
-                            <mat-divider></mat-divider>
-                            <mat-card-actions>
-                                <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
-                                    <button mat-icon-button class="col-6">
-                                                        <mat-icon svgIcon="claps-white"></mat-icon>
-                                                        {{post.content.claps}}
-                                                    </button>
-                                    <button (click)="openPost('city', i)" mat-icon-button class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
-                                                        {{post.answers}}
-                                                    </button>
-                                    <button mat-icon-button class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
-                                                    </button>
-                                </div>
-                                <ng-template #login>
-                                    <div class="row d-flex justify-content-around">
-                                        <button mat-icon-button class="col-6">
-                                                            <mat-icon svgIcon="claps-white"></mat-icon>
-                                                            {{post.content.claps}}
-                                                        </button>
-                                        <button mat-icon-button class="col-6 ml-2">
-                                                            <mat-icon>forum</mat-icon>
-                                                            {{post.answers}}
-                                                        </button>
-                                        <button mat-icon-button class="col-6 ml-2">
-                                                            <mat-icon>share</mat-icon>
-                                                        </button>
-                                    </div>
-                                </ng-template>
-                            </mat-card-actions>
-                        </mat-card>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Answers">
-                    <div class="example-card" *ngFor="let post of answers; let i = index">
-                        <mat-card class="bg-dark text-light" style="cursor: pointer;">
-                            <a routerLink="/post/{{post.docRef}}/{{post.pId}}">
-                                <mat-card-header>
-                                    <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
-                                    <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.fullname}}</a></mat-card-title>
-                                    <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
-                                </mat-card-header>
-                                <mat-card-content>
-                                    <h2>
-                                        {{post.answer}}
-                                    </h2>
-                                </mat-card-content>
-                            </a>
-                        </mat-card>
-                    </div>
-                </mat-tab>
-            </mat-tab-group>
+        <div class="col-4" style="border: 1px solid white; border-radius: 15px; background-color: rgb(15, 15, 15);">
+            <mat-toolbar style="background-color: rgb(15, 15, 15); color: white; top: 0; z-index: 999; display: flex; justify-content: space-evenly;">
+                <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                 <mat-icon>notifications</mat-icon>
+               </button>
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                <mat-icon>account_circle</mat-icon>
+              </button>
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                <mat-icon>settings</mat-icon>
+              </button>
+            </mat-toolbar>
         </div>
     </div>
     <ng-template #mobileTemplate>
