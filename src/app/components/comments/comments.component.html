@@ -1,11 +1,16 @@
-<form [formGroup]="comment" (ngSubmit)="postComment()">
-    <div class="row m-auto">
-        <mat-form-field appearance="outline" class="w-75">
-            <mat-label style="color: lightyellow;">Description</mat-label>
-            <textarea matInput placeholder="Type your comment" formControlName="answer"></textarea>
-        </mat-form-field>
-        <div class="m-auto d-flex flex-column w-25 justify-content-center">
-            <button mat-raised-button [disabled]="comment.invalid" color="primary" type="submit" class="m-auto w-50">Ask OUT!!</button>
+<div *ngIf="auth.userData; else login" class="fixed">
+    <form [formGroup]="comment" (ngSubmit)="postComment()">
+        <div class="row m-auto">
+            <mat-form-field appearance="outline" class="col-10">
+                <mat-label style="color: lightyellow;">Description</mat-label>
+                <textarea matInput placeholder="Type your comment" formControlName="answer"></textarea>
+            </mat-form-field>
+            <div class="m-auto d-flex flex-column col-2 justify-content-center">
+                <button mat-raised-button [disabled]="comment.invalid" color="primary" type="submit" class="m-auto w-50">Ask OUT!!</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
+<ng-template #login>
+    <h1>You Need To Log In to Comment.</h1>
+</ng-template>

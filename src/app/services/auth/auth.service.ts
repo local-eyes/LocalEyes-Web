@@ -44,6 +44,7 @@ export class AuthService {
 
   async signOut() {
     await firebase.auth().signOut();
+    this.userData = null;
     return this.router.navigate(['/']);
   }
 

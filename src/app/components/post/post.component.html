@@ -47,10 +47,6 @@
         </ng-template>
     </mat-card-actions>
 </mat-card>
-<app-comments (newCommentEvent)="addComment($event)" *ngIf="post.city === null; else city" [docRef]="'local'" [postId]="post.id"></app-comments>
-<ng-template #city>
-    <app-comments (newCommentEvent)="addComment($event)" [docRef]="'city'" [postId]="post.id"></app-comments>
-</ng-template>
 
 <div class="container m-auto" *ngIf="answersLoaded == false">
     <app-loader></app-loader>
@@ -68,3 +64,7 @@
         <p> {{answer.answer}} </p>
     </mat-card-content>
 </mat-card>
+<app-comments (newCommentEvent)="addComment($event)" *ngIf="post.city === null; else city" [docRef]="'local'" [postId]="post.id"></app-comments>
+<ng-template #city>
+    <app-comments (newCommentEvent)="addComment($event)" [docRef]="'city'" [postId]="post.id"></app-comments>
+</ng-template>

@@ -33,7 +33,9 @@ isMobile = localStorage.getItem('isMobile');
 
   ngOnInit(): void {
     window.scroll(0, 0);
-    this.currentUser = this.auth.userData.uid;
+    if (this.auth.userData) {
+      this.currentUser = this.auth.userData.uid; 
+    }
     console.log(this.currentUser);
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.getProfileFromService(this.uid);

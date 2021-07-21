@@ -32,3 +32,13 @@ body {
 .mat-tab-nav-bar.mat-background-primary>.mat-tab-link-container .mat-tab-link {
     opacity: 1!important;
 }
+
+::-webkit-scrollbar {
+    width: 15px;
+    background: rgb(15, 15, 15);
+}
+
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 50px;
+}

@@ -132,4 +132,8 @@ export class HomeComponent implements OnInit {
       this.cityLoaded = true;
     }
   }
+
+  openLogoutConfirmation() {
+    this.dialog.open(SignInCheckerComponent, {data: "logOut"});
+  }
 }
