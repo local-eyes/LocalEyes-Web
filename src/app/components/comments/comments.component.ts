@@ -17,6 +17,7 @@ export class CommentsComponent implements OnInit {
   @Output() newCommentEvent = new EventEmitter<any>();
   comment:FormGroup;
   author: any;
+  isMobile = localStorage.getItem('isMobile');
 
   constructor(
     public auth: AuthService,

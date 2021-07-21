@@ -1,12 +1,17 @@
-<div *ngIf="auth.userData; else login" class="fixed">
+<div *ngIf="auth.userData; else login" [ngClass]="{'fixed': isMobile=='false', 'fixed-mobile': isMobile=='true' }">
     <form [formGroup]="comment" (ngSubmit)="postComment()">
-        <div class="row m-auto">
-            <mat-form-field appearance="outline" class="col-10">
-                <mat-label style="color: lightyellow;">Description</mat-label>
-                <textarea matInput placeholder="Type your comment" formControlName="answer"></textarea>
+        <div class="row align-items-center justify-content-start w-100">
+            <mat-form-field appearance="outline" [ngClass]="{'col-10': isMobile=='false', 'col-9': isMobile=='true' }">
+                <mat-label *ngIf="isMobile=='false'; else mobileLabel" style="color: white;">Comment</mat-label>
+                <ng-template #mobileLabel>
+                    <mat-label style="color: black;">Comment</mat-label>
+                </ng-template>
+                <textarea wrap="hard" matInput placeholder="Type your comment" formControlName="answer"></textarea>
             </mat-form-field>
-            <div class="m-auto d-flex flex-column col-2 justify-content-center">
-                <button mat-raised-button [disabled]="comment.invalid" color="primary" type="submit" class="m-auto w-50">Ask OUT!!</button>
+            <div class="col-auto">
+                <button mat-raised-button [disabled]="comment.invalid" color="primary" type="submit" [ngClass]="{'bg-dark': isMobile=='false', 'bg-secondary': isMobile=='true' }">
+                    <mat-icon>add_comment</mat-icon>
+                </button>
             </div>
         </div>
     </form>
