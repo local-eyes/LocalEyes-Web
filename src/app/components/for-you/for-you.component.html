@@ -1,7 +1,7 @@
 <div *ngIf="isMobile != 'true'; else mobileTemplate">
     <div class="row w-100 m-auto">
         <div class="col-8" style="border: 1px solid white; border-radius: 15px;">
-            <mat-toolbar style="background-color: black; color: white; top: 0; z-index: 999;">
+            <mat-toolbar style="background-color: rgb(15, 15, 15);color: white;z-index: 999;position: fixed;justify-content: space-between;width: 24%;">
                 <div style="margin-bottom: 7px;">
                     <h1>Unanswered Questions</h1>
                 </div>
@@ -142,6 +142,7 @@
 <!-- Mobile Template -->
 
 <ng-template #mobileTemplate>
+    <div style="margin-top: 50px!important;" class="gutter"></div>
     <mat-sidenav-container>
         <mat-sidenav [(opened)]="mobileNavOpened" [fixedInViewport]="true">
             <mat-nav-list>
@@ -182,12 +183,6 @@
             </mat-toolbar>
             <mat-tab-group backgroundColor="primary" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
-                    <mat-button-toggle-group class="sorting-toggle m-auto col-6" #sortBy="matButtonToggleGroup">
-                        <mat-button-toggle value="new" (change)="getPosts(lat, lon, radius, sortBy.value)">Newest</mat-button-toggle>
-                        <mat-button-toggle value="popularity" (change)="getPosts(lat, lon, radius, sortBy.value)">Popular</mat-button-toggle>
-                    </mat-button-toggle-group>
-                    Radius:
-                    <mat-slider min="400" step="100" [(ngModel)]="radius" [displayWith]="formatThumb" (change)="getPosts(lat, lon, radius, null)" thumbLabel max="10000"></mat-slider>
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">

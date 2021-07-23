@@ -1,5 +1,5 @@
 <div class="row w-100 m-auto">
-    <div class="col-8" style="border: 1px solid white; border-radius: 15px;">
+    <div class="col-lg-8 col-sm-12" style="border: 1px solid white; border-radius: 15px; padding: 0">
         <mat-toolbar style="background-color: black; color: white; z-index: 999; top: 0;">
             <div class="m-3">
                 <button mat-button (click)="goBack()">
@@ -12,10 +12,11 @@
         </mat-toolbar>
         <div *ngIf="!author.is_completed; else createPost">
             <h1>Profile Not Completed</h1>
+            <button mat-raised-button color="primary" routerLink="/profile/{{author.uid}}/edit" class="w-25 my-4">Complete Profile</button>
         </div>
         <mat-divider style="background-color:white"></mat-divider>
         <ng-template #createPost>
-            <form [formGroup]="localPost" class="w-100 my-4" *ngIf="postingIn=='local'" (ngSubmit)="postToLocalFeed()">
+            <form [formGroup]="localPost" class="w-100 py-4 bg-dark text-light" *ngIf="postingIn=='local'" (ngSubmit)="postToLocalFeed()">
                 <mat-form-field appearance="outline">
                     <mat-label style="color: lightyellow;">Posting In</mat-label>
                     <mat-select [(value)]="postingIn">
@@ -86,8 +87,8 @@
             </form>
         </ng-template>
     </div>
-    <div class="col-4" style="border: 1px solid white; border-radius: 15px; background-color: rgb(15, 15, 15);">
-        <mat-toolbar style="background-color: rgb(15, 15, 15); color: white; top: 0; z-index: 999; display: flex; justify-content: space-evenly;">
+    <div *ngIf="isMobile=='false'" class="col-4" style="border: 1px solid white; border-radius: 15px; background-color: rgb(15, 15, 15);">
+        <mat-toolbar style="background-color: rgb(15, 15, 15);color: white;z-index: 999;position: fixed;justify-content: space-between;width: 24%;">
             <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
                  <mat-icon>notifications</mat-icon>
                </button>

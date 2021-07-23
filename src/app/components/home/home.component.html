@@ -139,7 +139,7 @@
             </mat-tab-group>
         </div>
         <div class="col-4" style="border: 1px solid white; border-radius: 15px; background-color: rgb(15, 15, 15);">
-            <mat-toolbar style="background-color: rgb(15, 15, 15); color: white; top: 0; z-index: 999; display: flex; justify-content: space-evenly;">
+            <mat-toolbar style="background-color: rgb(15, 15, 15);color: white;z-index: 999;position: fixed;justify-content: space-between;width: 24%;">
                 <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
                  <mat-icon>notifications</mat-icon>
                </button>
@@ -157,6 +157,8 @@
 <!-- Mobile Template -->
 
 <ng-template #mobileTemplate>
+    <div style="margin-top: 50px!important;" class="gutter"></div>
+
     <mat-sidenav-container>
         <mat-sidenav [(opened)]="mobileNavOpened" [fixedInViewport]="true">
             <mat-nav-list>
@@ -200,12 +202,6 @@
             </mat-toolbar>
             <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" backgroundColor="primary" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
-                    <mat-button-toggle-group class="sorting-toggle m-auto col-6" #sortBy="matButtonToggleGroup">
-                        <mat-button-toggle value="new" (change)="getPosts(lat, lon, radius, sortBy.value)">Newest</mat-button-toggle>
-                        <mat-button-toggle value="popularity" (change)="getPosts(lat, lon, radius, sortBy.value)">Popular</mat-button-toggle>
-                    </mat-button-toggle-group>
-                    Radius:
-                    <mat-slider min="400" step="100" [(ngModel)]="radius" [displayWith]="formatThumb" (change)="getPosts(lat, lon, radius, null)" thumbLabel max="10000"></mat-slider>
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">

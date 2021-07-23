@@ -30,6 +30,8 @@ point: any;
 loading: boolean;
 success: boolean;
 
+isMobile = localStorage.getItem('isMobile');
+
   constructor( 
     private afs: AngularFirestore, 
     private fb: FormBuilder,

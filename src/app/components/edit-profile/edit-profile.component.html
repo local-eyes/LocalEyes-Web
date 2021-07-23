@@ -1,6 +1,6 @@
-<div *ngIf="isMobile != 'true'; else mobileTemplate" class=" w-100">
+<div class=" w-100">
     <div class="row m-auto">
-        <div class="col-12" style="border: 1px solid white; border-radius: 15px;">
+        <div class="col-12" style="border: 1px solid white; border-radius: 15px; padding-right: 0; padding-left: 0;">
             <mat-toolbar style="background-color: black; color: white; top: 0; z-index: 999;">
                 <button mat-button (click)="goBack()">
                     <mat-icon>arrow_back_ios_new</mat-icon>
@@ -8,10 +8,10 @@
                 <div style="margin-bottom: 7px;">{{title}}</div>
             </mat-toolbar>
             <form [formGroup]="profileData" class="w-100 my-4 row" (ngSubmit)="saveData()">
-                <div class="col-4 d-flex align-items-center justify-content-center">
+                <div class="col-lg-4 col-sm-12 d-flex align-items-center justify-content-center">
                     <img src="{{auth.userData.imageURL}}" alt="personID">
                 </div>
-                <div class="col-8">
+                <div class="col-lg-8 col-sm-12">
                     <mat-card class="bg-dark text-light w-100">
                         <mat-card-content class="d-flex flex-column">
                             <mat-form-field appearance="outline">
