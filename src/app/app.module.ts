@@ -25,6 +25,7 @@ import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-che
 import { NewComponent } from './components/new/new.component';
 import { DirectLinkComponent } from './components/direct-link/direct-link.component';
 import { FileUploadComponent } from "./components/file-upload/file-upload.component";
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 // Services
 import { AuthService } from './services/auth/auth.service';
@@ -49,7 +50,8 @@ import { DropZoneDirective } from './drop-zone.directive';
     ForYouComponent,
     CommentsComponent,
     DropZoneDirective,
-    FileUploadComponent
+    FileUploadComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

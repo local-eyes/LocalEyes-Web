@@ -34,7 +34,7 @@
                             <p class="ms-2">Joined {{getJoiningDate(personData.createdOn._seconds)}}</p>
                         </div>
                     </div>
-                    <button *ngIf="currentUser == personData.uid" mat-raised-button color="primary">
+                    <button mat-raised-button color="primary" *ngIf="currentUser == personData.uid" routerLink="edit">
                         Edit Profile
                     </button>
                 </div>
@@ -208,7 +208,7 @@
                             <p class="ms-2">Joined {{getJoiningDate(personData.createdOn._seconds)}}</p>
                         </div>
                     </div>
-                    <button *ngIf="currentUser == personData.uid" mat-raised-button color="primary">
+                    <button mat-raised-button color="primary" *ngIf="currentUser == personData.uid" routerLink="edit">
                     Edit Profile
                 </button>
                 </div>
