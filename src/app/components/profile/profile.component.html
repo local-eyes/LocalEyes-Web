@@ -1,18 +1,20 @@
+<mat-toolbar style="background-color: black; color: white; top: 0; z-index: 9909; position: fixed;">
+    <div class="m-3">
+        <button mat-button (click)="goBack()">
+            <mat-icon>arrow_back_ios_new</mat-icon>
+        </button>
+    </div>
+    <div style="margin-bottom: 7px;">
+        <h1>{{title}}</h1>
+    </div>
+</mat-toolbar>
 <app-loader *ngIf="dataLoaded==false; else showProfile"></app-loader>
 <ng-template #showProfile>
-    <div class="row w-100 m-auto">
+    <div *ngIf="isMobile=='false'; else mobileTemplate" class="row w-100 m-auto">
+        <div class="gutter" style="margin: 33px 0;"></div>
+
         <div class="col-lg-8 col-sm-12" style="border: 1px solid white; border-radius: 15px; padding-left: 0; padding-right: 0;">
-            <mat-toolbar style="background-color: black; color: white; top: 0; z-index: 999;">
-                <div class="m-3">
-                    <button mat-button (click)="goBack()">
-                        <mat-icon>arrow_back_ios_new</mat-icon>
-                    </button>
-                </div>
-                <div style="margin-bottom: 7px;">
-                    <h1>{{title}}</h1>
-                </div>
-            </mat-toolbar>
-            <div *ngIf="isMobile=='false'; else mobileTemplate" class="wrapper" style="border: 2px solid #0a4b52; background-color: #021b20;">
+            <div class="wrapper" style="border: 2px solid #0a4b52; background-color: #021b20;">
                 <div class="header">
                     <img src="{{personData.imageURL}}" alt="UserImage" class="user-image my-2">
                     <h1 class="user-name text-capitalize">{{personData.fullname}}</h1>
@@ -186,6 +188,7 @@
         </div>
     </div>
     <ng-template #mobileTemplate>
+        <div class="gutter" style="margin:50px 0;"></div>
         <div class="wrapper" style="border: 2px solid #0a4b52; background-color: white; color: black">
             <div class="mobile-header">
                 <img src="{{personData.imageURL}}" alt="UserImage" class="user-image my-4 m-auto">
@@ -214,7 +217,7 @@
                 </div>
             </div>
 
-            <div class="tabs" style="background-color: #b4fcff;">
+            <div class="tabs" style="background-color: #021b20;">
                 <mat-tab-group (selectedTabChange)="loadData($event.index)" dynamicHeight mat-stretch-tabs backgroundColor="primary" color="primary" mat-align-tabs="center">
                     <mat-tab label="Local Posts">
                         <div class="example-card" *ngFor="let post of localFeed; let i = index">

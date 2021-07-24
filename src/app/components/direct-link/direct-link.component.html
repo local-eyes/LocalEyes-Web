@@ -9,7 +9,7 @@
     </div>
 </mat-toolbar>
 <app-loader *ngIf="loadComplete==false"></app-loader>
-<mat-card *ngIf="loadComplete==true" [ngClass]="{'bg-dark text-light': isMobile!='true', 'bg-light text-dark': isMobile == 'true'}">
+<mat-card *ngIf="loadComplete==true" [ngClass]="{'bg-dark text-light': isMobile!='true', 'bg-light text-dark': isMobile == 'true'}" style="margin-top: 50px;">
     <mat-card-header>
         <mat-chip-list aria-label="PostData type">
             <mat-chip *ngIf="postData.type=='announcement'" color="accent" selected class="text-capitalize">{{postData.type}}</mat-chip>
@@ -60,7 +60,7 @@
 <h1 class="d-flex justify-content-center m-auto col-12" *ngIf="answersLoaded && commentsData.length == 0">
     Nothing to Show. Be the first one to ANSWER.
 </h1>
-<mat-card *ngFor="let answer of commentsData; let i = index;" [ngClass]="{'bg-dark text-light m-3': isMobile!='true', 'bg-light text-dark m-3': isMobile == 'true'}">
+<mat-card *ngFor="let answer of commentsData; let i = index;" [ngClass]="{'bg-dark text-light my-3': isMobile=='false', 'bg-light text-dark my-3': isMobile == 'true'}">
     <mat-card-header>
         <a [ngClass]="{'text-light': isMobile!='true', 'text-dark': isMobile == 'true'}" routerLink="/profile/{{answer.author.uid}}"><img src="{{answer.author.image}}" mat-card-avatar></a>
         <mat-card-title><a [ngClass]="{'text-light': isMobile!='true', 'text-dark': isMobile == 'true'}" routerLink="/profile/{{answer.author.uid}}">{{answer.author.fullname}}</a></mat-card-title>
@@ -70,7 +70,9 @@
         <p> {{answer.answer}} </p>
     </mat-card-content>
 </mat-card>
-<app-comments *ngIf="postData && postData.city == null; else city" (newCommentEvent)="addComment($event)" [docRef]="'local'" [postId]="postId"></app-comments>
-<ng-template #city>
-    <app-comments *ngIf="postData" (newCommentEvent)="addComment($event)" [docRef]="'city'" [postId]="postId"></app-comments>
-</ng-template>
+<div *ngIf="answersLoaded">
+    <app-comments *ngIf="postData && postData.city == null; else city" (newCommentEvent)="addComment($event)" [docRef]="'local'" [postId]="postId"></app-comments>
+    <ng-template #city>
+        <app-comments *ngIf="postData" (newCommentEvent)="addComment($event)" [docRef]="'city'" [postId]="postId"></app-comments>
+    </ng-template>
+</div>
