@@ -69,7 +69,8 @@ isMobile = localStorage.getItem('isMobile');
       postedOn: firestore.firestore.Timestamp.now(),
       type: [this.postType, [
         Validators.required
-      ]]
+      ]],
+      postedFrom: "web"
     })
     this.cityPost = this.fb.group({
       answers: 0,
@@ -93,7 +94,8 @@ isMobile = localStorage.getItem('isMobile');
       postedOn: firestore.firestore.Timestamp.now(),
       type: [this.postType, [
         Validators.required
-      ]]
+      ]],
+      postedFrom: "web"
     });
     this.localPost.valueChanges.subscribe(val => {
       if (val.type == 'announcement') {

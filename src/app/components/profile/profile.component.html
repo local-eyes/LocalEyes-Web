@@ -23,11 +23,11 @@
                     <h2 class="bio text-capitalize">{{personData.bio}}</h2>
                     <!-- <div class="location-info d-flex flex-row justify-content-start my-3"> -->
                     <div class="location-info row my-3">
-                        <div class="location-info-tag col-5 d-flex">
+                        <div class="location-info-tag col-5 d-flex" *ngIf="personData.locality != null">
                             <mat-icon>place</mat-icon>
                             <p class="ms-2 highlight">{{personData.locality}}</p>
                         </div>
-                        <div class="location-info-tag col-5 d-flex">
+                        <div class="location-info-tag col-5 d-flex" *ngIf="personData.living_since != null">
                             <mat-icon>hourglass_bottom</mat-icon>
                             <p class="ms-2">Since {{personData.living_since}} Years</p>
                         </div>
