@@ -4,6 +4,11 @@
             <h1>Notifications</h1>
         </div>
     </mat-toolbar>
+    <div *ngFor="let notification of notifs$">
+        <a routerLink="{{notification.content.redirectUrl}}">
+            <pre>{{ notification | json }}</pre>
+        </a>
+    </div>
 </div>
 <ng-template #mobileView>
     <mat-toolbar style="background-color: black; color: white; position: fixed; top:0; z-index: 999;">
