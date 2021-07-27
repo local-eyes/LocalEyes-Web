@@ -8,6 +8,14 @@ mat-sidenav-closed {
     width: 100vw;
 }
 
+.mat-icon-button {
+    min-width: 60px;
+}
+
+.mat-icon {
+    font-size: 20px;
+}
+
 mat-sidenav-content {
     background-color: white;
     color: black;
@@ -21,7 +29,7 @@ mat-sidenav-content {
 }
 
 mat-card {
-    border-radius: 20px;
+    border-radius: 10px;
     border: 2px solid #62c9d575;
 }
 
@@ -92,4 +100,10 @@ mat-card:hover {
 .post-image {
     width: calc(80% + 32px);
     margin-bottom: 0px;
+}
+
+.post-prompt {
+    border-radius: 10px;
+    align-items: center;
+    border: 1px solid #62c9d575;
 }

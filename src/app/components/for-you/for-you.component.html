@@ -1,6 +1,6 @@
 <div *ngIf="isMobile != 'true'; else mobileTemplate">
     <div class="row w-100 m-auto">
-        <div class="col-8" style="border: 1px solid white; border-radius: 15px;">
+        <div class="col-8">
             <mat-toolbar style="background-color: black;color: white;top: 0;z-index: 999;">
                 <div style="margin-bottom: 7px;">
                     <h1>Unanswered Questions</h1>
@@ -123,7 +123,7 @@
                 </mat-tab>
             </mat-tab-group>
         </div>
-        <div class="col-4" style="border: 1px solid white; border-radius: 15px; background-color: rgb(15, 15, 15);">
+        <div class="col-4" style="background-color: rgb(15, 15, 15); min-height: 100vh;">
             <mat-toolbar style="background-color: rgb(15, 15, 15); color: white; top: 0; z-index: 999; display: flex; justify-content: space-evenly;">
                 <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
                  <mat-icon>notifications</mat-icon>

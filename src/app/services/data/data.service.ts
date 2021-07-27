@@ -90,7 +90,7 @@ export class DataService {
   }
 
   getNotifications(uid:string): Observable<any> {
-    return this.db.collection("notifications", ref => ref.where('to', 'in', [uid, 'all'])).snapshotChanges()
+    return this.db.collection("notifications", ref => ref.where('to', 'in', [uid, 'all']).orderBy("postedOn", 'desc')).snapshotChanges()
       .pipe(map(snaps => {
         return snaps.map(snap => {
           return snap.payload.doc.data()
