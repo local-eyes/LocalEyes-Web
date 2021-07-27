@@ -1,22 +1,53 @@
-<div *ngIf="isMobile!='true'; else mobileView">
-    <mat-toolbar style="background-color: black; color: white; position: fixed; top:0; z-index: 999;">
-        <div style="margin-bottom: 7px;">
-            <h1>Notifications</h1>
+<div *ngIf="isMobile != 'true'; else mobileView">
+    <div class="row w-100 m-auto">
+        <div class="col-8" style="border: 1px solid white; border-radius: 15px;">
+            <mat-toolbar style="background-color: black; color: white; top: 0; z-index: 999;">
+                <div style="margin-bottom: 7px;">{{title}}</div>
+            </mat-toolbar>
+
+            <div *ngFor="let notification of notifs$">
+                <a routerLink="{{notification.content.redirectUrl}}" style="text-decoration: none;">
+                    <mat-card class="bg-dark text-light m-2 p-2" style="cursor: pointer;">
+                        <mat-card-header>
+                            <a routerLink="/profile/{{notification.from.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{notification.from.image}}); background-size: cover; background-repeat: no-repeat;"></a>
+                            <mat-card-title>{{notification.content.title}}</mat-card-title>
+                            <mat-card-subtitle style="color: #62c9d5">{{notification.content.description}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-divider></mat-divider>
+                        <mat-card-action>
+                            <mat-card-subtitle style="color: #7a7a7a">{{getDate(notification.postedOn.seconds)}} by {{notification.from.fullname}}</mat-card-subtitle>
+                        </mat-card-action>
+                    </mat-card>
+                </a>
+            </div>
         </div>
-    </mat-toolbar>
-    <div *ngFor="let notification of notifs$">
-        <a routerLink="{{notification.content.redirectUrl}}">
-            <pre>{{ notification | json }}</pre>
-        </a>
     </div>
 </div>
 <ng-template #mobileView>
+    <div style="margin-top: 60px!important;" class="gutter"></div>
     <mat-toolbar style="background-color: black; color: white; position: fixed; top:0; z-index: 999;">
         <div class="m-3">
-            <mat-icon>menu</mat-icon>
+            <a (click)="goBack()">
+                <mat-icon>arrow_back_ios_new</mat-icon>
+            </a>
         </div>
         <div style="margin-bottom: 7px;">
-            <h1>Notifications</h1>
+            <h1>{{title}}</h1>
         </div>
     </mat-toolbar>
+    <div *ngFor="let notification of notifs$">
+        <a routerLink="{{notification.content.redirectUrl}}" style="text-decoration: none;">
+            <mat-card class=" m-2 p-2" style="cursor: pointer;">
+                <mat-card-header>
+                    <a routerLink="/profile/{{notification.from.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{notification.from.image}}); background-size: cover; background-repeat: no-repeat;"></a>
+                    <mat-card-title>{{notification.content.title}}</mat-card-title>
+                    <mat-card-subtitle>{{notification.content.description}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-action>
+                    <mat-card-subtitle>{{getDate(notification.postedOn.seconds)}} by {{notification.from.fullname}}</mat-card-subtitle>
+                </mat-card-action>
+            </mat-card>
+        </a>
+    </div>
 </ng-template>
