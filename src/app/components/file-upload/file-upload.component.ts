@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from "@angular/fire/storage";
+import app from "firebase/app"
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -11,44 +13,37 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class FileUploadComponent implements OnInit {
 
   task: AngularFireUploadTask;
-  percentage: Observable<number>;
-  snapshot: Observable<any>;
   downloadURL: Observable<string>;
-  isHovering: boolean;
-  uid = this.auth.userData.uid;
+  filepath: string;
+  file: File;
+  fullname = this.auth.userData.fullname;
 
   constructor(private storage: AngularFireStorage, private auth: AuthService) { }
 
   ngOnInit(): void {
+    app.storage().useEmulator("localhost", 9199)
   }
 
-  toggleHover(event:boolean) {
-    this.isHovering = event;
-  }
-
-  startUpload(event: FileList) {
-    const file = event.item(0);
-
-    if (file.type.split('/')[0] !== 'image') {
+  getFile(event: FileList) {
+    this.file = event.item(0);
+    if (this.file.type.split('/')[0] !== 'image') {
       console.log("ONLY IMAGE TYPE REQUIRED");
       return;
     }
-
-    const path = `images/${this.uid}_${new Date().getTime()}_${file.name}`;
-
-    this.task = this.storage.upload(path, file);
-    const fileRef = this.storage.ref(path);
-
-    this.percentage = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges();
-
-    fileRef.getDownloadURL().subscribe(ref => {
-      this.downloadURL = ref;
-    });
+    this.filepath = `uploads/${this.fullname}/${new Date().getTime()}_${this.file.name}`;
   }
 
-  isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
+  startUpload() {
+    this.task = this.storage.upload(this.filepath, this.file);
+    // get notified when the download URL is available
+    const fileRef = this.storage.ref(this.filepath);
+    this.task.snapshotChanges().pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL()
+          console.log("download url ", this.downloadURL);
+        })
+     )
+    .subscribe()
   }
 
 }

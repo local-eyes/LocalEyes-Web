@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Firebase
-import { firebaseConfig } from "../environments/environment";
+import { environment, firebaseConfig } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFirestoreModule, USE_EMULATOR as FIRESTORE_EMULATOR } from "@angular/fire/firestore";
@@ -26,14 +26,13 @@ import { NewComponent } from './components/new/new.component';
 import { DirectLinkComponent } from './components/direct-link/direct-link.component';
 import { FileUploadComponent } from "./components/file-upload/file-upload.component";
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ForYouComponent } from './components/for-you/for-you.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 // Services
 import { AuthService } from './services/auth/auth.service';
 import { DataService } from "./services/data/data.service";
 import { LocationService } from './services/location/location.service';
-import { ForYouComponent } from './components/for-you/for-you.component';
-import { CommentsComponent } from './components/comments/comments.component';
-import { DropZoneDirective } from './drop-zone.directive';
 
 @NgModule({
   declarations: [
@@ -49,7 +48,6 @@ import { DropZoneDirective } from './drop-zone.directive';
     DirectLinkComponent,
     ForYouComponent,
     CommentsComponent,
-    DropZoneDirective,
     FileUploadComponent,
     EditProfileComponent
   ],
@@ -70,10 +68,10 @@ import { DropZoneDirective } from './drop-zone.directive';
     DataService, 
     LocationService, 
     AuthService,
-    // {
-    //   provide: FIRESTORE_EMULATOR,
-    //   useValue: environment.production ? undefined : ["localhost", 8080]
-    // }
+    {
+      provide: FIRESTORE_EMULATOR,
+      useValue: environment.production ? undefined : ["localhost", 8080]
+    }
   ],
   bootstrap: [AppComponent]
 })
