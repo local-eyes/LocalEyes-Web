@@ -26,7 +26,10 @@
                 <mat-icon>forum</mat-icon>
                 {{post.answers}}
             </button>
-            <button mat-icon-button (click)="copyToClipboard(post.id)" class="col-6 ml-2">
+            <button *ngIf="post.city != null" mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
+                <mat-icon>share</mat-icon>
+            </button>
+            <button *ngIf="post.city == null" mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
                 <mat-icon>share</mat-icon>
             </button>
         </div>
@@ -40,7 +43,10 @@
                     <mat-icon>forum</mat-icon>
                     {{post.answers}}
                 </button>
-                <button mat-icon-button (click)="copyToClipboard(post.id)" class="col-6 ml-2">
+                <button *ngIf="post.city != null" mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
+                    <mat-icon>share</mat-icon>
+                </button>
+                <button *ngIf="post.city == null" mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
                     <mat-icon>share</mat-icon>
                 </button>
             </div>
