@@ -58,9 +58,9 @@ export class PostComponent implements OnInit {
   copyToClipboard(collection: string, id:string) {
     this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "top", horizontalPosition: "end", duration: 3000});
     if (location.hostname === "localhost") {
-      this.clipboard.copy(`http://localhost:4200/#/post/${collection}/${id}`);
+      this.clipboard.copy(`http://localhost:4200/post/${collection}/${id}`);
     } else {
-      this.clipboard.copy(`https://local-eyes.tech/app/#/post/${collection}/${id}`);
+      this.clipboard.copy(`https://local-eyes.tech/app/post/${collection}/${id}`);
     }
   }
 
