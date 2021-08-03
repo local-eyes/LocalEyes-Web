@@ -22,21 +22,21 @@ export class DataService {
     .set('radius', radius)
     .set('sortBy', sortBy)
 
-    return this.http.get(`${this.devURL}/getNearbyPosts`, {params})
+    return this.http.get(`${prodURL}/getNearbyPosts`, {params})
   }
 
   getCityPosts(city:string) {
     let params = new HttpParams()
     .set('city', city)
     
-    return this.http.get(`${this.devURL}/getCityPosts`, {params})
+    return this.http.get(`${prodURL}/getCityPosts`, {params})
   }
 
   getAnswers(postId: string) {
     let params = new HttpParams()
     .set('postId', postId)
 
-    return this.http.get(`${this.devURL}/answers`, {params})
+    return this.http.get(`${prodURL}/answers`, {params})
   }
 
   getSinglePost(postId:string, collection: string) {
@@ -44,33 +44,33 @@ export class DataService {
     .set('collection', collection)
     .set('postId', postId)
 
-    return this.http.get(`${this.devURL}/getPost`, {params})
+    return this.http.get(`${prodURL}/getPost`, {params})
   }
 
   getProfile(uid:string) {
     let params = new HttpParams()
     .set('uid', uid)
 
-    return this.http.get(`${this.devURL}/getProfile`, {params})
+    return this.http.get(`${prodURL}/getProfile`, {params})
   }
 
   getUserLocalFeed(uid:string) {
     let params = new HttpParams()
     .set('uid', uid)
 
-    return this.http.get(`${this.devURL}/getUserLocalFeed`, {params})
+    return this.http.get(`${prodURL}/getUserLocalFeed`, {params})
   }
   getUserCityFeed(uid:string) {
     let params = new HttpParams()
     .set('uid', uid)
 
-    return this.http.get(`${this.devURL}/getUserCityFeed`, {params})
+    return this.http.get(`${prodURL}/getUserCityFeed`, {params})
   }
   getAnswersFeed(uid:string) {
     let params = new HttpParams()
     .set('uid', uid)
 
-    return this.http.get(`${this.devURL}/getUserAnswers`, {params})
+    return this.http.get(`${prodURL}/getUserAnswers`, {params})
   }
 
   getNearbyUnanswered(lat:any, lon:any, radius:any) {
@@ -79,14 +79,14 @@ export class DataService {
     .set('lon', lon)
     .set('radius', radius)
 
-    return this.http.get(`${this.devURL}/getNearbyUnanswered`, {params})
+    return this.http.get(`${prodURL}/getNearbyUnanswered`, {params})
   }
 
   getCityUnanswered(city:string) {
     let params = new HttpParams()
     .set('city', city)
 
-    return this.http.get(`${this.devURL}/getCityUnanswered`, {params})
+    return this.http.get(`${prodURL}/getCityUnanswered`, {params})
   }
 
   getNotifications(uid:string): Observable<any> {

@@ -21,7 +21,7 @@ export class FileUploadComponent implements OnInit {
   constructor(private storage: AngularFireStorage, private auth: AuthService) { }
 
   ngOnInit(): void {
-    app.storage().useEmulator("localhost", 9199)
+    // app.storage().useEmulator("localhost", 9199)
   }
 
   getFile(event: FileList) {
