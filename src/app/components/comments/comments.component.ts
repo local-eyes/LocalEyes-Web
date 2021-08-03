@@ -29,7 +29,6 @@ export class CommentsComponent implements OnInit {
   ngOnInit(): void {
     if (this.auth.userData) {
       this.author = this.auth.userData;
-      console.log(`${this.docRef}/${this.postId}`);
       this.comment = this.fb.group({
         answer: ['', [
           Validators.required,

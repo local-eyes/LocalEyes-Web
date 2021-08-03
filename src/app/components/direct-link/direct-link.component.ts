@@ -42,19 +42,16 @@ isMobile = localStorage.getItem('isMobile');
     window.scroll(0, 0);
     this.collection = this.router.snapshot.paramMap.get('collection');
     this.postId = this.router.snapshot.paramMap.get('id');
-    console.log(`${this.collection}/${this.postId}`);
     this.getPostByPostId(this.collection, this.postId);
   }
 
   getPostByPostId(collection:string, id:string) {
     this.data.getSinglePost(id, collection).subscribe(res => {
       this.postData = res;
-      console.log(this.postData);
       this.loadComplete = true;
     })
     this.data.getAnswers(id).subscribe(comments => {
       this.commentsData = comments;
-      console.log(this.commentsData);
       this.answersLoaded = true
     })
   }

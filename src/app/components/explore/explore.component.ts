@@ -19,7 +19,6 @@ title: string = "Notifications";
     this.auth.user$.subscribe(user => {
       this.data.getNotifications(user.uid).subscribe(notif => {
         this.notifs$ = notif;
-        console.log(this.notifs$);
       });
     });
   }

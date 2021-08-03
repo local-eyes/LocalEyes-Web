@@ -15,7 +15,6 @@ export class SignInCheckerComponent implements OnInit {
     public auth: AuthService) { }
 
   ngOnInit(): void {
-    console.log(this.type);
   }
 
   closeDialog() {

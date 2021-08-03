@@ -75,7 +75,6 @@ profileData: FormGroup
     const profileFormData = this.profileData.value;
 
     try {
-      console.log(profileFormData);
       await this.afs.collection("users").doc(this.editUid).set(profileFormData, {merge: true});
       this.route.navigate([`/profile/${this.editUid}`]);
     } catch (error) {

@@ -36,7 +36,6 @@ isMobile = localStorage.getItem('isMobile');
     if (this.auth.userData) {
       this.currentUser = this.auth.userData.uid; 
     }
-    console.log(this.currentUser);
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.getProfileFromService(this.uid);
     this.getLocalFeed(this.uid);
@@ -46,7 +45,6 @@ isMobile = localStorage.getItem('isMobile');
     this.data.getProfile(uid).subscribe(res => {
       this.personData = res;
       this.dataLoaded = true;
-      console.log(this.personData);
     });
   }
 
@@ -96,39 +94,32 @@ isMobile = localStorage.getItem('isMobile');
   }
 
   log(value:any) {
-    console.log(value);
   }
 
   loadData(tabIndex:number) {
-    console.log("loadData Called")
     if (tabIndex === 1 && this.cityLoaded == false) {
       this.getCityFeed(this.uid);
       this.cityLoaded = true;
-      console.log("getCityFeed Called")
-  }
+    }
     if (tabIndex === 2 && this.answersLoaded == false) {
       this.getUserAnswersFeed(this.uid);
       this.answersLoaded = true;
-      console.log("getUserAnswers Called")
-  }
+    }
   }
 
   getLocalFeed(uid: string) {
     this.data.getUserLocalFeed(uid).subscribe(feed => {
       this.localFeed = feed;
-      console.log(this.localFeed);
     })
   }
   getCityFeed(uid: string) {
     this.data.getUserCityFeed(uid).subscribe(feed => {
       this.cityFeed = feed;
-      console.log(this.cityFeed);
     })
   }
   getUserAnswersFeed(uid: string) {
     this.data.getAnswersFeed(uid).subscribe(feed => {
       this.answers = feed;
-      console.log(this.answers);
     })
   }
 

@@ -33,7 +33,6 @@ export class PostComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log(this.post);
     this.fetchAnswers(this.post.id);
   }
 
@@ -46,8 +45,6 @@ export class PostComponent implements OnInit {
     this.data.getAnswers(postId).forEach(res => {
       this.answers = res;
       this.answersLoaded = true;
-      console.log(res);
-      
     })
   }
 
