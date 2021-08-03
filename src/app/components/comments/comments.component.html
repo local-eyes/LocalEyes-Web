@@ -1,4 +1,4 @@
-<div *ngIf="auth.userData; else login" [ngClass]="{'fixed': isMobile=='false', 'fixed-mobile': isMobile=='true' }">
+<div *ngIf="auth.user$ && auth.userData; else login" [ngClass]="{'fixed': isMobile=='false', 'fixed-mobile': isMobile=='true' }">
     <form [formGroup]="comment" (ngSubmit)="postComment()">
         <div class="row align-items-center justify-content-start w-100">
             <mat-form-field appearance="outline" [ngClass]="{'col-10': isMobile=='false', 'col-9': isMobile=='true' }">
@@ -9,7 +9,7 @@
                 <textarea wrap="hard" matInput placeholder="Type your comment" formControlName="answer"></textarea>
             </mat-form-field>
             <div class="col-auto">
-                <button mat-raised-button [disabled]="comment.invalid" color="primary" type="submit" [ngClass]="{'bg-dark': isMobile=='false', 'bg-secondary': isMobile=='true' }">
+                <button mat-raised-button [disabled]="answer.invalid" color="primary" type="submit" [ngClass]="{'bg-dark': isMobile=='false', 'bg-secondary': isMobile=='true' }">
                     <mat-icon>add_comment</mat-icon>
                 </button>
             </div>

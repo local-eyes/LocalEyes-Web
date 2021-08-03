@@ -13,7 +13,7 @@
     <div *ngIf="isMobile=='false'; else mobileTemplate" class="row w-100 m-auto">
         <div class="gutter" style="margin: 33px 0;"></div>
 
-        <div class="col-lg-8 col-sm-12" style="border: 1px solid white; border-radius: 15px; padding-left: 0; padding-right: 0;">
+        <div class="col-lg-8 col-sm-12" style="border-radius: 15px; padding-left: 0; padding-right: 0;">
             <div class="wrapper" style="border: 2px solid #0a4b52; background-color: #021b20;">
                 <div class="header">
                     <img src="{{personData.imageURL}}" alt="UserImage" class="user-image my-2">
@@ -21,7 +21,6 @@
                     <h3 class="user-email text-secondary">{{personData.email}}</h3>
                     <mat-divider></mat-divider>
                     <h2 class="bio text-capitalize">{{personData.bio}}</h2>
-                    <!-- <div class="location-info d-flex flex-row justify-content-start my-3"> -->
                     <div class="location-info row my-3">
                         <div class="location-info-tag col-5 d-flex" *ngIf="personData.locality != null">
                             <mat-icon>place</mat-icon>
@@ -65,7 +64,7 @@
                                     </mat-card-content>
                                     <mat-divider></mat-divider>
                                     <mat-card-actions>
-                                        <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
+                                        <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                             <button mat-icon-button class="col-6">
                                                                 <mat-icon svgIcon="claps-white"></mat-icon>
                                                                 {{post.content.claps}}
@@ -79,7 +78,7 @@
                                                             </button>
                                         </div>
                                         <ng-template #login>
-                                            <div class="row d-flex justify-content-around">
+                                            <div class="row d-flex justify-content-start">
                                                 <button mat-icon-button class="col-6">
                                                                     <mat-icon svgIcon="claps-white"></mat-icon>
                                                                     {{post.content.claps}}
@@ -119,7 +118,7 @@
                                     </mat-card-content>
                                     <mat-divider></mat-divider>
                                     <mat-card-actions>
-                                        <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
+                                        <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                             <button mat-icon-button class="col-6">
                                                                 <mat-icon svgIcon="claps-white"></mat-icon>
                                                                 {{post.content.claps}}
@@ -133,7 +132,7 @@
                                                             </button>
                                         </div>
                                         <ng-template #login>
-                                            <div class="row d-flex justify-content-around">
+                                            <div class="row d-flex justify-content-start">
                                                 <button mat-icon-button class="col-6">
                                                                     <mat-icon svgIcon="claps-white"></mat-icon>
                                                                     {{post.content.claps}}
@@ -173,8 +172,8 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="isMobile=='false'" class="col-4" style="border: 1px solid white; border-radius: 15px; background-color: rgb(15, 15, 15);">
-            <mat-toolbar style="background-color: rgb(15, 15, 15);color: white;z-index: 999;position: fixed;justify-content: space-between;width: 24%;">
+        <div *ngIf="isMobile=='false'" class="col-4" style="background-color: rgb(15, 15, 15); min-height: 100vh;">
+            <mat-toolbar style="background-color: rgb(15, 15, 15);color: white;z-index: 999;position: fixed;justify-content: flex-end;width: 24%;">
                 <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
                  <mat-icon>notifications</mat-icon>
                </button>
@@ -243,7 +242,7 @@
                                 </a>
                                 <mat-divider></mat-divider>
                                 <mat-card-actions>
-                                    <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
+                                    <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button class="col-6">
                                                         <mat-icon svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
@@ -257,7 +256,7 @@
                                                     </button>
                                     </div>
                                     <ng-template #login>
-                                        <div class="row d-flex justify-content-around">
+                                        <div class="row d-flex justify-content-start">
                                             <button mat-icon-button class="col-6">
                                                             <mat-icon svgIcon="claps"></mat-icon>
                                                             {{post.content.claps}}
@@ -299,7 +298,7 @@
                                 </a>
                                 <mat-divider></mat-divider>
                                 <mat-card-actions>
-                                    <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
+                                    <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button class="col-6">
                                                         <mat-icon svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
@@ -313,7 +312,7 @@
                                                     </button>
                                     </div>
                                     <ng-template #login>
-                                        <div class="row d-flex justify-content-around">
+                                        <div class="row d-flex justify-content-start">
                                             <button mat-icon-button class="col-6">
                                                             <mat-icon svgIcon="claps"></mat-icon>
                                                             {{post.content.claps}}

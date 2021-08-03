@@ -8,6 +8,14 @@ mat-sidenav-closed {
     width: 100vw;
 }
 
+.mat-icon-button {
+    min-width: 60px;
+}
+
+.mat-icon {
+    font-size: 20px;
+}
+
 mat-sidenav-content {
     background-color: white;
     color: black;

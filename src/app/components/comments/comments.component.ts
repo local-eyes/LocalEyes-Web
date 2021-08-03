@@ -48,6 +48,10 @@ export class CommentsComponent implements OnInit {
     }
   }
 
+  get answer() {
+    return this.comment.get('answer');
+  }
+
   async postComment() {
     const commentValue = this.comment.value;
     try {
