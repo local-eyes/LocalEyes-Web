@@ -3,8 +3,8 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-    background-color: rgb(15, 15, 15);
-    color: white;
+    /* background-color: rgb(15, 15, 15);
+    color: white; */
     width: 300px;
 }
 
@@ -12,15 +12,16 @@ mat-sidenav-closed {
     width: 100vw;
 }
 
-mat-sidenav-content {
+
+/* mat-sidenav-content {
     background-color: black;
     color: white;
-    ;
-}
+} */
 
-a {
+
+/* a {
     color: #62c9d5!important;
-}
+} */
 
 .mat-list-item {
     font-size: 20px;
@@ -39,12 +40,14 @@ a {
     margin: 20px 0;
 }
 
-mat-divider {
+
+/* mat-divider {
     border-top-color: rgba(255, 255, 255, 0.411);
-}
+} */
 
 .bottom-nav {
     position: fixed;
     bottom: 0;
     z-index: 9999;
+    background-color: white;
 }

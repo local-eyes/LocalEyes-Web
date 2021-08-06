@@ -1,4 +1,4 @@
-<mat-card [ngClass]="{'bg-dark text-light': !isMobile, 'bg-light text-dark': isMobile}">
+<mat-card class="bg-light text-dark">
     <mat-card-header>
         <mat-chip-list aria-label="Post type">
             <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
@@ -19,7 +19,7 @@
     <mat-card-actions>
         <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-around">
             <button mat-icon-button (click)="incrementClaps(post.id, i)" class="col-6">
-                <mat-icon svgIcon="claps-white"></mat-icon>
+                <mat-icon svgIcon="claps"></mat-icon>
                 {{post.content.claps}}
             </button>
             <button mat-icon-button class="col-6 ml-2">
@@ -36,7 +36,7 @@
         <ng-template #login>
             <div class="row d-flex justify-content-around">
                 <button mat-icon-button (click)="openSignInChecker()" class="col-6">
-                    <mat-icon svgIcon="claps-white"></mat-icon>
+                    <mat-icon svgIcon="claps"></mat-icon>
                     {{post.content.claps}}
                 </button>
                 <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
@@ -60,7 +60,7 @@
 <h1 class="d-flex justify-content-center m-auto col-12" *ngIf="answersLoaded && answers.length == 0">
     Nothing to Show. Be the first one to ANSWER.
 </h1>
-<mat-card *ngFor="let answer of answers; let i = index;" class="bg-dark text-light m-3">
+<mat-card *ngFor="let answer of answers; let i = index;" class="bg-light text-dark m-3">
     <mat-card-header>
         <img src="{{answer.author.image}}" mat-card-avatar>
         <mat-card-title><a routerLink="profile/{{answer.author.uid}}">{{answer.author.fullname}}</a></mat-card-title>

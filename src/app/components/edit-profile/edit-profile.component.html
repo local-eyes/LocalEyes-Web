@@ -1,7 +1,7 @@
 <div class=" w-100">
     <div class="row m-auto">
         <div class="col-12" style="border: 1px solid white; border-radius: 15px; padding-right: 0; padding-left: 0;">
-            <mat-toolbar style="background-color: black; color: white; top: 0; z-index: 999;">
+            <mat-toolbar style="top: 0; z-index: 999;">
                 <button mat-button (click)="goBack()">
                     <mat-icon>arrow_back_ios_new</mat-icon>
                 </button>
@@ -12,15 +12,15 @@
                     <img src="{{auth.userData.imageURL}}" alt="personID">
                 </div>
                 <div class="col-lg-8 col-sm-12">
-                    <mat-card class="bg-dark text-light w-100">
+                    <mat-card class="bg-light text-dark w-100">
                         <mat-card-content class="d-flex flex-column">
                             <mat-form-field appearance="outline">
                                 <mat-label style="color: #62c9d5;">Fullname</mat-label>
-                                <input matInput formControlName="fullname" class="text-light">
+                                <input matInput formControlName="fullname" class="text-dark">
                             </mat-form-field>
                             <mat-form-field appearance="outline">
                                 <mat-label style="color: #62c9d5;">E-Mail</mat-label>
-                                <input matInput formControlName="email" class="text-light">
+                                <input matInput formControlName="email" class="text-dark">
                             </mat-form-field>
                             <mat-form-field appearance="outline">
                                 <mat-label style="color: #62c9d5;">Bio</mat-label>
@@ -37,7 +37,7 @@
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" color="primary" class="col-5">
                                     <mat-label style="color: #62c9d5;">Date of Birth</mat-label>
-                                    <input matInput [matDatepicker]="dob" formControlName="dob" disabled class="text-light">
+                                    <input matInput [matDatepicker]="dob" formControlName="dob" disabled class="text-dark">
                                     <mat-datepicker-toggle [for]="dob" matSuffix style="color: #62c9d5;"></mat-datepicker-toggle>
                                     <mat-datepicker startView="multi-year" #dob disabled="false"></mat-datepicker>
                                 </mat-form-field>

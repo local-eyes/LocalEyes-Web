@@ -1,22 +1,22 @@
 <div *ngIf="isMobile != 'true'; else mobileTemplate">
     <div class="row w-100 m-auto">
         <div class="col-8">
-            <mat-toolbar style="background-color: black; color: white; top: 0; z-index: 999;">
+            <mat-toolbar style="top: 0; z-index: 999;">
                 <div style="margin-bottom: 7px;">{{title}}</div>
             </mat-toolbar>
-            <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" backgroundColor="primary" color="primary" mat-align-tabs="center">
+            <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
-                    <div class="bg-dark w-100 my-2 post-prompt">
+                    <div class="bg-light w-100 my-2 post-prompt">
                         <a [routerLink]="['/create']" [queryParams]="{ feed: 'local'}" class="d-flex flex-row justify-content-st px-4 py-2">
                             <mat-icon style="margin-top: 5px;">maps_ugc</mat-icon>
-                            <input type="text" class="w-100 mx-4" placeholder="Create Post" style="background-color: rgb(19, 19, 19); border: 1px solid #1c1c1c; border-radius: 9px;">
+                            <input type="text" class="w-100 mx-4" placeholder="Create Post" style="background-color: rgb(224, 224, 224); border: 1px solid #1c1c1c; border-radius: 9px;">
                             <button mat-button>Post</button>
                         </a>
                     </div>
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
-                            <mat-card class="bg-dark text-light" style="cursor: pointer;">
+                            <mat-card class="bg-light text-dark" style="cursor: pointer;">
                                 <mat-card-header (click)="openPost('local', i)">
                                     <mat-chip-list aria-label="Fish selection">
                                         <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
@@ -39,7 +39,7 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button (click)="incrementClaps('local', post.id, i)" class="col-6">
-                                                    <mat-icon svgIcon="claps-white"></mat-icon>
+                                                    <mat-icon svgIcon="claps"></mat-icon>
                                                     {{post.content.claps}}
                                                 </button>
                                         <button mat-icon-button (click)="openPost('local', i)" class="col-6 ml-2">
@@ -51,9 +51,9 @@
                                                 </button>
                                     </div>
                                     <ng-template #login>
-                                        <div class="row d-flex justify-content-around">
+                                        <div class="row d-flex justify-content-start">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
-                                                        <mat-icon svgIcon="claps-white"></mat-icon>
+                                                        <mat-icon svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
@@ -71,16 +71,16 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="City" (click)="getCity('jaipur')">
-                    <div class="bg-dark w-100 my-2 post-prompt">
+                    <div class="bg-light w-100 my-2 post-prompt">
                         <a [routerLink]="['/create']" [queryParams]="{ feed: 'city'}" class="d-flex flex-row justify-content-st px-4 py-2">
                             <mat-icon style="margin-top: 5px;">maps_ugc</mat-icon>
-                            <input type="text" class="w-100 mx-4" placeholder="Create Post" style="background-color: rgb(19, 19, 19); border: 1px solid #1c1c1c; border-radius: 9px;">
+                            <input type="text" class="w-100 mx-4" placeholder="Create Post" style="background-color: rgb(224, 224, 224); border: 1px solid #1c1c1c; border-radius: 9px;">
                             <button mat-button>Post</button>
                         </a>
                     </div>
                     <div class="container">
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
-                            <mat-card class="bg-dark text-light">
+                            <mat-card class="bg-light text-dark">
                                 <mat-card-header>
                                     <mat-chip-list aria-label="Fish selection">
                                         <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
@@ -105,7 +105,7 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button (click)="incrementClaps('city', post.id, i)" class="col-6">
-                                                    <mat-icon svgIcon="claps-white"></mat-icon>
+                                                    <mat-icon svgIcon="claps"></mat-icon>
                                                     {{post.content.claps}}
                                                 </button>
                                         <button mat-icon-button (click)="openPost('city', i)" class="col-6 ml-2">
@@ -117,9 +117,9 @@
                                                 </button>
                                     </div>
                                     <ng-template #login>
-                                        <div class="row d-flex justify-content-around">
+                                        <div class="row d-flex justify-content-start">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
-                                                        <mat-icon svgIcon="claps-white"></mat-icon>
+                                                        <mat-icon svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
@@ -138,8 +138,8 @@
                 </mat-tab>
             </mat-tab-group>
         </div>
-        <div class="col-4" style="background-color: rgb(15, 15, 15); min-height: 100vh;">
-            <mat-toolbar style="background-color: rgb(15, 15, 15);color: white;z-index: 999;position: fixed;justify-content: flex-end;width: 24%;">
+        <div class="col-4" style="min-height: 100vh;">
+            <mat-toolbar style="z-index: 999;position: fixed;justify-content: flex-end;width: 24%;">
                 <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
                  <mat-icon>notifications</mat-icon>
                </button>
@@ -200,7 +200,7 @@
                     <h1>{{title}}</h1>
                 </div>
             </mat-toolbar>
-            <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" backgroundColor="primary" color="primary" mat-align-tabs="center">
+            <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
@@ -240,7 +240,7 @@
                                         </button>
                                     </div>
                                     <ng-template #login>
-                                        <div class="row d-flex justify-content-around">
+                                        <div class="row d-flex justify-content-start">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
                                                         <mat-icon svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
@@ -298,7 +298,7 @@
                                         </button>
                                     </div>
                                     <ng-template #login>
-                                        <div class="row d-flex justify-content-around">
+                                        <div class="row d-flex justify-content-start">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
                                                         <mat-icon svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
