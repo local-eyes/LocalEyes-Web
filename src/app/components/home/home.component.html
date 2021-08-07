@@ -13,6 +13,10 @@
                             <button mat-button>Post</button>
                         </a>
                     </div>
+                    <div class="d-flex flex-row">
+                        <mat-icon>place</mat-icon>
+                        <p>Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span></p>
+                    </div>
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
@@ -77,6 +81,10 @@
                             <input type="text" class="w-100 mx-4" placeholder="Create Post" style="background-color: rgb(224, 224, 224); border: 1px solid #1c1c1c; border-radius: 9px;">
                             <button mat-button>Post</button>
                         </a>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <mat-icon>place</mat-icon>
+                        <p>Showing posts in <span class="text-capitalize highlight">{{city}}</span></p>
                     </div>
                     <div class="container">
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
@@ -203,6 +211,10 @@
             <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
                     <app-loader *ngIf="loadComplete==false"></app-loader>
+                    <div class="d-flex flex-row">
+                        <mat-icon>place</mat-icon>
+                        <p>Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span></p>
+                    </div>
                     <div class="container" *ngIf="loadComplete==true">
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
@@ -260,6 +272,10 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="City">
+                    <div class="d-flex flex-row">
+                        <mat-icon>place</mat-icon>
+                        <p>Showing posts in <span class="text-capitalize highlight">{{city}}</span></p>
+                    </div>
                     <div class="container">
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark">

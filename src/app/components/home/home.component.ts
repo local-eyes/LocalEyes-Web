@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   cityPosts:any;
   lat:any;
   lon: any;
+  city: any;
+  neighborhood: any;
   loadComplete:boolean = false;
   cityLoaded = false;
   isMobile = localStorage.getItem('isMobile');
@@ -38,12 +40,22 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    window.scroll(0, 0);
     this.location.getPosition().then(pos=>
       {
         this.lon = pos.lng;
         this.lat = pos.lat;
         this.getPosts(this.lat, this.lon, this.radius, null);
+        this.getCityDynamically(this.lat, this.lon);
       });
+  }
+
+  getCityDynamically(lat, lon) {
+    this.location.getDynamicCity(lat, lon).subscribe(res => {
+      const addressComponents = res['results'][0]['address_components'];
+      this.city = addressComponents.at(-4)['long_name'].toLowerCase();
+      this.neighborhood = addressComponents[2]['long_name'].toLowerCase()
+    })
   }
 
   getCity (city:string) {
@@ -128,7 +140,8 @@ export class HomeComponent implements OnInit {
 
   loadData(tabIndex:number) {
     if (tabIndex === 1 && this.cityLoaded == false) {
-      this.getCity("jaipur");
+      this.log(this.city)
+      this.getCity(this.city);
       this.cityLoaded = true;
     }
   }

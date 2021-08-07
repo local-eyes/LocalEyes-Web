@@ -1,4 +1,6 @@
+import { HttpParams, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { geoCodingAPI } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -6,11 +8,10 @@ import { Injectable } from '@angular/core';
 export class LocationService {
  lat:any;
  lng: any;
-  constructor() { 
+  constructor(private http: HttpClient) { 
     this.getPosition()
   }
-  getPosition(): Promise<any>
-  {
+  getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
 
       navigator.geolocation.getCurrentPosition(resp => {
@@ -22,5 +23,11 @@ export class LocationService {
           reject(err);
         });
     });
+  }
+  getDynamicCity(lat, lng) {
+    let params = new HttpParams()
+    .set('latlng', `${lat},${lng}`)
+    .set('key', geoCodingAPI)
+    return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json`, {params})
   }
 }
