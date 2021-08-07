@@ -21,6 +21,7 @@ export class ForYouComponent implements OnInit {
   cityPosts:any;
   lat:any;
   lon: any;
+  city: any;
   loadComplete:boolean = false;
   deviceInfo: any;
   isMobile = localStorage.getItem('isMobile');
@@ -45,7 +46,15 @@ export class ForYouComponent implements OnInit {
         this.lon = pos.lng;
         this.lat = pos.lat;
         this.getPosts(this.lat, this.lon, this.radius, null);
+        this.getCityDynamically(this.lat, this.lon);
       });
+  }
+
+  getCityDynamically(lat, lon) {
+    this.location.getDynamicCity(lat, lon).subscribe(res => {
+      const addressComponents = res['results'][0]['address_components'];
+      this.city = addressComponents.at(-4)['long_name'].toLowerCase();
+    })
   }
 
   getCity (city:string) {
@@ -120,7 +129,7 @@ export class ForYouComponent implements OnInit {
 
   loadData(tabIndex:number) {
     if (tabIndex === 1 && this.cityLoaded == false) {
-      this.getCity("jaipur");
+      this.getCity(this.city);
       this.cityLoaded = true;
     }
   }

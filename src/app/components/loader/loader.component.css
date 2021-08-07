@@ -2,7 +2,8 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    width: 496px;
+    width: 90vw;
+    z-index: 99999999999;
     padding: 10px;
     margin: 10px auto;
     -moz-border-radius: 3px;

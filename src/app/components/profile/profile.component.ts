@@ -33,9 +33,9 @@ isMobile = localStorage.getItem('isMobile');
 
   ngOnInit(): void {
     window.scroll(0, 0);
-    if (this.auth.userData) {
-      this.currentUser = this.auth.userData.uid; 
-    }
+    this.auth.user$.subscribe(user => {
+      this.currentUser = user.uid;
+    })
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.getProfileFromService(this.uid);
     this.getLocalFeed(this.uid);

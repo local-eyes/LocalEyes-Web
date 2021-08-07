@@ -1,13 +1,13 @@
 <div *ngIf="isMobile != 'true'; else mobileView">
     <div class="row w-100 m-auto">
         <div class="col-8" style="border: 1px solid white; border-radius: 15px;">
-            <mat-toolbar style="background-color: black; color: white; top: 0; z-index: 999;">
+            <mat-toolbar style="top: 0; z-index: 999;">
                 <div style="margin-bottom: 7px;">{{title}}</div>
             </mat-toolbar>
 
             <div *ngFor="let notification of notifs$">
                 <a routerLink="{{notification.content.redirectUrl}}" style="text-decoration: none;">
-                    <mat-card class="bg-dark text-light m-2 p-2" style="cursor: pointer;">
+                    <mat-card class="bg-light text-dark m-2 p-2" style="cursor: pointer;">
                         <mat-card-header>
                             <a routerLink="/profile/{{notification.from.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{notification.from.image}}); background-size: cover; background-repeat: no-repeat;"></a>
                             <mat-card-title>{{notification.content.title}}</mat-card-title>

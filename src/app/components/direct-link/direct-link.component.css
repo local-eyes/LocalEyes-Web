@@ -1,3 +1,12 @@
 a {
     text-decoration: none;
 }
+
+.no-comments {
+    background-repeat: no-repeat;
+    min-height: 245px;
+    min-width: 300px;
+    background-size: contain;
+    background-position: top;
+    background-image: url('../../../assets/imgs/no-comments.svg');
+}

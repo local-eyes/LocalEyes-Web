@@ -1,4 +1,4 @@
-<mat-toolbar style="z-index: 999; top: 0; position: fixed;">
+<mat-toolbar style="z-index: 999; top: 0; position: fixed; background: black; color: white;">
     <div class="m-3">
         <button mat-button (click)="goBack()">
             <mat-icon>arrow_back_ios_new</mat-icon>
@@ -57,9 +57,10 @@
 <div class="container m-auto" *ngIf="answersLoaded == false">
     <app-loader></app-loader>
 </div>
-<h1 class="d-flex justify-content-center m-auto col-12" *ngIf="answersLoaded && commentsData.length == 0">
-    Nothing to Show. Be the first one to ANSWER.
-</h1>
+<div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="answersLoaded && commentsData.length == 0">
+    <div class="no-comments"></div>
+    <p>Nothing to Show. Be the first one to ANSWER.</p>
+</div>
 <mat-card *ngFor="let answer of commentsData; let i = index;" class="bg-light text-dark my-3">
     <mat-card-header>
         <a class="text-dark" routerLink="/profile/{{answer.author.uid}}"><img src="{{answer.author.image}}" mat-card-avatar></a>
@@ -70,7 +71,7 @@
         <p> {{answer.answer}} </p>
     </mat-card-content>
 </mat-card>
-<div *ngIf="answersLoaded">
+<div *ngIf="auth.userData">
     <app-comments *ngIf="postData && postData.city == null; else city" (newCommentEvent)="addComment($event)" [docRef]="'local'" [postId]="postId"></app-comments>
     <ng-template #city>
         <app-comments *ngIf="postData" (newCommentEvent)="addComment($event)" [docRef]="'city'" [postId]="postId"></app-comments>

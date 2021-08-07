@@ -10,6 +10,10 @@
                 <mat-tab label="Local">
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
+                        <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="nearbyPosts && nearbyPosts.length == 0">
+                            <div class="no-posts my-3"></div>
+                            <h1>There are no Unanswered Questions in you Neighborhood. Hoorayy</h1>
+                        </div>
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
                                 <mat-card-header (click)="openPost('local', i)">
@@ -32,7 +36,7 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button (click)="incrementClaps('local', post.id, i)" class="col-6">
-                                                    <mat-icon svgIcon="claps-white"></mat-icon>
+                                                    <mat-icon svgIcon="claps"></mat-icon>
                                                     {{post.content.claps}}
                                                 </button>
                                         <button mat-icon-button (click)="openPost('local', i)" class="col-6 ml-2">
@@ -46,7 +50,7 @@
                                     <ng-template #login>
                                         <div class="row d-flex justify-content-start">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
-                                                        <mat-icon svgIcon="claps-white"></mat-icon>
+                                                        <mat-icon svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
@@ -65,6 +69,10 @@
                 </mat-tab>
                 <mat-tab label="City">
                     <div class="container">
+                        <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="cityPosts && cityPosts.length == 0">
+                            <div class="no-posts my-3"></div>
+                            <h1>There are no Unanswered Questions in you City. Hoorayy</h1>
+                        </div>
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark">
                                 <mat-card-header>
@@ -90,7 +98,7 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button (click)="incrementClaps('city', post.id, i)" class="col-6">
-                                                    <mat-icon svgIcon="claps-white"></mat-icon>
+                                                    <mat-icon svgIcon="claps"></mat-icon>
                                                     {{post.content.claps}}
                                                 </button>
                                         <button mat-icon-button (click)="openPost('city', i)" class="col-6 ml-2">
@@ -104,7 +112,7 @@
                                     <ng-template #login>
                                         <div class="row d-flex justify-content-start">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
-                                                        <mat-icon svgIcon="claps-white"></mat-icon>
+                                                        <mat-icon svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
@@ -185,6 +193,10 @@
                 <mat-tab label="Local">
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
+                        <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="nearbyPosts && nearbyPosts.length == 0">
+                            <div class="no-posts my-3"></div>
+                            <h1>There are no Unanswered Questions in you Neighborhood. Hoorayy</h1>
+                        </div>
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
                                 <mat-card-header (click)="openPost('local', i)">
@@ -242,6 +254,10 @@
                 </mat-tab>
                 <mat-tab label="City">
                     <div class="container">
+                        <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="cityPosts && cityPosts.length == 0">
+                            <div class="no-posts my-3"></div>
+                            <h1>There are no Unanswered Questions in you City. Hoorayy</h1>
+                        </div>
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark">
                                 <mat-card-header>

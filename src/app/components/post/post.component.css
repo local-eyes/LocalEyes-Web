@@ -11,3 +11,12 @@ a {
 .mat-card-image:first-child {
     margin-top: 0px;
 }
+
+.no-comments {
+    background-repeat: no-repeat;
+    min-height: 245px;
+    min-width: 400px;
+    background-size: contain;
+    background-position: top;
+    background-image: url('../../../assets/imgs/no-comments.svg');
+}
