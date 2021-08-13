@@ -22,6 +22,7 @@ export class ForYouComponent implements OnInit {
   lat:any;
   lon: any;
   city: any;
+  neighborhood: any;
   loadComplete:boolean = false;
   deviceInfo: any;
   isMobile = localStorage.getItem('isMobile');
@@ -53,7 +54,10 @@ export class ForYouComponent implements OnInit {
   getCityDynamically(lat, lon) {
     this.location.getDynamicCity(lat, lon).subscribe(res => {
       const addressComponents = res['results'][0]['address_components'];
-      this.city = addressComponents.at(-4)['long_name'].toLowerCase();
+      const resLen = addressComponents.length;
+      const cityPos = resLen - 4;
+      this.city = addressComponents[cityPos]['long_name'].toLowerCase();
+      this.neighborhood = addressComponents[2]['long_name'].toLowerCase()
     })
   }
 
