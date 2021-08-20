@@ -1,0 +1,11 @@
+<div class="row text-center m-auto">
+    <h1 class="col-12">{{data[step].title}}</h1>
+    <img src="{{data[step].img}}" alt="pas" class="col-lg-6 col-sm-4 m-auto">
+    <h3 class="col-12">{{data[step].description}}</h3>
+    <div class="bottom-cta d-flex flex-row justify-content-between col-12">
+        <button mat-flat-button *ngIf="step==0" (click)="close()">SKIP</button>
+        <button mat-flat-button *ngIf="step>=1" (click)="back()">BACK</button>
+        <button mat-raised-button (click)="increaseStep()" *ngIf="step!=3" color="primary">NEXT</button>
+        <button mat-raised-button (click)="close()" *ngIf="step==3" color="primary">GET STARTED</button>
+    </div>
+</div>

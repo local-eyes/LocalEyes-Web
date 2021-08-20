@@ -28,6 +28,7 @@ import { FileUploadComponent } from "./components/file-upload/file-upload.compon
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ForYouComponent } from './components/for-you/for-you.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { IntroScreenComponent } from './components/intro-screen/intro-screen.component';
 
 // Services
 import { AuthService } from './services/auth/auth.service';
@@ -49,7 +50,8 @@ import { LocationService } from './services/location/location.service';
     ForYouComponent,
     CommentsComponent,
     FileUploadComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    IntroScreenComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-che
 import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { IntroScreenComponent } from './components/intro-screen/intro-screen.component';
 
 @Component({
   selector: 'app-root',
@@ -28,13 +29,13 @@ export class AppComponent implements OnInit{
       `claps`,
       this.sanitizer.bypassSecurityTrustResourceUrl("../assets/imgs/clap.svg")
     );
-    this.registerIcon.addSvgIcon(
-      `claps-white`,
-      this.sanitizer.bypassSecurityTrustResourceUrl("../assets/imgs/clap-white.svg")
-    );
   }
   ngOnInit() {
     this.getUserData();
+    if (!localStorage.getItem("intro_screen_displayed")){
+      this.dialog.open(IntroScreenComponent);
+      localStorage.setItem("intro_screen_displayed", "true")
+    }
   }
 
   getUserData() {
