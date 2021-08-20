@@ -8,4 +8,9 @@
         <button mat-raised-button (click)="increaseStep()" *ngIf="step!=3" color="primary">NEXT</button>
         <button mat-raised-button (click)="close()" *ngIf="step==3" color="primary">GET STARTED</button>
     </div>
+    <mat-divider></mat-divider>
+    <div class="d-flex flex-row text-center" *ngIf="step==3">
+        <mat-icon>info_outlined</mat-icon>
+        <p>By Continuing, You Agree to Our <a target="_blank" href="https://local-eyes.tech/tnc/">Terms of Use</a> and <a target="_blank" href="https://local-eyes.tech/privacy-policy">Privacy Policy</a>
+    </div>
 </div>
