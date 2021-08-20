@@ -192,6 +192,36 @@
                     <mat-icon matListIcon>settings</mat-icon>
                     <h1 matLine>Settings</h1>
                 </a>
+                <a mat-list-item [matMenuTriggerFor]="moreMenu">
+                    <mat-icon matListIcon>more_vert</mat-icon>
+                    <h1 matLine>More</h1>
+                </a>
+                <mat-menu #moreMenu="matMenu" yPosition="below">
+                    <a mat-menu-item href="https://local-eyes.tech/" target="_blank">
+                        <mat-icon class="text-dark">cottage</mat-icon>
+                        <span>What is LocalEyes?</span>
+                    </a>
+                    <a mat-menu-item href="https://localeyesblog.pythonanywhere.com/" target="_blank">
+                        <mat-icon class="text-dark">library_books</mat-icon>
+                        <span>LocalEyes Blogs</span>
+                    </a>
+                    <a mat-menu-item href="https://forms.gle/wduNLsdHFpNBuW8i9" target="_blank">
+                        <mat-icon class="text-dark">feed</mat-icon>
+                        <span>Submit Feedback / Report a Bug</span>
+                    </a>
+                    <a mat-menu-item href="https://local-eyes.tech/tnc/" target="_blank">
+                        <mat-icon class="text-dark">gavel</mat-icon>
+                        <span>Terms of Use</span>
+                    </a>
+                    <a mat-menu-item href="https://local-eyes.tech/privacy-policy/" target="_blank">
+                        <mat-icon class="text-dark">policy</mat-icon>
+                        <span>Privacy Policy</span>
+                    </a>
+                    <a mat-menu-item href="mailto:team@local-eyes.tech" target="_blank">
+                        <mat-icon class="text-dark">support_agent</mat-icon>
+                        <span>Get Support</span>
+                    </a>
+                </mat-menu>
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>
