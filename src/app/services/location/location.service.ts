@@ -1,6 +1,7 @@
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { geoCodingAPI } from 'src/environments/environment';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { geoCodingAPI } from 'src/environments/environment';
 export class LocationService {
  lat:any;
  lng: any;
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private snackbar: MatSnackBar) { 
     this.getPosition()
   }
   getPosition(): Promise<any> {
@@ -20,6 +21,8 @@ export class LocationService {
           resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
         },
         err => {
+          console.log(err);
+          this.snackbar.open(`❌ ${err.message}`, null,{verticalPosition: "top", horizontalPosition: "end"});
           reject(err);
         });
     });
