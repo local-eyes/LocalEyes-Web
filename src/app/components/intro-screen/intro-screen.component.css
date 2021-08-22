@@ -1,0 +1,27 @@
+.img-bg,
+.img-bg-m {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.img-bg img {
+    height: 20rem;
+}
+
+.img-bg-m img {
+    height: 12rem;
+}
+
+.head {
+    font-size: 45px;
+}
+
+.head-m {
+    font-size: 34px;
+}
+
+
+/* img {
+    height: 20rem;
+} */

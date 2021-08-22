@@ -7,30 +7,35 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./intro-screen.component.css']
 })
 export class IntroScreenComponent implements OnInit {
+  isMobile = localStorage.getItem('isMobile');
   data = [
     {
       step: 1,
       title: "Ask & Answer Questions",
       description: "Ask questions in your locality and get true insights from people living there",
-      img: "../../../assets/imgs/intro.svg"
+      img: "../../../assets/imgs/ask-ans-fg.svg",
+      bgImg: "../../../assets/imgs/ask-ans-bg.svg"
     },
     {
       step: 2,
       title: "Make Announcement",
       description: "Share experiences with people about your locality and tell them things they might not know",
-      img: "../../../assets/imgs/intro.svg"
+      img: "../../../assets/imgs/announce-fg.svg",
+      bgImg: "../../../assets/imgs/announce-bg.svg"
     },
     {
       step: 3,
       title: "A Look Around You",
       description: "Get a locally curated feed of your neighborhood and city",
-      img: "../../../assets/imgs/intro.svg"
+      img: "../../../assets/imgs/intro.svg",
+      bgImg: "../../../assets/imgs/ask-ans-bg.svg"
     },
     {
       step: 1,
       title: "Every question matters",
       description: "Look at all the unanswered questions around you and share your opinions about them",
-      img: "../../../assets/imgs/intro.svg"
+      img: "../../../assets/imgs/intro.svg",
+      bgImg: "../../../assets/imgs/ask-ans-bg.svg"
     }
   ]
   step: number = 0;
