@@ -29,6 +29,9 @@ export class HomeComponent implements OnInit {
   loadComplete:boolean = false;
   cityLoaded = false;
   isMobile = localStorage.getItem('isMobile');
+  swipeCoords: any;
+  swipeTime: any;
+  selectedTabIndex = 0;
   constructor(
     private data: DataService, 
     private location: LocationService, 
@@ -156,5 +159,26 @@ export class HomeComponent implements OnInit {
 
   openLogoutConfirmation() {
     this.dialog.open(SignInCheckerComponent, {data: "logOut"});
+  }
+
+  swipe(e: TouchEvent, when: string): void {
+    const coords: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY]
+    const time = new Date().getTime();
+
+    if (when === 'start') {
+      this.swipeCoords = coords;
+      this.swipeTime = time;
+    } else if (when === 'end') {
+      const direction = [coords[0] - this.swipeCoords[0], coords[1] - this.swipeCoords[1]]
+      const duration = time - this.swipeTime;
+      if (duration < 1000 && Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
+        const swipe = direction[0] < 0 ? 'next' : 'previous';
+        if (swipe==='next') {
+          this.selectedTabIndex = 1;
+        } else {
+          this.selectedTabIndex = 0;
+        }
+      }
+    }
   }
 }

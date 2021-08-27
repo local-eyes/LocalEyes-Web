@@ -229,7 +229,7 @@
                 </mat-menu>
             </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <mat-sidenav-content (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
             <a routerLink="create" class="fab" mat-fab aria-label="Example icon button with a delete icon">
                 <img src="../../../assets/imgs/LOgo-13.png" alt="ask" height="100px" style="height:40px; margin: -5px; position: relative;">
             </a>
@@ -243,7 +243,7 @@
                     <h1>{{title}}</h1>
                 </div>
             </mat-toolbar>
-            <mat-tab-group dynamicHeight (selectedTabChange)="loadData($event.index)" color="primary" mat-align-tabs="center">
+            <mat-tab-group dynamicHeight [selectedIndex]="selectedTabIndex" (selectedTabChange)="loadData($event.index)" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="d-flex flex-row">
