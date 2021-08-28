@@ -18,6 +18,7 @@ export class LocationService {
       navigator.geolocation.getCurrentPosition(resp => {
         localStorage.setItem("latitude", `${resp.coords.latitude}`)
         localStorage.setItem("longitude", `${resp.coords.longitude}`)
+        console.log(resp.coords.latitude, resp.coords.longitude);
           resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
         },
         err => {

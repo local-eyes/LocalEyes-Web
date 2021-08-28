@@ -27,15 +27,15 @@ export class IntroScreenComponent implements OnInit {
       step: 3,
       title: "A Look Around You",
       description: "Get a locally curated feed of your neighborhood and city",
-      img: "../../../assets/imgs/intro.svg",
-      bgImg: "../../../assets/imgs/ask-ans-bg.svg"
+      img: "../../../assets/imgs/look-around-you-web.png",
+      bgImg: "../../../assets/imgs/look-around-you.svg"
     },
     {
       step: 1,
       title: "Every question matters",
       description: "Look at all the unanswered questions around you and share your opinions about them",
-      img: "../../../assets/imgs/intro.svg",
-      bgImg: "../../../assets/imgs/ask-ans-bg.svg"
+      img: "../../../assets/imgs/unsanswered.svg",
+      bgImg: "../../../assets/imgs/look-around-you.svg"
     }
   ]
   step: number = 0;

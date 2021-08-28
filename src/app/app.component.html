@@ -80,22 +80,22 @@
         <div class="row w-100 justify-content-between">
             <div class="col-3 d-flex justify-content-center">
                 <a routerLink="">
-                    <mat-icon>home</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined" class="text-dark">home</mat-icon>
                 </a>
             </div>
             <div class="col-3 d-flex justify-content-center">
                 <a routerLink="unanswered">
-                    <mat-icon>local_library</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined" class="text-dark">local_library</mat-icon>
                 </a>
             </div>
             <div class="col-3 d-flex justify-content-center">
                 <a routerLink="notifications">
-                    <mat-icon>notifications</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined" class="text-dark">notifications</mat-icon>
                 </a>
             </div>
             <div class="col-3 d-flex justify-content-center" *ngIf="auth.user$ | async as user">
                 <a routerLink="profile/{{user.uid}}">
-                    <mat-icon>account_circle</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined" class="text-dark">account_circle</mat-icon>
                 </a>
             </div>
             <!-- <ng-template #loginMobile>
