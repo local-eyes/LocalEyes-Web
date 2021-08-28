@@ -104,3 +104,12 @@ mat-card:hover {
     align-items: center;
     border: 1px solid #62c9d575;
 }
+
+.no-posts {
+    background-repeat: no-repeat;
+    min-height: 40vh;
+    min-width: 90vw;
+    background-size: contain;
+    background-position: center;
+    background-image: url('../../../assets/imgs/no-comments.svg');
+}

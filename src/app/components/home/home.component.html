@@ -19,6 +19,10 @@
                     </div>
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
+                        <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="nearbyPosts && nearbyPosts.length == 0">
+                            <div class="no-posts my-3"></div>
+                            <h1>There are no Posts in your Neighborhood. Hoorayy</h1>
+                        </div>
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
                                 <mat-card-header (click)="openPost('local', i)">
@@ -87,6 +91,10 @@
                         <p>Showing posts in <span class="text-capitalize highlight">{{city}}</span></p>
                     </div>
                     <div class="container">
+                        <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="cityPosts && cityPosts.length == 0">
+                            <div class="no-posts my-3"></div>
+                            <h1>There are no Posts in your City. Hoorayy</h1>
+                        </div>
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark">
                                 <mat-card-header>
@@ -251,6 +259,10 @@
                         <p>Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span></p>
                     </div>
                     <div class="container" *ngIf="loadComplete==true">
+                        <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="nearbyPosts && nearbyPosts.length == 0">
+                            <div class="no-posts my-3"></div>
+                            <h1>There are no Posts in your Neighborhood. Hoorayy</h1>
+                        </div>
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
                                 <mat-card-header>
@@ -312,6 +324,10 @@
                         <p>Showing posts in <span class="text-capitalize highlight">{{city}}</span></p>
                     </div>
                     <div class="container">
+                        <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="cityPosts && cityPosts.length == 0">
+                            <div class="no-posts my-3"></div>
+                            <h1>There are no Posts in your City. Hoorayy</h1>
+                        </div>
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark">
                                 <mat-card-header>
