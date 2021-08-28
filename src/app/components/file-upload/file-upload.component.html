@@ -3,7 +3,7 @@
     <div class="files">
         <label for="file-uploading" class="file"></label>
         <input type="file" (change)="getFile($event.target.files)">
-        <button mat-raised-button color="primary" (click)="startUpload()">Upload Image</button>
+        <button mat-raised-button color="primary" (click)="startUpload($event)" [disabled]="disableUploadButton">{{buttonTitle}}</button>
     </div>
 </div>
 

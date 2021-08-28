@@ -122,6 +122,16 @@ isMobile = localStorage.getItem('isMobile');
     return this.cityPost.get('content.description')
   }
 
+  addImage(imageURL:string, form:string) {
+    if (form === 'local') {
+      (this.localPost.get('content') as FormGroup).addControl('image', this.fb.control(imageURL));
+      console.log(this.localPost.value);
+    } else if (form === 'city') {
+      (this.cityPost.get('content') as FormGroup).addControl('image', this.fb.control(imageURL));
+      console.log(this.cityPost.value);
+    }
+  }
+
   getUserLocation() {
     this.lat = parseFloat(localStorage.getItem("latitude"))
     this.lon = parseFloat(localStorage.getItem("longitude"))

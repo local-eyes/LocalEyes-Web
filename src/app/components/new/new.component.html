@@ -45,7 +45,7 @@
                                 <mat-label>Description</mat-label>
                                 <textarea matInput placeholder="(optional)" formControlName="description"></textarea>
                             </mat-form-field>
-                            <app-file-upload></app-file-upload>
+                            <app-file-upload (imageUploadEvent)="addImage($event, 'local')"></app-file-upload>
                         </div>
                     </mat-card-content>
                 </mat-card>
@@ -80,7 +80,7 @@
                                 <mat-label>Description</mat-label>
                                 <textarea matInput placeholder="(optional)" formControlName="description"></textarea>
                             </mat-form-field>
-                            <app-file-upload></app-file-upload>
+                            <app-file-upload (imageUploadEvent)="addImage($event, 'city')"></app-file-upload>
                         </div>
                     </mat-card-content>
                 </mat-card>
