@@ -10,3 +10,7 @@ a {
     background-position: top;
     background-image: url('../../../assets/imgs/null-comments.svg');
 }
+
+.mat-icon-button {
+    min-width: 60px;
+}
