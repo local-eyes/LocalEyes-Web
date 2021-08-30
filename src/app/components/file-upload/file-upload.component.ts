@@ -21,7 +21,7 @@ export class FileUploadComponent implements OnInit {
   file: File;
   fullname = this.auth.userData.fullname;
   uploadURL: string;
-  disableUploadButton: boolean = false;
+  disableUploadButton: boolean = true;
   buttonTitle:string = "Upload Image";
 
   constructor(private storage: AngularFireStorage, private auth: AuthService, public snackbar: MatSnackBar) { }
@@ -32,16 +32,16 @@ export class FileUploadComponent implements OnInit {
 
   getFile(event: FileList) {
     this.file = event.item(0);
-    this.disableUploadButton = false;
     this.buttonTitle = "Upload Image";
     if (this.file.type.split('/')[0] !== 'image') {
       console.log("ONLY IMAGE TYPE REQUIRED");
       const snackRef = this.snackbar.open("ONLY IMAGES ALLOWED", "Retry", {verticalPosition: "bottom", horizontalPosition: "center"})
       snackRef.onAction().subscribe(res => {
-        this.file = null;
+        event.item = null
       })
       return;
     }
+    this.disableUploadButton = false;
     this.filepath = `uploads/${this.fullname}/${new Date().getTime()}_${this.file.name}`;
   }
 
