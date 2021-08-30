@@ -213,11 +213,11 @@
             <mat-divider></mat-divider>
             <h2 class="bio text-capitalize">{{personData.bio}}</h2>
             <div class="location-info row">
-                <div class="location-info-tag col-5 d-flex text-dark">
+                <div class="location-info-tag col-5 d-flex text-dark" *ngIf="personData.locality != null">
                     <mat-icon>place</mat-icon>
                     <p class="ms-2 highlight">{{personData.locality}}</p>
                 </div>
-                <div class="location-info-tag col-5 d-flex text-dark">
+                <div class="location-info-tag col-5 d-flex text-dark" *ngIf="personData.living_since != null">
                     <mat-icon>hourglass_bottom</mat-icon>
                     <p class="ms-2 text-dark">Since {{personData.living_since}} Years</p>
                 </div>
