@@ -25,8 +25,8 @@ export class LocationService {
           console.log(err);
           this.snackbar.open(`❌ ${err.message}`, null,{verticalPosition: "top", horizontalPosition: "end"});
           reject(err);
-        });
-        // {enableHighAccuracy: true, timeout: 10000});
+        },
+        {enableHighAccuracy: true, timeout: 10000});
     });
   }
   getDynamicCity(lat, lng) {

@@ -34,6 +34,7 @@ import { IntroScreenComponent } from './components/intro-screen/intro-screen.com
 import { AuthService } from './services/auth/auth.service';
 import { DataService } from "./services/data/data.service";
 import { LocationService } from './services/location/location.service';
+import { NotOpenComponent } from './components/not-open/not-open.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LocationService } from './services/location/location.service';
     CommentsComponent,
     FileUploadComponent,
     EditProfileComponent,
-    IntroScreenComponent
+    IntroScreenComponent,
+    NotOpenComponent
   ],
   imports: [
     BrowserModule,
