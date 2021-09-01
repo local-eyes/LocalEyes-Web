@@ -50,20 +50,20 @@ export class ForYouComponent implements OnInit {
         this.lon = pos.lng;
         this.lat = pos.lat;
         this.getPosts(this.lat, this.lon, this.radius, null);
-        this.getCityDynamically(this.lat, this.lon);
-        this.getNeighborhoodDynamically(this.lat, this.lon);
+        this.getAddressDynamically(this.lat, this.lon);
       });
   }
 
-  getCityDynamically(lat, lon) {
-    this.location.getDynamicCity(lat, lon).subscribe(res => {
-      this.city = res['results'][0]['address_components'][0]['long_name'];
-    })
-  }
-
-  getNeighborhoodDynamically(lat, lon) {
-    this.location.getDynamicNeighborhood(lat, lon).subscribe(res => {
-      this.neighborhood = res['results'][0]['address_components'][0]['long_name'];
+  getAddressDynamically(lat, lon) {
+    this.location.getDynamicAddress(lat, lon).subscribe(res => {
+      this.neighborhood = res['results'][0]['address_components'][0]['long_name']
+      const addressList = res['results'][0]['address_components']
+      addressList.forEach(address => {
+        if (address.types.includes("locality")) {
+          this.city = address['long_name'];
+          console.log(this.city);
+        }
+      });
     })
   }
 

@@ -29,15 +29,7 @@ export class LocationService {
         {enableHighAccuracy: true, timeout: 10000});
     });
   }
-  getDynamicCity(lat, lng) {
-    let params = new HttpParams()
-    .set('latlng', `${lat},${lng}`)
-    .set('key', geoCodingAPI)
-    .set('result_type', 'locality')
-    return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json`, {params})
-  }
-
-  getDynamicNeighborhood(lat, lng) {
+  getDynamicAddress(lat, lng) {
     let params = new HttpParams()
     .set('latlng', `${lat},${lng}`)
     .set('key', geoCodingAPI)
