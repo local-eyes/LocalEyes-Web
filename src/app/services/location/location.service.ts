@@ -9,16 +9,15 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class LocationService {
  lat:any;
  lng: any;
-  constructor(private http: HttpClient, private snackbar: MatSnackBar) { 
-    this.getPosition()
-  }
+  constructor(private http: HttpClient, private snackbar: MatSnackBar) { }
+
   getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
 
       navigator.geolocation.getCurrentPosition(resp => {
         localStorage.setItem("latitude", `${resp.coords.latitude}`)
         localStorage.setItem("longitude", `${resp.coords.longitude}`)
-        console.log(resp.coords.latitude, resp.coords.longitude);
+        console.log(`${resp.coords.latitude},${resp.coords.longitude}`);
           resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
         },
         err => {
@@ -33,7 +32,7 @@ export class LocationService {
     let params = new HttpParams()
     .set('latlng', `${lat},${lng}`)
     .set('key', geoCodingAPI)
-    .set('result_type', 'sublocality')
+    .set('result_type', 'sublocality|political')
     return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json`, {params})
   }
 }
