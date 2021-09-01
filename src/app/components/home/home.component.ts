@@ -50,23 +50,21 @@ export class HomeComponent implements OnInit {
         this.lat = pos.lat;
         this.getPosts(this.lat, this.lon, this.radius, null);
         this.getCityDynamically(this.lat, this.lon);
+        this.getNeighborhoodDynamically(this.lat, this.lon);
       });
   }
 
   getCityDynamically(lat, lon) {
     this.location.getDynamicCity(lat, lon).subscribe(res => {
-      const addressComponents = res['results'][0]['address_components'];
-      this.log(res['results'])
-      const resLen = addressComponents.length;
-      if (resLen > 4) {
-        const cityPos = resLen - 4;
-        this.city = addressComponents[cityPos]['long_name'].toLowerCase();
-        this.neighborhood = addressComponents[2]['long_name'].toLowerCase();
-      } else {
-        const cityPos = resLen - 1;
-        this.city = addressComponents[cityPos]['long_name'].toLowerCase();
-        this.neighborhood = addressComponents[1]['long_name'].toLowerCase();
-      }
+      this.log(res);
+      this.city = res['results'][0]['address_components'][0]['long_name'];
+    })
+  }
+
+  getNeighborhoodDynamically(lat, lon) {
+    this.location.getDynamicNeighborhood(lat, lon).subscribe(res => {
+      this.log(res);
+      this.neighborhood = res['results'][0]['address_components'][0]['long_name'];
     })
   }
 
