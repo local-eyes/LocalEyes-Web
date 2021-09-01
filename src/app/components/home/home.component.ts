@@ -144,10 +144,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  formatThumb(value:number) {
-    return value + 'mtr'
-  }
-
   loadData(tabIndex:number) {
     if (tabIndex === 1 && this.cityLoaded == false) {
       this.log(this.city)

@@ -29,6 +29,9 @@ export class ForYouComponent implements OnInit {
   user:any;
   title = "Unanswered Questions";
   cityLoaded = false;
+  swipeCoords: any;
+  swipeTime: any;
+  selectedTabIndex = 0;
   constructor(
     private data: DataService, 
     private location: LocationService, 
@@ -114,6 +117,11 @@ export class ForYouComponent implements OnInit {
     this.dialog.open(SignInCheckerComponent);
   }
 
+  openLogoutConfirmation() {
+    this.dialog.open(SignInCheckerComponent, {data: "logOut"});
+  }
+
+
   incrementClaps(collection:string, postToIncrease:string, i:number) {
     const incrementor = firestore.firestore.FieldValue.increment(1);
     const postRef = this.af.doc(`${collection}/${postToIncrease}`);
@@ -130,10 +138,6 @@ export class ForYouComponent implements OnInit {
     }
   }
 
-  formatThumb(value:number) {
-    return value + 'mtr'
-  }
-
   loadData(tabIndex:number) {
     if (tabIndex === 1 && this.cityLoaded == false) {
       this.getCity(this.city);
@@ -141,4 +145,24 @@ export class ForYouComponent implements OnInit {
     }
   }
 
+  swipe(e: TouchEvent, when: string): void {
+    const coords: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY]
+    const time = new Date().getTime();
+
+    if (when === 'start') {
+      this.swipeCoords = coords;
+      this.swipeTime = time;
+    } else if (when === 'end') {
+      const direction = [coords[0] - this.swipeCoords[0], coords[1] - this.swipeCoords[1]]
+      const duration = time - this.swipeTime;
+      if (duration < 1000 && Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
+        const swipe = direction[0] < 0 ? 'next' : 'previous';
+        if (swipe==='next') {
+          this.selectedTabIndex = 1;
+        } else {
+          this.selectedTabIndex = 0;
+        }
+      }
+    }
+  }
 }

@@ -162,14 +162,14 @@
     <mat-sidenav-container>
         <mat-sidenav [(opened)]="mobileNavOpened" [fixedInViewport]="true">
             <mat-nav-list>
-                <div *ngIf="user; else login">
+                <div *ngIf="auth.user$ | async as user; else login">
                     <img src="{{user.imageURL}}" alt="User Image" class="mobileUserImage">
                     <h1 class="d-flex justify-content-center">{{user.fullname}}</h1>
-                    <a routerLink="/profile/{{user.uid}}/" mat-list-item>
+                    <a routerLink="profile/{{user.uid}}/" mat-list-item>
                         <mat-icon matListIcon>person_outline</mat-icon>
                         <h1 matLine>My Profile</h1>
                     </a>
-                    <a mat-list-item (click)="auth.signOut()">
+                    <a mat-list-item (click)="openLogoutConfirmation()">
                         <mat-icon matListIcon>logout</mat-icon>
                         <h1 matLine>Logout</h1>
                     </a>
@@ -184,9 +184,44 @@
                     <mat-icon matListIcon>settings</mat-icon>
                     <h1 matLine>Settings</h1>
                 </a>
+                <a mat-list-item href="https://forms.gle/wduNLsdHFpNBuW8i9" target="_blank">
+                    <mat-icon matListIcon class="text-dark">feed</mat-icon>
+                    <h1 matLine>Submit Feedback</h1>
+                </a>
+                <a mat-list-item href="https://forms.gle/wduNLsdHFpNBuW8i9" target="_blank">
+                    <mat-icon matListIcon class="text-dark">bug_report</mat-icon>
+                    <h1 matLine>Report a Bug</h1>
+                </a>
+                <a mat-list-item [matMenuTriggerFor]="moreMenu">
+                    <mat-icon matListIcon>more_vert</mat-icon>
+                    <h1 matLine>More</h1>
+                </a>
+                <mat-menu #moreMenu="matMenu" yPosition="below">
+                    <a mat-menu-item href="https://local-eyes.tech/" target="_blank">
+                        <mat-icon class="text-dark">cottage</mat-icon>
+                        <span>What is LocalEyes?</span>
+                    </a>
+                    <a mat-menu-item href="https://localeyesblog.pythonanywhere.com/" target="_blank">
+                        <mat-icon class="text-dark">library_books</mat-icon>
+                        <span>LocalEyes Blogs</span>
+                    </a>
+
+                    <a mat-menu-item href="https://local-eyes.tech/tnc/" target="_blank">
+                        <mat-icon class="text-dark">gavel</mat-icon>
+                        <span>Terms of Use</span>
+                    </a>
+                    <a mat-menu-item href="https://local-eyes.tech/privacy-policy/" target="_blank">
+                        <mat-icon class="text-dark">policy</mat-icon>
+                        <span>Privacy Policy</span>
+                    </a>
+                    <a mat-menu-item href="mailto:team@local-eyes.tech" target="_blank">
+                        <mat-icon class="text-dark">support_agent</mat-icon>
+                        <span>Get Support</span>
+                    </a>
+                </mat-menu>
             </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <mat-sidenav-content (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
             <mat-toolbar style="background-color: black; color: white; position: fixed; top:0; z-index: 999;">
                 <div class="m-3">
                     <a (click)="mobileNavOpened=!mobileNavOpened">
@@ -197,7 +232,7 @@
                     <h1>{{title}}</h1>
                 </div>
             </mat-toolbar>
-            <mat-tab-group color="primary" mat-align-tabs="center">
+            <mat-tab-group dynamicHeight [selectedIndex]="selectedTabIndex" (selectedTabChange)="loadData($event.index)" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
                     <div class="d-flex flex-row">
                         <mat-icon>place</mat-icon>
