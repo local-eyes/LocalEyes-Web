@@ -33,6 +33,7 @@ export class LocationService {
     .set('latlng', `${lat},${lng}`)
     .set('key', geoCodingAPI)
     .set('result_type', 'sublocality|political')
+    console.info("GOOGLE API CALLED")
     return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json`, {params})
   }
 }

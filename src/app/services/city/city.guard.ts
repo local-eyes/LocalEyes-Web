@@ -12,7 +12,6 @@ export class CityGuard implements CanActivate {
   async canActivate(): Promise<boolean> {
     await this.getAddressDynamically().then(city => {
       this.city = city;
-      console.log(this.city);
     });
     if (this.city.toLowerCase() === 'jaipur') {
       return true;
@@ -24,16 +23,31 @@ export class CityGuard implements CanActivate {
 
   getAddressDynamically(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.location.getPosition().then(pos => {
-        this.location.getDynamicAddress(pos.lat, pos.lng).subscribe(res => {
-          const addressList = res['results'][0]['address_components']
-          addressList.forEach(address => {
-            if (address.types.includes("locality")) {
-              resolve(address['long_name']);
-            }
-          });
+      if (localStorage.getItem("api_res")) {
+        const res = JSON.parse(localStorage.getItem('api_res'));
+        const addressList = res['results'][0]['address_components']
+        addressList.forEach(address => {
+          if (address.types.includes("locality")) {
+            const city = address['long_name'];
+            console.log("city on guard got from localstorage");
+            resolve(city);
+          }
+        });
+      } else {
+        this.location.getPosition().then(pos => {
+          this.location.getDynamicAddress(pos.lat, pos.lng).subscribe(res => {
+            localStorage.setItem("api_res", JSON.stringify(res));
+            localStorage.setItem("last_api_call", `${new Date().getTime()}`);
+            const addressList = res['results'][0]['address_components']
+            addressList.forEach(address => {
+              if (address.types.includes("locality")) {
+                console.log("city on guard got from Google API");
+                resolve(address['long_name']);
+              }
+            });
+          })
         })
-      })
+      }
     })
   }
 }

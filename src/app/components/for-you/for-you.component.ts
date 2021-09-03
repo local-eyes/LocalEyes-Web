@@ -55,16 +55,28 @@ export class ForYouComponent implements OnInit {
   }
 
   getAddressDynamically(lat, lon) {
-    this.location.getDynamicAddress(lat, lon).subscribe(res => {
+    if (localStorage.getItem("api_res")) {
+      const res = JSON.parse(localStorage.getItem("api_res"));
       this.neighborhood = res['results'][0]['address_components'][0]['long_name']
       const addressList = res['results'][0]['address_components']
       addressList.forEach(address => {
         if (address.types.includes("locality")) {
           this.city = address['long_name'];
-          console.log(this.city);
         }
       });
-    })
+      console.log("Neighborhood and City got from LocalStorage, HOME COMPONENT");
+    } else {
+      this.location.getDynamicAddress(lat, lon).subscribe(res => {
+        this.neighborhood = res['results'][0]['address_components'][0]['long_name']
+        const addressList = res['results'][0]['address_components']
+        addressList.forEach(address => {
+          if (address.types.includes("locality")) {
+            this.city = address['long_name'];
+          }
+        });
+      console.log("Neighborhood and City got from Google API, HOME COMPONENT");
+      })
+    }
   }
 
   getCity (city:string) {
