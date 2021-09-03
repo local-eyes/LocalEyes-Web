@@ -23,13 +23,13 @@ export class CityGuard implements CanActivate {
 
   getAddressDynamically(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (localStorage.getItem("api_res")) {
+      const minutesSinceLastCall = Math.floor((new Date().getTime() - parseInt(localStorage.getItem("last_api_call"))) / 60000);
+      if (localStorage.getItem("api_res") && minutesSinceLastCall < 30) {
         const res = JSON.parse(localStorage.getItem('api_res'));
         const addressList = res['results'][0]['address_components']
         addressList.forEach(address => {
           if (address.types.includes("locality")) {
             const city = address['long_name'];
-            console.log("city on guard got from localstorage");
             resolve(city);
           }
         });
@@ -41,7 +41,6 @@ export class CityGuard implements CanActivate {
             const addressList = res['results'][0]['address_components']
             addressList.forEach(address => {
               if (address.types.includes("locality")) {
-                console.log("city on guard got from Google API");
                 resolve(address['long_name']);
               }
             });

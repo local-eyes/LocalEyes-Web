@@ -63,7 +63,6 @@ export class HomeComponent implements OnInit {
           this.city = address['long_name'];
         }
       });
-      console.log("Neighborhood and City got from LocalStorage, HOME COMPONENT");
     } else {
       this.location.getDynamicAddress(lat, lon).subscribe(res => {
         this.neighborhood = res['results'][0]['address_components'][0]['long_name']
@@ -73,7 +72,6 @@ export class HomeComponent implements OnInit {
             this.city = address['long_name'];
           }
         });
-      console.log("Neighborhood and City got from Google API, HOME COMPONENT");
       })
     }
   }
