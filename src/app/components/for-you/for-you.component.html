@@ -12,6 +12,9 @@
                         <mat-icon>place</mat-icon>
                         <p>Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span></p>
                     </div>
+                    <div *ngIf="auth.user$ | async as user">
+                        <mat-slider *ngIf="user.role==='admin'" thumbLabel [(ngModel)]="radius" (change)="getPosts(lat, lon, radius, null)" [displayWith]="formatLabel" step="500" min="500" max="20000" aria-label="units"></mat-slider>
+                    </div>
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">
                         <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="nearbyPosts && nearbyPosts.length == 0">
@@ -237,6 +240,9 @@
                     <div class="d-flex flex-row">
                         <mat-icon>place</mat-icon>
                         <p>Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span></p>
+                    </div>
+                    <div *ngIf="auth.user$ | async as user">
+                        <mat-slider *ngIf="user.role==='admin'" thumbLabel [(ngModel)]="radius" (change)="getPosts(lat, lon, radius, null)" [displayWith]="formatLabel" step="500" min="500" max="20000" aria-label="units"></mat-slider>
                     </div>
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="container" *ngIf="loadComplete==true">

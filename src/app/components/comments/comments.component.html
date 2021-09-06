@@ -1,5 +1,4 @@
 <div *ngIf="auth.user$ && auth.userData; else login" class="fixed">
-    <pre>{{auth.userData | json}}</pre>
     <form [formGroup]="comment" (ngSubmit)="postComment()" *ngIf="auth.userData.is_completed==true; else completeProfile">
         <div class="row align-items-center justify-content-start w-100">
             <mat-form-field appearance="outline" [ngClass]="{'col-10': isMobile=='false', 'col-9': isMobile=='true' }">

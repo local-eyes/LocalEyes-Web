@@ -82,6 +82,14 @@ export class ForYouComponent implements OnInit {
       this.cityPosts = res;
     })
   }
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return (value / 1000) + 'km';
+    }
+    return value;
+  }
+
   getPosts(latitude, longitude, radius, sortBy) {
     this.loadComplete = false;
     this.data.getNearbyUnanswered(latitude, longitude, radius).subscribe(res => {
