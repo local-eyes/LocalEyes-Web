@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/firestore";
 import firestore from "firebase/app";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DataService } from 'src/app/services/data/data.service';
 
@@ -30,10 +30,10 @@ export class CommentsComponent implements OnInit {
     if (this.auth.userData) {
       this.author = this.auth.userData;
       this.comment = this.fb.group({
-        answer: ['', [
+        answer: new FormControl({value: '', disabled: !this.auth.userData.is_completed}, [
           Validators.required,
           Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)
-        ]],
+        ]),
         author: {
           fullname: this.author.fullname,
           image: this.author.imageURL,
