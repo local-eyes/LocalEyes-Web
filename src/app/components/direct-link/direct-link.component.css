@@ -14,3 +14,12 @@ a {
 .mat-icon-button {
     min-width: 60px;
 }
+
+.chip-s {
+    min-height: 16px;
+    font-size: 9px;
+}
+
+.verified {
+    border: 2px solid #62c9d5;
+}

@@ -39,7 +39,8 @@ export class CommentsComponent implements OnInit {
           image: this.author.imageURL,
           living_since: this.author.living_since,
           locality: this.author.locality,
-          uid: this.author.uid
+          uid: this.author.uid,
+          role: this.author.role
         },
         docRef: this.docRef,
         pId: this.postId,

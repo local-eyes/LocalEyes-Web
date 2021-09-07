@@ -70,7 +70,7 @@ export class PostComponent implements OnInit {
 
   addComment(newComment: string) {
     this.post.answers += 1;
-    this.answers.unshift(newComment)
+    this.answers.push(newComment);
   }
 
 }

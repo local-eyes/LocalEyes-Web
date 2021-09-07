@@ -61,10 +61,11 @@
     <div class="no-comments"></div>
     <p>Nothing to Show. Be the first one to ANSWER.</p>
 </div>
-<mat-card *ngFor="let answer of commentsData; let i = index;" class="bg-light text-dark my-3">
+<mat-card *ngFor="let answer of commentsData; let i = index;" class="bg-light text-dark my-3" [ngClass]="{'verified': answer.author.role=='admin'}">
     <mat-card-header>
         <a class="text-dark" routerLink="/profile/{{answer.author.uid}}"><img src="{{answer.author.image}}" mat-card-avatar></a>
         <mat-card-title><a class="text-dark" routerLink="/profile/{{answer.author.uid}}">{{answer.author.fullname}}</a></mat-card-title>
+        <mat-chip *ngIf="answer.author.uid==postData.author.uid" color="accent" selected class="text-capitalize chip-s">author</mat-chip>
         <mat-card-subtitle class="text-secondary">• Living in <span class="highlight text-capitalize">{{answer.author.locality}}</span> since {{answer.author.living_since}} Years</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
