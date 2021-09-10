@@ -57,21 +57,30 @@
 <div class="container m-auto" *ngIf="answersLoaded == false">
     <app-loader></app-loader>
 </div>
-<div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="answersLoaded && commentsData.length == 0">
+<div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="answersLoaded && commentsData.length == 0; else showComments">
     <div class="no-comments"></div>
     <p>Nothing to Show. Be the first one to ANSWER.</p>
 </div>
-<mat-card *ngFor="let answer of commentsData; let i = index;" class="bg-light text-dark my-3" [ngClass]="{'verified': answer.author.role=='admin'}">
-    <mat-card-header>
-        <a class="text-dark" routerLink="/profile/{{answer.author.uid}}"><img src="{{answer.author.image}}" mat-card-avatar></a>
-        <mat-card-title><a class="text-dark" routerLink="/profile/{{answer.author.uid}}">{{answer.author.fullname}}</a></mat-card-title>
-        <mat-chip *ngIf="answer.author.uid==postData.author.uid" color="accent" selected class="text-capitalize chip-s">author</mat-chip>
-        <mat-card-subtitle class="text-secondary">• Living in <span class="highlight text-capitalize">{{answer.author.locality}}</span> since {{answer.author.living_since}} Years</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <p> {{answer.answer}} </p>
-    </mat-card-content>
-</mat-card>
+<ng-template #showComments>
+    <mat-card *ngFor="let answer of commentsData; let i = index;" class="bg-light text-dark my-3">
+        <div class="d-flex flex-row">
+            <a class="text-dark" routerLink="/profile/{{answer.author.uid}}"><img src="{{answer.author.image}}" mat-card-avatar></a>
+            <mat-card-header>
+                <mat-card-title>
+                    <a class="text-dark" routerLink="/profile/{{answer.author.uid}}">
+                {{answer.author.fullname}}
+                <mat-icon *ngIf="answer.author.role=='admin'" style="color: #5851DB; font-size: 20px;" class="mx-2">verified</mat-icon>
+                <mat-chip *ngIf="answer.author.uid==postData.author.uid" color="accent" selected class="text-capitalize chip-s">author</mat-chip>
+            </a>
+                </mat-card-title>
+                <mat-card-subtitle class="text-secondary">• Living in <span class="highlight text-capitalize">{{answer.author.locality}}</span> since {{answer.author.living_since}} Years</mat-card-subtitle>
+            </mat-card-header>
+        </div>
+        <mat-card-content>
+            <p> {{answer.answer}} </p>
+        </mat-card-content>
+    </mat-card>
+</ng-template>
 <div *ngIf="auth.userData">
     <app-comments *ngIf="postData && postData.city == null; else city" (newCommentEvent)="addComment($event)" [docRef]="'local'" [postId]="postId"></app-comments>
     <ng-template #city>
