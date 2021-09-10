@@ -54,11 +54,11 @@
                                                     {{post.content.claps}}
                                                 </button>
                                         <button mat-icon-button (click)="openPost('local', i)" class="col-6 ml-2">
-                                                    <mat-icon>forum</mat-icon>
+                                                    <mat-icon fontSet="material-icons-outlined">forum</mat-icon>
                                                     {{post.answers}}
                                                 </button>
                                         <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
-                                                    <mat-icon>share</mat-icon>
+                                                    <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                 </button>
                                     </div>
                                     <ng-template #login>
@@ -68,11 +68,11 @@
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">forum</mat-icon>
                                                         {{post.answers}}
                                                     </button>
                                             <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
                                     </ng-template>
@@ -128,11 +128,11 @@
                                                     {{post.content.claps}}
                                                 </button>
                                         <button mat-icon-button (click)="openPost('city', i)" class="col-6 ml-2">
-                                                    <mat-icon>forum</mat-icon>
+                                                    <mat-icon fontSet="material-icons-outlined">forum</mat-icon>
                                                     {{post.answers}}
                                                 </button>
                                         <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
-                                                    <mat-icon>share</mat-icon>
+                                                    <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                 </button>
                                     </div>
                                     <ng-template #login>
@@ -142,11 +142,11 @@
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">forum</mat-icon>
                                                         {{post.answers}}
                                                     </button>
                                             <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
                                     </ng-template>
@@ -160,13 +160,13 @@
         <div class="col-4" style="min-height: 100vh;">
             <mat-toolbar style="z-index: 999;position: fixed;justify-content: flex-end;width: 24%;">
                 <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                 <mat-icon>notifications</mat-icon>
+                 <mat-icon fontSet="material-icons-outlined">notifications</mat-icon>
                </button>
                 <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-                <mat-icon>account_circle</mat-icon>
+                <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
               </button>
                 <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-                <mat-icon>settings</mat-icon>
+                <mat-icon fontSet="material-icons-outlined">settings</mat-icon>
               </button>
             </mat-toolbar>
         </div>
@@ -247,7 +247,7 @@
             <mat-toolbar style="background-color: black; color: white; position: fixed; top:0; z-index: 999;">
                 <div class="m-3">
                     <a (click)="mobileNavOpened=!mobileNavOpened">
-                        <mat-icon>menu</mat-icon>
+                        <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
                     </a>
                 </div>
                 <div style="margin-bottom: 7px;">
@@ -297,11 +297,11 @@
                                             {{post.content.claps}}
                                         </button>
                                         <a mat-icon-button routerLink="post/local/{{post.id}}" class="col-6 ml-2">
-                                            <mat-icon>forum</mat-icon>
+                                            <mat-icon fontSet="material-icons-outlined">forum</mat-icon>
                                             {{post.answers}}
                                         </a>
                                         <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
-                                            <mat-icon>share</mat-icon>
+                                            <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                         </button>
                                     </div>
                                     <ng-template #login>
@@ -311,11 +311,11 @@
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">forum</mat-icon>
                                                         {{post.answers}}
                                                     </button>
                                             <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
                                     </ng-template>
@@ -359,29 +359,29 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button (click)="incrementClaps('city', post.id, i)" class="col-6">
-                                            <mat-icon svgIcon="claps"></mat-icon>
+                                            <mat-icon fontSet="material-icons-outlined" svgIcon="claps"></mat-icon>
                                             {{post.content.claps}}
                                         </button>
                                         <a mat-icon-button routerLink="post/city/{{post.id}}" class="col-6 ml-2">
-                                            <mat-icon>forum</mat-icon>
+                                            <mat-icon fontSet="material-icons-outlined">forum</mat-icon>
                                             {{post.answers}}
                                         </a>
                                         <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
-                                            <mat-icon>share</mat-icon>
+                                            <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                         </button>
                                     </div>
                                     <ng-template #login>
                                         <div class="row d-flex justify-content-start">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
-                                                        <mat-icon svgIcon="claps"></mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined" svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">forum</mat-icon>
                                                         {{post.answers}}
                                                     </button>
                                             <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
                                     </ng-template>
