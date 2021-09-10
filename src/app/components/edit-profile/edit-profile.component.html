@@ -28,20 +28,6 @@
                             </mat-form-field>
                             <div class="row justify-content-evenly">
                                 <mat-form-field appearance="outline" class="col-5">
-                                    <mat-label style="color: #62c9d5;">Gender</mat-label>
-                                    <mat-select formControlName="gender">
-                                        <mat-option value="Male">Male</mat-option>
-                                        <mat-option value="Female">Female</mat-option>
-                                        <mat-option value="Other">Other</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                <mat-form-field appearance="outline" color="primary" class="col-5">
-                                    <mat-label style="color: #62c9d5;">Date of Birth</mat-label>
-                                    <input matInput [matDatepicker]="dob" formControlName="dob" disabled class="text-dark">
-                                    <mat-datepicker-toggle [for]="dob" matSuffix style="color: #62c9d5;"></mat-datepicker-toggle>
-                                    <mat-datepicker startView="multi-year" #dob disabled="false"></mat-datepicker>
-                                </mat-form-field>
-                                <mat-form-field appearance="outline" class="col-5">
                                     <mat-label style="color: #62c9d5;">Locality</mat-label>
                                     <input matInput placeholder="Where are you residing right now" formControlName="locality">
                                 </mat-form-field>
@@ -54,8 +40,12 @@
                                     <input matInput placeholder="What you doing?" formControlName="occupation">
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" class="col-5">
-                                    <mat-label style="color: #62c9d5;">Contact Number</mat-label>
-                                    <input type="number" matInput placeholder="Your Contact Number?" formControlName="phoneNum">
+                                    <mat-label style="color: #62c9d5;">Gender</mat-label>
+                                    <mat-select formControlName="gender">
+                                        <mat-option value="Male">Male</mat-option>
+                                        <mat-option value="Female">Female</mat-option>
+                                        <mat-option value="Other">Other</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </mat-card-content>
