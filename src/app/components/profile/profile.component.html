@@ -14,7 +14,9 @@
         <div *ngIf="dataLoaded==true" class="wrapper" style="border: 1px solid #0a4b52;">
             <div class="header">
                 <img src="{{personData.imageURL}}" alt="UserImage" class="user-image my-2">
-                <h1 class="user-name text-capitalize">{{personData.fullname}}</h1>
+                <h1 class="user-name text-capitalize">{{personData.fullname}}
+                    <mat-icon *ngIf="personData.role=='admin'" style="color: #5851DB; font-size: 35px" class="mx-2">verified</mat-icon>
+                </h1>
                 <h3 class="user-email text-secondary">{{personData.email}}</h3>
                 <mat-divider></mat-divider>
                 <h2 class="bio text-capitalize">{{personData.bio}}</h2>
@@ -208,7 +210,9 @@
     <div class="mobile-header" *ngIf="dataLoaded==true">
         <img src="{{personData.imageURL}}" alt="UserImage" class="user-image mb-4 m-auto">
         <div class="ms-3">
-            <h1 class="user-name text-capitalize">{{personData.fullname}}</h1>
+            <h1 class="user-name text-capitalize">{{personData.fullname}}
+                <mat-icon *ngIf="personData.role=='admin'" style="color: #5851DB; font-size: 35px" class="mx-2">verified</mat-icon>
+            </h1>
             <h3 class="user-email text-secondary">{{personData.email}}</h3>
             <mat-divider></mat-divider>
             <h2 class="bio text-capitalize">{{personData.bio}}</h2>
