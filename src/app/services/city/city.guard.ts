@@ -16,7 +16,7 @@ export class CityGuard implements CanActivate {
     if (this.city.toLowerCase() === 'jaipur') {
       return true;
     } else {
-      this.router.navigate(['/launching-soon'])
+      this.router.navigate(['/launching-soon'], {queryParams: {city: this.city}})
       return false;
     }
   }
@@ -28,7 +28,7 @@ export class CityGuard implements CanActivate {
         const res = JSON.parse(localStorage.getItem('api_res'));
         const addressList = res['results'][0]['address_components']
         addressList.forEach(address => {
-          if (address.types.includes("locality")) {
+          if (address.types.includes("administrative_area_level_2")) {
             const city = address['long_name'];
             resolve(city);
           }
@@ -40,7 +40,7 @@ export class CityGuard implements CanActivate {
             localStorage.setItem("last_api_call", `${new Date().getTime()}`);
             const addressList = res['results'][0]['address_components']
             addressList.forEach(address => {
-              if (address.types.includes("locality")) {
+              if (address.types.includes("administrative_area_level_2")) {
                 resolve(address['long_name']);
               }
             });

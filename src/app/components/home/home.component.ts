@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
       this.neighborhood = res['results'][0]['address_components'][0]['long_name']
       const addressList = res['results'][0]['address_components']
       addressList.forEach(address => {
-        if (address.types.includes("locality")) {
+        if (address.types.includes("administrative_area_level_2")) {
           this.city = address['long_name'];
         }
       });
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
         this.neighborhood = res['results'][0]['address_components'][0]['long_name']
         const addressList = res['results'][0]['address_components']
         addressList.forEach(address => {
-          if (address.types.includes("locality")) {
+          if (address.types.includes("administrative_area_level_2")) {
             this.city = address['long_name'];
           }
         });
