@@ -188,10 +188,10 @@
                         <mat-icon matListIcon>person_outline</mat-icon>
                         <h1 matLine>My Profile</h1>
                     </a>
-                    <a mat-list-item (click)="openLogoutConfirmation()">
+                    <!-- <a mat-list-item (click)="openLogoutConfirmation()">
                         <mat-icon matListIcon>logout</mat-icon>
                         <h1 matLine>Logout</h1>
-                    </a>
+                    </a> -->
                 </div>
                 <ng-template #login>
                     <a mat-list-item (click)="auth.googleSignIn()">
@@ -236,6 +236,10 @@
                     <a mat-menu-item href="mailto:team@local-eyes.tech" target="_blank">
                         <mat-icon class="text-dark">support_agent</mat-icon>
                         <span>Get Support</span>
+                    </a>
+                    <a mat-menu-item (click)="openLogoutConfirmation()" *ngIf="auth.user$ | async">
+                        <mat-icon class="text-dark">logout</mat-icon>
+                        <span>Logout</span>
                     </a>
                 </mat-menu>
             </mat-nav-list>

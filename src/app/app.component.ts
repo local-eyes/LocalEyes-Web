@@ -40,6 +40,14 @@ export class AppComponent implements OnInit{
       }
       localStorage.setItem("intro_screen_displayed", "true")
     }
+    setTimeout(() => {
+      if (!this.auth.userData) {
+        console.log("User not logged in");
+        this.openSignInChecker();
+      } else {
+        console.log("user Logged In");
+      }
+    }, 30000);
   }
 
   getUserData() {
@@ -53,7 +61,7 @@ export class AppComponent implements OnInit{
   }
 
   openSignInChecker() {
-    this.dialog.open(SignInCheckerComponent);
+    this.dialog.open(SignInCheckerComponent, {disableClose: true});
   }
 
   openLogoutConfirmation() {
