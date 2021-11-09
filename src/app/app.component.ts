@@ -47,7 +47,7 @@ export class AppComponent implements OnInit{
       } else {
         console.log("user Logged In");
       }
-    }, 30000);
+    }, 60000);
   }
 
   getUserData() {
