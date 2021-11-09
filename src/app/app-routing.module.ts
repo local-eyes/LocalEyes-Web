@@ -19,7 +19,8 @@ const routes: Routes = [
   {path: 'create', component: NewComponent, canActivate: [GuardGuard, CityGuard]},
   {path: 'unanswered', component: ForYouComponent, canActivate: [CityGuard]},
   {path: 'launching-soon', component: NotOpenComponent},
-  {path: 'profile/:uid/edit', component: EditProfileComponent, canActivate: [GuardGuard]}
+  {path: 'profile/:uid/edit', component: EditProfileComponent, canActivate: [GuardGuard]},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
