@@ -19,6 +19,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from "@angular/material/menu";
+import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 
 const MaterialComponents = [
   MatButtonModule,
@@ -40,7 +41,8 @@ const MaterialComponents = [
   MatSliderModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatMenuModule
+  MatMenuModule,
+  MatBottomSheetModule
 ]
 
 @NgModule({

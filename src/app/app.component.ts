@@ -5,6 +5,7 @@ import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-che
 import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+import { MatBottomSheet, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { IntroScreenComponent } from './components/intro-screen/intro-screen.component';
 
 @Component({
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit{
   title = 'LocalEyes';
   deviceInfo = null;
   isMobile: boolean;
+  os: string;
   userData: any;
   constructor(
     public auth: AuthService, 
@@ -57,10 +59,12 @@ export class AppComponent implements OnInit{
   detectDevice() {
     this.deviceInfo = this.deviceDetector.getDeviceInfo();
     this.isMobile = this.deviceDetector.isMobile();
+    this.os = this.deviceInfo.os;
+    localStorage.setItem("os", this.deviceInfo.os);
     localStorage.setItem("isMobile", `${this.isMobile}`)
   }
 
-  openSignInChecker() {
+  openSignInChecker(): void {
     this.dialog.open(SignInCheckerComponent, {disableClose: true});
   }
 

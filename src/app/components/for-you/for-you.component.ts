@@ -16,7 +16,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ['./for-you.component.css']
 })
 export class ForYouComponent implements OnInit {
-  radius:any = 8000;
+  radius:any = 2000;
   nearbyPosts:any;
   cityPosts:any;
   lat:any;
