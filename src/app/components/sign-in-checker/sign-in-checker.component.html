@@ -11,11 +11,15 @@
     </mat-dialog-content>
 </div>
 <ng-template #signIn>
-    <h1 mat-dialog-title>Action Restricted.</h1>
+    <h1 mat-dialog-title>Umm... 😬</h1>
     <mat-dialog-content>
-        <h3>You need to Sign in first to Continue.</h3>
+        <h3>You need to <span class="highlight">Sign In</span> first to Continue.</h3>
+        <div class="img-holder">
+            <img src="../../../assets/imgs/signIn.png" alt="Sign In To Continue" height="300" width="300">
+        </div>
         <button mat-raised-button (click)="auth.googleSignIn()">
-        Continue with Google
-    </button>
+            <img src="../../../assets/imgs/google.png" alt="google">
+            Continue with Google
+        </button>
     </mat-dialog-content>
 </ng-template>
