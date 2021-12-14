@@ -26,11 +26,12 @@ mat-sidenav-container {
 
 mat-card {
     border-radius: 10px;
-    border: 2px solid #62c9d575;
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
+    /* border: 2px solid #62c9d575; */
 }
 
 mat-card:hover {
-    border: 2px solid #62c9d5;
+    box-shadow: 0px 7px 19px rgba(0, 0, 0, 0.2);
 }
 
 .bg-light a {
