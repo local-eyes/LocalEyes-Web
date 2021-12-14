@@ -6,12 +6,12 @@
             </a>
             <mat-divider></mat-divider>
             <a routerLink="" mat-list-item class="mt-2">
-                <mat-icon matListIcon>apartment</mat-icon>
-                <h1 matLine>Local</h1>
+                <mat-icon matListIcon>home</mat-icon>
+                <h1 matLine>Home</h1>
             </a>
             <a routerLink="unanswered" mat-list-item>
                 <mat-icon matListIcon>local_library</mat-icon>
-                <h1 matLine>For You</h1>
+                <h1 matLine>Unanswered</h1>
             </a>
             <div *ngIf="auth.user$ | async as user; else login">
                 <a routerLink="notifications" mat-list-item>
@@ -84,24 +84,24 @@
         <div class="row w-100 justify-content-between">
             <div class="col-3 d-flex justify-content-center">
                 <a routerLink="">
-                    <mat-icon fontSet="material-icons-outlined" class="text-dark">home</mat-icon>
-                </a>
-            </div>
-            <div class="col-3 d-flex justify-content-center">
-                <a routerLink="unanswered">
-                    <mat-icon fontSet="material-icons-outlined" class="text-dark">local_library</mat-icon>
+                    <mat-icon class="text-dark">home</mat-icon>
                 </a>
             </div>
             <div class="col-3 d-flex justify-content-center">
                 <a routerLink="notifications">
-                    <mat-icon fontSet="material-icons-outlined" class="text-dark">notifications</mat-icon>
+                    <mat-icon class="text-dark">notifications</mat-icon>
                 </a>
             </div>
-            <div class="col-3 d-flex justify-content-center" *ngIf="auth.user$ | async as user">
+            <div class="col-3 d-flex justify-content-center">
+                <a routerLink="unanswered">
+                    <mat-icon class="text-dark">local_library</mat-icon>
+                </a>
+            </div>
+            <!-- <div class="col-3 d-flex justify-content-center" *ngIf="auth.user$ | async as user">
                 <a routerLink="profile/{{user.uid}}">
                     <mat-icon fontSet="material-icons-outlined" class="text-dark">account_circle</mat-icon>
                 </a>
-            </div>
+            </div> -->
             <!-- <ng-template #loginMobile>
                 <div class="col-3 d-flex justify-content-center">
                     <a (click)="openSignInChecker()">

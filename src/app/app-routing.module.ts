@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [CityGuard]},
   {path: 'profile/:uid', component: ProfileComponent},
   {path: 'post/:collection/:id', component: DirectLinkComponent},
-  {path: 'notifications', component: ExploreComponent, canActivate: [CityGuard]},
+  {path: 'notifications', component: ExploreComponent, canActivate: [GuardGuard, CityGuard]},
   {path: 'create', component: NewComponent, canActivate: [GuardGuard, CityGuard]},
   {path: 'unanswered', component: ForYouComponent, canActivate: [CityGuard]},
   {path: 'launching-soon', component: NotOpenComponent},
