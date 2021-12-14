@@ -246,9 +246,10 @@
         </mat-sidenav>
         <mat-sidenav-content (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
             <a routerLink="create" class="fab" mat-fab aria-label="Example icon button with a delete icon">
-                <img src="../../../assets/imgs/LOgo-07.png" alt="ask" height="100px" style="height:40px; margin: -5px; position: relative;">
+                <!-- <img src="../../../assets/imgs/LOgo-07.png" alt="ask" height="100px" style="height:40px; margin: -5px; position: relative;"> -->
+                <mat-icon>add</mat-icon>
             </a>
-            <mat-toolbar style="background-color: black; color: white; position: fixed; top:0; z-index: 999;">
+            <mat-toolbar style="background-color: #04242F; color: white; position: fixed; top:0; z-index: 999;">
                 <div class="m-3">
                     <a (click)="mobileNavOpened=!mobileNavOpened">
                         <mat-icon fontSet="material-icons-outlined">menu</mat-icon>

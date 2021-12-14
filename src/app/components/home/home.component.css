@@ -74,13 +74,17 @@ mat-card:hover {
 }
 
 .fab {
-    background-color: #022b35;
+    background-color: #62c9d5;
     position: fixed;
     background-size: cover;
     background-repeat: no-repeat;
     bottom: 90px;
     z-index: 9999;
     right: 10px;
+}
+
+.fab mat-icon {
+    font-size: 25px;
 }
 
 .mobileUserImage {
