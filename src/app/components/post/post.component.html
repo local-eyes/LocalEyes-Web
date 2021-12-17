@@ -9,7 +9,7 @@
         <mat-card-subtitle class="text-secondary">• Living in <span class="highlight text-capitalize">{{post.author.locality}}</span> since {{post.author.living_since}} Years</mat-card-subtitle>
     </mat-card-header>
     <h1 mat-dialog-title>{{post.content.title}}</h1>
-    <h4 mat-dialog-content> {{post.content.description}} </h4>
+    <pre style="white-space: pre-wrap;"><h4 mat-dialog-content>{{post.content.description}}</h4></pre>
     <div class="d-flex justify-content-center" style="background: black;">
         <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}" class="post-image">
     </div>
