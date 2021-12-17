@@ -330,6 +330,7 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="City">
+                    <app-loader *ngIf="cityLoaded==false"></app-loader>
                     <div class="d-flex flex-row">
                         <mat-icon>place</mat-icon>
                         <p>Showing posts in <span class="text-capitalize highlight">{{city}}</span></p>

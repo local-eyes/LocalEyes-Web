@@ -9,16 +9,16 @@
                 <mat-icon matListIcon>home</mat-icon>
                 <h1 matLine>Home</h1>
             </a>
-            <a routerLink="unanswered" mat-list-item>
+            <a routerLink="unanswered" mat-list-item class="mt-2">
                 <mat-icon matListIcon>local_library</mat-icon>
                 <h1 matLine>Unanswered</h1>
             </a>
             <div *ngIf="auth.user$ | async as user; else login">
-                <a routerLink="notifications" mat-list-item>
+                <a routerLink="notifications" mat-list-item class="mt-2">
                     <mat-icon matListIcon>notifications</mat-icon>
                     <h1 matLine>Notifications</h1>
                 </a>
-                <a routerLink="profile/{{user.uid}}/" mat-list-item>
+                <a routerLink="profile/{{user.uid}}/" mat-list-item class="mt-2">
                     <mat-icon matListIcon>person_outline</mat-icon>
                     <h1 matLine>{{user.fullname}}</h1>
                 </a>
@@ -28,16 +28,16 @@
                 </a> -->
             </div>
             <ng-template #login>
-                <a mat-list-item (click)="auth.googleSignIn()">
+                <a mat-list-item (click)="auth.googleSignIn()" class="mt-2">
                     <mat-icon matListIcon>login</mat-icon>
                     <h1 matLine>Sign in with Google</h1>
                 </a>
             </ng-template>
-            <a routerLink="create" mat-list-item class="active">
+            <a routerLink="create" mat-list-item class="mt-2 active">
                 <mat-icon matListIcon>maps_ugc</mat-icon>
                 <h1 matLine>Create New</h1>
             </a>
-            <a mat-list-item [matMenuTriggerFor]="moreMenu">
+            <a mat-list-item [matMenuTriggerFor]="moreMenu" class="mt-2">
                 <mat-icon matListIcon>more_vert</mat-icon>
                 <h1 matLine>More</h1>
             </a>
