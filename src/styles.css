@@ -34,12 +34,12 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 15px;
+    width: 8px;
     background: white;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(15, 15, 15);
+    background: #022B35;
     border-radius: 50px;
 }
 

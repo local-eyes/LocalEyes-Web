@@ -29,14 +29,14 @@
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
                                 <mat-card-header (click)="openPost('local', i)">
-                                    <mat-chip-list aria-label="Fish selection">
-                                        <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                        <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                    </mat-chip-list>
                                     <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
                                     <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
                                     <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                                 </mat-card-header>
+                                <mat-chip-list aria-label="Fish selection">
+                                    <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                    <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                </mat-chip-list>
                                 <mat-card-content (click)="openPost('local', i)">
                                     <h2>
                                         {{post.content.title}}
@@ -101,14 +101,14 @@
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark">
                                 <mat-card-header>
-                                    <mat-chip-list aria-label="Fish selection">
-                                        <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                        <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                    </mat-chip-list>
                                     <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
                                     <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
                                     <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                                 </mat-card-header>
+                                <mat-chip-list aria-label="Fish selection">
+                                    <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                    <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                </mat-chip-list>
                                 <a (click)="openPost('city', i)" routerLink="">
                                     <mat-card-content>
                                         <h2>
@@ -277,14 +277,14 @@
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark mx-2 mx-2" style="cursor: pointer;">
                                 <mat-card-header>
-                                    <mat-chip-list aria-label="Fish selection">
-                                        <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                        <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                    </mat-chip-list>
                                     <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
                                     <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
                                     <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                                 </mat-card-header>
+                                <mat-chip-list aria-label="Fish selection">
+                                    <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                    <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                </mat-chip-list>
                                 <a routerLink="post/local/{{post.id}}">
                                     <mat-card-content>
                                         <h2>
@@ -342,14 +342,14 @@
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark mx-2">
                                 <mat-card-header>
-                                    <mat-chip-list aria-label="Fish selection">
-                                        <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                        <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                    </mat-chip-list>
                                     <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
                                     <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
                                     <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                                 </mat-card-header>
+                                <mat-chip-list aria-label="Fish selection">
+                                    <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                    <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                </mat-chip-list>
                                 <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                                 <a routerLink="post/city/{{post.id}}">
                                     <mat-card-content>
