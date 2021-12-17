@@ -51,6 +51,11 @@ export class AuthService {
   private updateUserData(uid){
     const userRef = this.afs.doc(`users/${uid}`).get().subscribe(data => {
       this.userData = data.data()
+      if (this.userData.is_completed === true) {
+      this.router.navigate(['/']);
+      } else {
+        this.router.navigate([`/profile/${uid}/edit`]);
+      }
     })
   }
 }

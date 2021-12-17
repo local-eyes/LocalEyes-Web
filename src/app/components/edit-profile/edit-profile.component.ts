@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,11 +10,12 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit, OnDestroy {
 isMobile = localStorage.getItem('isMobile');
 title: string = "Complete your profile";
 editUid: string = this.router.snapshot.paramMap.get('uid');
-profileData: FormGroup
+profileData: FormGroup;
+user: any;
 
   constructor(
     public auth: AuthService,
@@ -27,31 +28,31 @@ profileData: FormGroup
 
   ngOnInit(): void {
     if (this.auth && this.editUid === this.auth.userData.uid) {
-      let user = this.auth.userData;
+      this.user = this.auth.userData;
       this.profileData = this.fb.group({
-        bio: [user.bio, [
+        bio: [this.user.bio, [
           Validators.required,
           Validators.maxLength(200)
         ]],
-        createdOn: user.createdOn,
+        createdOn: this.user.createdOn,
         dob: '',
-        email: {value: user.email, disabled: true},
-        fullname: {value: user.fullname, disabled: true},
+        email: {value: this.user.email, disabled: true},
+        fullname: {value: this.user.fullname, disabled: true},
         gender: 'Male',
-        imageURL: user.imageURL,
+        imageURL: this.user.imageURL,
         is_completed: true,
-        living_since: [user.living_since, [
+        living_since: [this.user.living_since, [
           Validators.required,
           Validators.max(99),
           Validators.min(1)
         ]],
-        locality: [user.locality, [
+        locality: [this.user.locality, [
           Validators.required,
           Validators.maxLength(20),
           Validators.minLength(2)
         ]],
         phoneNum: '',
-        uid: user.uid,
+        uid: this.user.uid,
         occupation: ''
       })
     } else {
@@ -86,4 +87,12 @@ profileData: FormGroup
     this._location.back();
   }
 
+  ngOnDestroy() {
+    const formData = this.profileData.value;
+    console.log(formData);    
+    if (formData.locality == "" || formData.living_since == "" || formData.locality == null || formData.living_since == null) {
+      alert("You Need to Fill Locality and Living Since to Continue");
+      return this.route.navigate([`/profile/${this.user.uid}/edit`]);
+    }
+  }
 }
