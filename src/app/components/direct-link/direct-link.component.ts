@@ -6,9 +6,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Clipboard } from "@angular/cdk/clipboard";
 import { Location } from "@angular/common";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 
 @Component({
@@ -33,8 +33,7 @@ isMobile = localStorage.getItem('isMobile');
     public auth: AuthService,
     public af: AngularFirestore,
     public dialog: MatDialog,
-    private snackbar: MatSnackBar,
-    private clipboard: Clipboard,
+    private bottomSheet: MatBottomSheet,
     private _location: Location
     ) { }
 
@@ -63,15 +62,6 @@ isMobile = localStorage.getItem('isMobile');
     this.postData.content.claps += 1;
   }
 
-  copyToClipboard(collection: string, id:string) {
-    this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "top", horizontalPosition: "end", duration: 3000});
-    if (location.hostname === "localhost") {
-      this.clipboard.copy(`http://localhost:4200/post/${collection}/${id}`);
-    } else {
-      this.clipboard.copy(`https://local-eyes.tech/app/post/${collection}/${id}`);
-    }
-  }
-
   openSignInChecker() {
     this.dialog.open(SignInCheckerComponent);
   }
@@ -83,6 +73,10 @@ isMobile = localStorage.getItem('isMobile');
   addComment(newComment: string) {
     this.postData.answers += 1;
     this.commentsData.push(newComment)
+  }
+
+  openShareSheet(collection: string, id: string, name: string, title: string) {
+    this.bottomSheet.open(SidenavComponent, {data: {collection: collection, id:id, name: name, title: title}})  
   }
 
 }

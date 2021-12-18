@@ -47,7 +47,7 @@
                 <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                     {{postData.answers}}
                 </button>
-                <button mat-icon-button (click)="copyToClipboard(collection, postData.id)" class="col-6 ml-2">
+                <button mat-icon-button (click)="openShareSheet('city', postData.id, postData.author.name, postData.content.title)" class="col-6 ml-2">
                     <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                 </button>
             </div>

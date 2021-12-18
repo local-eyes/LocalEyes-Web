@@ -1,1 +1,24 @@
-<p>sidenav works!</p>
+<h1>Share or Copy to Clipboard.</h1>
+
+<!-- share on whatsapp -->
+<div class="row">
+    <div class="col-12 m-3">
+        <div class="d-flex justify-content-center">
+            <button mat-raised-button color="primary" (click)="sendWhatsapp()" class="col-6">
+                <mat-icon fontSet="material-icons-outlined">whatsapp</mat-icon>
+                <span class="mx-2">Share on WhatsApp</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-12 m-3">
+        <div class="d-flex justify-content-center">
+            <button mat-raised-button color="primary" (click)="copyToClipboard()" class="col-6">
+                <mat-icon fontSet="material-icons-outlined">content_copy</mat-icon>
+                <span class="mx-2">Copy to clipboard</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<p>LocalEyes. All rights served.</p>

@@ -36,7 +36,6 @@ user: any;
         ]],
         createdOn: this.user.createdOn,
         dob: '',
-        email: {value: this.user.email, disabled: true},
         fullname: {value: this.user.fullname, disabled: true},
         gender: 'Male',
         imageURL: this.user.imageURL,
@@ -89,7 +88,6 @@ user: any;
 
   ngOnDestroy() {
     const formData = this.profileData.value;
-    console.log(formData);    
     if (formData.locality == "" || formData.living_since == "" || formData.locality == null || formData.living_since == null) {
       alert("You Need to Fill Locality and Living Since to Continue");
       return this.route.navigate([`/profile/${this.user.uid}/edit`]);

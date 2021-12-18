@@ -57,7 +57,7 @@
                                                     <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                     {{post.answers}}
                                                 </button>
-                                        <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                     <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                 </button>
                                     </div>
@@ -71,7 +71,7 @@
                                                         <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
+                                            <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                         <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
@@ -305,7 +305,7 @@
                                             <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                             {{post.answers}}
                                         </a>
-                                        <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                             <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                         </button>
                                     </div>
@@ -319,7 +319,7 @@
                                                         <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
+                                            <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                         <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>

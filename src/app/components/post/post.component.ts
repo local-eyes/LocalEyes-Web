@@ -8,6 +8,8 @@ import { Clipboard } from "@angular/cdk/clipboard";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-post',
@@ -27,7 +29,8 @@ export class PostComponent implements OnInit {
     public af: AngularFirestore,
     public dialog: MatDialog,
     public auth: AuthService,
-    private deviceDetector: DeviceDetectorService
+    private deviceDetector: DeviceDetectorService,
+    private bottomSheet: MatBottomSheet
     ) { 
       this.detectDevice();
     }
@@ -55,13 +58,8 @@ export class PostComponent implements OnInit {
     this.post.content.claps += 1;
   }
 
-  copyToClipboard(collection: string, id:string) {
-    this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "top", horizontalPosition: "end", duration: 3000});
-    if (location.hostname === "localhost") {
-      this.clipboard.copy(`http://localhost:4200/post/${collection}/${id}`);
-    } else {
-      this.clipboard.copy(`https://local-eyes.tech/app/post/${collection}/${id}`);
-    }
+  openShareSheet(collection: string, id: string, name: string, title: string) {
+    this.bottomSheet.open(SidenavComponent, {data: {collection: collection, id:id, name: name, title: title}})  
   }
 
   openSignInChecker() {

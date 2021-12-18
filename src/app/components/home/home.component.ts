@@ -9,6 +9,8 @@ import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.compo
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Clipboard } from "@angular/cdk/clipboard";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +41,8 @@ export class HomeComponent implements OnInit {
     public af: AngularFirestore,
     public auth: AuthService,
     private clipboard: Clipboard,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private bottomSheet: MatBottomSheet
     ) { }
 
   ngOnInit(): void {
@@ -164,6 +167,10 @@ export class HomeComponent implements OnInit {
 
   openLogoutConfirmation() {
     this.dialog.open(SignInCheckerComponent, {data: "logOut"});
+  }
+
+  openShareSheet(collection: string, id: string, name: string, title: string) {
+    this.bottomSheet.open(SidenavComponent, {data: {collection: collection, id:id, name: name, title: title}})  
   }
 
   swipe(e: TouchEvent, when: string): void {
