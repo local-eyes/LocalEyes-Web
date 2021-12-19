@@ -19,7 +19,7 @@
                     <div class="container" *ngIf="loadComplete==true">
                         <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="nearbyPosts && nearbyPosts.length == 0">
                             <div class="no-posts my-3"></div>
-                            <h1>There are no Unanswered Questions in your Neighborhood. Hoorayy</h1>
+                            <h1 class="text-center">There are no Unanswered Questions in your Neighborhood. Hoorayy</h1>
                         </div>
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
@@ -47,11 +47,11 @@
                                                     {{post.content.claps}}
                                                 </button>
                                         <button mat-icon-button (click)="openPost('local', i)" class="col-6 ml-2">
-                                                    <mat-icon>forum</mat-icon>
+                                                    <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                     {{post.answers}}
                                                 </button>
-                                        <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
-                                                    <mat-icon>share</mat-icon>
+                                        <button mat-icon-button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                                    <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                 </button>
                                     </div>
                                     <ng-template #login>
@@ -61,11 +61,11 @@
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
+                                            <button mat-icon-button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                                        <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
                                     </ng-template>
@@ -82,7 +82,7 @@
                     <div class="container">
                         <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="cityPosts && cityPosts.length == 0">
                             <div class="no-posts my-3"></div>
-                            <h1>There are no Unanswered Questions in your City. Hoorayy</h1>
+                            <h1 class="text-center">There are no Unanswered Questions in your City. Hoorayy</h1>
                         </div>
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark">
@@ -96,7 +96,7 @@
                                     <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
                                 </mat-card-header>
                                 <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-                                <a (click)="openPost('city', i)" routerLink="">
+                                <a (click)="openPost('city', i)">
                                     <mat-card-content>
                                         <h2>
                                             {{post.content.title}}
@@ -113,11 +113,11 @@
                                                     {{post.content.claps}}
                                                 </button>
                                         <button mat-icon-button (click)="openPost('city', i)" class="col-6 ml-2">
-                                                    <mat-icon>forum</mat-icon>
+                                                    <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                     {{post.answers}}
                                                 </button>
-                                        <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
-                                                    <mat-icon>share</mat-icon>
+                                        <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                                    <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                 </button>
                                     </div>
                                     <ng-template #login>
@@ -127,11 +127,11 @@
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
+                                            <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                                        <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
                                     </ng-template>
@@ -168,14 +168,14 @@
                 <div *ngIf="auth.user$ | async as user; else login">
                     <img src="{{user.imageURL}}" alt="User Image" class="mobileUserImage">
                     <h1 class="d-flex justify-content-center">{{user.fullname}}</h1>
-                    <a routerLink="profile/{{user.uid}}/" mat-list-item>
+                    <a routerLink="/profile/{{user.uid}}/" mat-list-item>
                         <mat-icon matListIcon>person_outline</mat-icon>
                         <h1 matLine>My Profile</h1>
                     </a>
-                    <a mat-list-item (click)="openLogoutConfirmation()">
+                    <!-- <a mat-list-item (click)="openLogoutConfirmation()">
                         <mat-icon matListIcon>logout</mat-icon>
                         <h1 matLine>Logout</h1>
-                    </a>
+                    </a> -->
                 </div>
                 <ng-template #login>
                     <a mat-list-item (click)="auth.googleSignIn()">
@@ -221,7 +221,14 @@
                         <mat-icon class="text-dark">support_agent</mat-icon>
                         <span>Get Support</span>
                     </a>
+                    <a mat-menu-item (click)="openLogoutConfirmation()" *ngIf="auth.user$ | async">
+                        <mat-icon class="text-dark">logout</mat-icon>
+                        <span>Logout</span>
+                    </a>
                 </mat-menu>
+                <a href="https://play.google.com/store/apps/details?id=tech.dagurmittal.app" mat-list-item class="mt-5" target="blank">
+                    <img src="../../../assets/imgs/playstore.jpeg" alt="playstore" style="height: 65px;">
+                </a>
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
@@ -238,8 +245,10 @@
             <mat-tab-group dynamicHeight [selectedIndex]="selectedTabIndex" (selectedTabChange)="loadData($event.index)" color="primary" mat-align-tabs="center">
                 <mat-tab label="Local">
                     <div class="d-flex flex-row">
-                        <mat-icon>place</mat-icon>
-                        <p>Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span></p>
+                        <h2 style="margin: 0;">
+                            <mat-icon>place</mat-icon>
+                            Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span>
+                        </h2>
                     </div>
                     <div *ngIf="auth.user$ | async as user">
                         <mat-slider *ngIf="user.role==='admin'" thumbLabel [(ngModel)]="radius" (change)="getPosts(lat, lon, radius, null)" [displayWith]="formatLabel" step="500" min="500" max="20000" aria-label="units"></mat-slider>
@@ -248,25 +257,25 @@
                     <div class="container" *ngIf="loadComplete==true">
                         <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="nearbyPosts && nearbyPosts.length == 0">
                             <div class="no-posts my-3"></div>
-                            <h1>There are no Unanswered Questions in your Neighborhood. Hoorayy</h1>
+                            <h1 class="text-center">There are no Unanswered Questions in your Neighborhood. Hoorayy</h1>
                         </div>
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark" style="cursor: pointer;">
-                                <mat-card-header (click)="openPost('local', i)">
-                                    <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
-                                    <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
-                                    <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
-                                </mat-card-header>
                                 <a routerLink="/post/local/{{post.id}}">
+                                    <mat-card-header>
+                                        <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                        <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                                        <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-chip-list aria-label="Fish selection">
+                                        <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                        <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                    </mat-chip-list>
                                     <mat-card-content>
                                         <h2>
                                             {{post.content.title}}
                                         </h2>
                                         <img *ngIf="post.content.image" mat-card-image src="{{post.content.image}}">
-                                        <mat-chip-list aria-label="Fish selection">
-                                            <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                            <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                        </mat-chip-list>
                                         <mat-card-subtitle class="text-secondary">~ {{post.hitMetadata.distance.toString().slice(0, 4)}} km away from you</mat-card-subtitle>
                                     </mat-card-content>
                                 </a>
@@ -274,16 +283,16 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button (click)="incrementClaps('local', post.id, i)" class="col-6">
-                                                    <mat-icon svgIcon="claps"></mat-icon>
-                                                    {{post.content.claps}}
-                                                </button>
-                                        <button mat-icon-button (click)="openPost('local', i)" class="col-6 ml-2">
-                                                    <mat-icon>forum</mat-icon>
-                                                    {{post.answers}}
-                                                </button>
-                                        <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
-                                                    <mat-icon>share</mat-icon>
-                                                </button>
+                                            <mat-icon svgIcon="claps"></mat-icon>
+                                            {{post.content.claps}}
+                                        </button>
+                                        <a mat-icon-button routerLink="/post/local/{{post.id}}" class="col-6 ml-2">
+                                            <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
+                                            {{post.answers}}
+                                        </a>
+                                        <button mat-icon-button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                            <mat-icon fontSet="material-icons-outlined">share</mat-icon>
+                                        </button>
                                     </div>
                                     <ng-template #login>
                                         <div class="row d-flex justify-content-start">
@@ -292,11 +301,11 @@
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('local', post.id)" class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
+                                            <button mat-icon-button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                                        <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
                                     </ng-template>
@@ -307,26 +316,29 @@
                 </mat-tab>
                 <mat-tab label="City">
                     <div class="d-flex flex-row">
-                        <mat-icon>place</mat-icon>
-                        <p>Showing posts in <span class="text-capitalize highlight">{{city}}</span></p>
+                        <h2 style="margin: 0;">
+                            <mat-icon>place</mat-icon>
+                            Showing posts in <span class="text-capitalize highlight">{{city}}</span>
+                        </h2>
                     </div>
                     <div class="container">
                         <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="cityPosts && cityPosts.length == 0">
                             <div class="no-posts my-3"></div>
-                            <h1>There are no Unanswered Questions in your City. Hoorayy</h1>
+                            <h1 class="text-center">There are no Unanswered Questions in your City. Hoorayy</h1>
                         </div>
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark">
-                                <mat-card-header>
+                                <a routerLink="/post/city/{{post.id}}">
+                                    <mat-card-header>
+                                        <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                        <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                                        <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
+                                    </mat-card-header>
                                     <mat-chip-list aria-label="Fish selection">
                                         <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
                                         <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
                                     </mat-chip-list>
-                                    <a routerLink="/profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
-                                    <mat-card-title><a routerLink="/profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
-                                    <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
-                                </mat-card-header>
-                                <a routerLink="/post/city/{{post.id}}">
+                                    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                                     <mat-card-content>
                                         <h2>
                                             {{post.content.title}}
@@ -339,29 +351,29 @@
                                 <mat-card-actions>
                                     <div *ngIf="auth.user$ | async as user; else login" class="row d-flex justify-content-start">
                                         <button mat-icon-button (click)="incrementClaps('city', post.id, i)" class="col-6">
-                                                    <mat-icon svgIcon="claps"></mat-icon>
-                                                    {{post.content.claps}}
-                                                </button>
-                                        <button mat-icon-button (click)="openPost('city', i)" class="col-6 ml-2">
-                                                    <mat-icon>forum</mat-icon>
-                                                    {{post.answers}}
-                                                </button>
-                                        <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
-                                                    <mat-icon>share</mat-icon>
-                                                </button>
+                                            <mat-icon fontSet="material-icons-outlined" svgIcon="claps"></mat-icon>
+                                            {{post.content.claps}}
+                                        </button>
+                                        <a mat-icon-button routerLink="/post/city/{{post.id}}" class="col-6 ml-2">
+                                            <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
+                                            {{post.answers}}
+                                        </a>
+                                        <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                            <mat-icon fontSet="material-icons-outlined">share</mat-icon>
+                                        </button>
                                     </div>
                                     <ng-template #login>
                                         <div class="row d-flex justify-content-start">
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6">
-                                                        <mat-icon svgIcon="claps"></mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined" svgIcon="claps"></mat-icon>
                                                         {{post.content.claps}}
                                                     </button>
                                             <button mat-icon-button (click)="openSignInChecker()" class="col-6 ml-2">
-                                                        <mat-icon>forum</mat-icon>
+                                                        <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
-                                                        <mat-icon>share</mat-icon>
+                                            <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                                        <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
                                     </ng-template>

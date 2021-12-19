@@ -9,6 +9,8 @@ import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.compo
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Clipboard } from "@angular/cdk/clipboard";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-for-you',
@@ -39,7 +41,8 @@ export class ForYouComponent implements OnInit {
     public af: AngularFirestore,
     public auth: AuthService,
     private clipboard: Clipboard,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private bottomSheet: MatBottomSheet
     ) { }
 
   ngOnInit(): void {
@@ -131,6 +134,10 @@ export class ForYouComponent implements OnInit {
     }
   }
 
+  openShareSheet(collection: string, id: string, name: string, title: string) {
+    this.bottomSheet.open(SidenavComponent, {data: {collection: collection, id:id, name: name, title: title}})  
+  }
+
   openSignInChecker() {
     this.dialog.open(SignInCheckerComponent);
   }
@@ -145,15 +152,6 @@ export class ForYouComponent implements OnInit {
     const postRef = this.af.doc(`${collection}/${postToIncrease}`);
     postRef.update({'content.claps': incrementor});
     this.nearbyPosts[i].content.claps += 1;
-  }
-
-  copyToClipboard(collection: string, id:string) {
-    this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "bottom", horizontalPosition: "end", duration: 3000});
-    if (location.hostname === "localhost") {
-      this.clipboard.copy(`http://localhost:4200/post/${collection}/${id}`);
-    } else {
-      this.clipboard.copy(`https://local-eyes.tech/app/post/${collection}/${id}`);
-    }
   }
 
   loadData(tabIndex:number) {
