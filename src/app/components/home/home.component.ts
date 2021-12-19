@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   loadComplete:boolean = false;
   cityLoaded = false;
   isMobile = localStorage.getItem('isMobile');
+  isAndroid = localStorage.getItem('isAndroid');
   swipeCoords: any;
   swipeTime: any;
   selectedTabIndex = 0;

@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   title = 'LocalEyes';
   deviceInfo = null;
   isMobile: boolean;
-  os: string;
+  isAndroid: boolean;
   userData: any;
   constructor(
     public auth: AuthService, 
@@ -59,7 +59,10 @@ export class AppComponent implements OnInit{
   detectDevice() {
     this.deviceInfo = this.deviceDetector.getDeviceInfo();
     this.isMobile = this.deviceDetector.isMobile();
-    this.os = this.deviceInfo.os;
+    if (this.deviceInfo.os === "Android") {
+      this.isAndroid = true;
+      localStorage.setItem("isAndroid", this.isAndroid.toString());
+    }
     localStorage.setItem("os", this.deviceInfo.os);
     localStorage.setItem("isMobile", `${this.isMobile}`)
   }
