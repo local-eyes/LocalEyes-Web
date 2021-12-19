@@ -33,7 +33,7 @@
                         <p class="ms-2">Joined {{getJoiningDate(personData.createdOn._seconds)}}</p>
                     </div>
                 </div>
-                <button mat-raised-button color="primary" *ngIf="auth.userData && currentUser == personData.uid" routerLink="edit">Edit Profile</button>
+                <button mat-raised-button color="primary" *ngIf="currentUser!=null && auth.userData && currentUser == personData.uid" routerLink="edit">Edit Profile</button>
             </div>
 
             <div class="tabs">
@@ -73,7 +73,7 @@
                                                                 <mat-icon>forum</mat-icon>
                                                                 {{post.answers}}
                                                             </button>
-                                        <button mat-icon-button class="col-6 ml-2">
+                                        <button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" mat-icon-button class="col-6 ml-2">
                                                                 <mat-icon>share</mat-icon>
                                                             </button>
                                     </div>
@@ -87,7 +87,7 @@
                                                                     <mat-icon>forum</mat-icon>
                                                                     {{post.answers}}
                                                                 </button>
-                                            <button mat-icon-button class="col-6 ml-2">
+                                            <button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" mat-icon-button class="col-6 ml-2">
                                                                     <mat-icon>share</mat-icon>
                                                                 </button>
                                         </div>
@@ -131,7 +131,7 @@
                                                                 <mat-icon>forum</mat-icon>
                                                                 {{post.answers}}
                                                             </button>
-                                        <button mat-icon-button class="col-6 ml-2">
+                                        <button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" mat-icon-button class="col-6 ml-2">
                                                                 <mat-icon>share</mat-icon>
                                                             </button>
                                     </div>
@@ -145,7 +145,7 @@
                                                                     <mat-icon>forum</mat-icon>
                                                                     {{post.answers}}
                                                                 </button>
-                                            <button mat-icon-button class="col-6 ml-2">
+                                            <button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" mat-icon-button class="col-6 ml-2">
                                                                     <mat-icon>share</mat-icon>
                                                                 </button>
                                         </div>
@@ -212,7 +212,6 @@
             <h1 class="user-name text-capitalize">{{personData.fullname}}
                 <mat-icon *ngIf="personData.role=='admin'" style="color: #5851DB; font-size: 35px" class="mx-2">verified</mat-icon>
             </h1>
-            <h3 class="user-email text-secondary">{{personData.email}}</h3>
             <mat-divider></mat-divider>
             <h2 class="bio text-capitalize">{{personData.bio}}</h2>
             <div class="location-info row">
@@ -229,7 +228,7 @@
                     <p class="ms-2">Joined {{getJoiningDate(personData.createdOn._seconds)}}</p>
                 </div>
             </div>
-            <button mat-raised-button color="primary" *ngIf="auth.userData && currentUser == personData.uid" routerLink="edit">Edit Profile</button>
+            <button mat-raised-button color="primary" *ngIf="currentUser!=null && auth.userData && currentUser == personData.uid" routerLink="edit">Edit Profile</button>
         </div>
     </div>
 
@@ -272,7 +271,7 @@
                                                         <mat-icon>forum</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                <button mat-icon-button class="col-6 ml-2">
+                                <button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" mat-icon-button class="col-6 ml-2">
                                                         <mat-icon>share</mat-icon>
                                                     </button>
                             </div>
@@ -286,7 +285,7 @@
                                                             <mat-icon>forum</mat-icon>
                                                             {{post.answers}}
                                                         </button>
-                                    <button mat-icon-button class="col-6 ml-2">
+                                    <button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" mat-icon-button class="col-6 ml-2">
                                                             <mat-icon>share</mat-icon>
                                                         </button>
                                 </div>
@@ -332,7 +331,7 @@
                                                         <mat-icon>forum</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                <button mat-icon-button class="col-6 ml-2">
+                                <button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" mat-icon-button class="col-6 ml-2">
                                                         <mat-icon>share</mat-icon>
                                                     </button>
                             </div>
@@ -346,7 +345,7 @@
                                                             <mat-icon>forum</mat-icon>
                                                             {{post.answers}}
                                                         </button>
-                                    <button mat-icon-button class="col-6 ml-2">
+                                    <button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" mat-icon-button class="col-6 ml-2">
                                                             <mat-icon>share</mat-icon>
                                                         </button>
                                 </div>

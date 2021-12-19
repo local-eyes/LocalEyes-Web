@@ -1,10 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { PostComponent } from '../post/post.component';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-profile',
@@ -28,13 +30,16 @@ isMobile = localStorage.getItem('isMobile');
     private data: DataService, 
     private auth: AuthService,
     public dialog: MatDialog,
-    public _location: Location
+    public _location: Location,
+    private bottomSheet: MatBottomSheet
     ) { }
 
   ngOnInit(): void {
     window.scroll(0, 0);
     this.auth.user$.subscribe(user => {
+      if (user) {
       this.currentUser = user.uid;
+      }
     })
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.getProfileFromService(this.uid);
@@ -129,6 +134,10 @@ isMobile = localStorage.getItem('isMobile');
     } else {
       this.dialog.open(PostComponent, {height: "90vh", width: "100vw", data: this.cityFeed[postId], hasBackdrop: true});
     }
+  }
+
+  openShareSheet(collection: string, id: string, name: string, title: string) {
+    this.bottomSheet.open(SidenavComponent, {data: {collection: collection, id:id, name: name, title: title}})  
   }
 
   goBack() {
