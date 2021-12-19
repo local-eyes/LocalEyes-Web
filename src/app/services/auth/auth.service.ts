@@ -7,6 +7,8 @@ import { Observable, of } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { User } from './user.model';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from "@angular/material/snack-bar";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +19,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     // afAuth.useEmulator("http://localhost:9099",);
     this.user$ = this.afAuth.authState.pipe(
@@ -52,9 +55,10 @@ export class AuthService {
     const userRef = this.afs.doc(`users/${uid}`).get().subscribe(data => {
       this.userData = data.data()
       if (this.userData.is_completed === true) {
-      this.router.navigate(['/']);
+        this.snackBar.open("Welcome Back to LocalEyes ✨", "Thanks!", {horizontalPosition: 'center', verticalPosition: 'bottom', panelClass: 'snackbar'});      
       } else {
         this.router.navigate([`/profile/${uid}/edit`]);
+        this.snackBar.open("Welcome! Complete Profile to Continue", "", {horizontalPosition: 'center', verticalPosition: 'bottom', duration: 3000, panelClass: 'snackbar'});
       }
     })
   }
