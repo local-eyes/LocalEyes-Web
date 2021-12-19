@@ -25,7 +25,7 @@ export class SidenavComponent implements OnInit {
   }
 
   copyToClipboard() {
-    this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "top", horizontalPosition: "end", duration: 3000});
+    this.snackbar.open("🎉 Copied to Clipboard!", null,{verticalPosition: "top", horizontalPosition: "end", duration: 3000, panelClass: ["snackbar"]});
     if (location.hostname === "localhost") {
       const msg = `Checkout this post by ${this.data.name}:\n*${this.data.title}*\n\nhttp://localhost:4200/post/${this.data.collection}/${this.data.id}`
       this.clipboard.copy(msg);
@@ -50,6 +50,23 @@ export class SidenavComponent implements OnInit {
       url += "?text=" + msg;
       window.open(url)
       }
+  }
+
+  sendTweet() {
+    let url = "https://twitter.com/intent/tweet";
+    if (location.hostname === "localhost") {
+      const link = "http://localhost:4200/"
+      let msg = "Checkout this post by " + this.data.name + ":\n*" + this.data.title + "*\n\n" + link + "post/" + this.data.collection + "/" + this.data.id;
+      msg = encodeURIComponent(msg)
+      url += "?text=" + msg;
+      window.open(url)
+    } else {
+      const link = "https://local-eyes.tech/app/"
+      let msg = "Checkout this post by " + this.data.name + ":\n*" + this.data.title + "*\n\n" + link + "post/" + this.data.collection + "/" + this.data.id;
+      msg = encodeURIComponent(msg)
+      url += "?text=" + msg;
+      window.open(url)
+    }
   }
 
 }
