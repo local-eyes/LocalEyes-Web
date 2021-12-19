@@ -56,3 +56,8 @@ body {
 .mat-toolbar {
     background: none;
 }
+
+.snackbar {
+    background: #62c9d5;
+    margin-top: 300px;
+}
