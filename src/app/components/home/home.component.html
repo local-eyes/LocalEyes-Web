@@ -14,8 +14,10 @@
                         </a>
                     </div>
                     <div class="d-flex flex-row">
-                        <mat-icon>place</mat-icon>
-                        <p>Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span></p>
+                        <h2 style="margin: 0;">
+                            <mat-icon>place</mat-icon>
+                            Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span>
+                        </h2>
                     </div>
                     <div *ngIf="auth.user$ | async as user">
                         <mat-slider *ngIf="user.role==='admin'" thumbLabel [(ngModel)]="radius" (change)="getPosts(lat, lon, radius, null)" [displayWith]="formatLabel" step="500" min="500" max="20000" aria-label="units"></mat-slider>
@@ -57,7 +59,7 @@
                                                     <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                     {{post.answers}}
                                                 </button>
-                                        <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                     <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                 </button>
                                     </div>
@@ -71,7 +73,7 @@
                                                         <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                            <button mat-icon-button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                         <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
@@ -90,8 +92,10 @@
                         </a>
                     </div>
                     <div class="d-flex flex-row">
-                        <mat-icon>place</mat-icon>
-                        <p>Showing posts in <span class="text-capitalize highlight">{{city}}</span></p>
+                        <h2 style="margin: 0;">
+                            <mat-icon>place</mat-icon>
+                            Showing posts in <span class="text-capitalize highlight">{{city}}</span>
+                        </h2>
                     </div>
                     <div class="container">
                         <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="cityPosts && cityPosts.length == 0">
@@ -131,7 +135,7 @@
                                                     <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                     {{post.answers}}
                                                 </button>
-                                        <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                     <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                 </button>
                                     </div>
@@ -145,7 +149,7 @@
                                                         <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
+                                            <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                         <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
@@ -266,8 +270,10 @@
                 <mat-tab label="Local">
                     <app-loader *ngIf="loadComplete==false"></app-loader>
                     <div class="d-flex flex-row">
-                        <mat-icon>place</mat-icon>
-                        <p>Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span></p>
+                        <h2 style="margin: 0;">
+                            <mat-icon>place</mat-icon>
+                            Showing posts in <span class="text-capitalize highlight">{{neighborhood}}</span>
+                        </h2>
                     </div>
                     <div *ngIf="auth.user$ | async as user">
                         <mat-slider *ngIf="user.role==='admin'" thumbLabel [(ngModel)]="radius" (change)="getPosts(lat, lon, radius, null)" [displayWith]="formatLabel" step="500" min="500" max="20000" aria-label="units"></mat-slider>
@@ -279,16 +285,16 @@
                         </div>
                         <div class="example-card" *ngFor="let post of nearbyPosts; let i = index">
                             <mat-card class="bg-light text-dark mx-2 mx-2" style="cursor: pointer;">
-                                <mat-card-header>
-                                    <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
-                                    <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
-                                    <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
-                                </mat-card-header>
-                                <mat-chip-list aria-label="Fish selection">
-                                    <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                    <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                </mat-chip-list>
                                 <a routerLink="post/local/{{post.id}}">
+                                    <mat-card-header>
+                                        <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                        <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                                        <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-chip-list aria-label="Fish selection">
+                                        <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                        <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                    </mat-chip-list>
                                     <mat-card-content>
                                         <h2>
                                             {{post.content.title}}
@@ -308,7 +314,7 @@
                                             <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                             {{post.answers}}
                                         </a>
-                                        <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                             <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                         </button>
                                     </div>
@@ -322,7 +328,7 @@
                                                         <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
+                                            <button mat-icon-button (click)="openShareSheet('local', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                         <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>
@@ -335,8 +341,10 @@
                 <mat-tab label="City">
                     <app-loader *ngIf="cityLoaded==false"></app-loader>
                     <div class="d-flex flex-row">
-                        <mat-icon>place</mat-icon>
-                        <p>Showing posts in <span class="text-capitalize highlight">{{city}}</span></p>
+                        <h2 style="margin: 0;">
+                            <mat-icon>place</mat-icon>
+                            Showing posts in <span class="text-capitalize highlight">{{city}}</span>
+                        </h2>
                     </div>
                     <div class="container">
                         <div class="d-flex flex-column align-items-center justify-content-center m-auto col-12" *ngIf="cityPosts && cityPosts.length == 0">
@@ -345,17 +353,17 @@
                         </div>
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
                             <mat-card class="bg-light text-dark mx-2">
-                                <mat-card-header>
-                                    <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
-                                    <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
-                                    <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
-                                </mat-card-header>
-                                <mat-chip-list aria-label="Fish selection">
-                                    <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                    <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
-                                </mat-chip-list>
-                                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                                 <a routerLink="post/city/{{post.id}}">
+                                    <mat-card-header>
+                                        <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
+                                        <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
+                                        <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-chip-list aria-label="Fish selection">
+                                        <mat-chip *ngIf="post.type=='announcement'" color="accent" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                        <mat-chip *ngIf="post.type=='question'" color="primary" selected class="text-capitalize">{{post.type}}</mat-chip>
+                                    </mat-chip-list>
+                                    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                                     <mat-card-content>
                                         <h2>
                                             {{post.content.title}}
@@ -375,7 +383,7 @@
                                             <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                             {{post.answers}}
                                         </a>
-                                        <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
+                                        <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                             <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                         </button>
                                     </div>
@@ -389,7 +397,7 @@
                                                         <mat-icon fontSet="material-icons-outlined">chat_bubble_outline</mat-icon>
                                                         {{post.answers}}
                                                     </button>
-                                            <button mat-icon-button (click)="copyToClipboard('city', post.id)" class="col-6 ml-2">
+                                            <button mat-icon-button (click)="openShareSheet('city', post.id, post.author.name, post.content.title)" class="col-6 ml-2">
                                                         <mat-icon fontSet="material-icons-outlined">share</mat-icon>
                                                     </button>
                                         </div>

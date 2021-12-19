@@ -13,6 +13,15 @@
 
     <div class="col-12 m-3">
         <div class="d-flex justify-content-center">
+            <button mat-raised-button color="primary" (click)="sendTweet()" class="col-6">
+                <mat-icon fontSet="material-icons-outlined">assistant</mat-icon>
+                <span class="mx-2">Tweet about it</span>
+            </button>
+        </div>
+    </div>
+    <!-- Clipboard -->
+    <div class="col-12 m-3">
+        <div class="d-flex justify-content-center">
             <button mat-raised-button color="primary" (click)="copyToClipboard()" class="col-6">
                 <mat-icon fontSet="material-icons-outlined">content_copy</mat-icon>
                 <span class="mx-2">Copy to clipboard</span>
@@ -20,5 +29,3 @@
         </div>
     </div>
 </div>
-
-<p>LocalEyes. All rights served.</p>
