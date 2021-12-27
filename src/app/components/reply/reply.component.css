@@ -1,0 +1,10 @@
+.fixed {
+    position: sticky;
+    bottom: 0;
+    z-index: 999;
+    background-color: white;
+}
+
+.mat-form-field-wrapper {
+    padding-bottom: 0em!important;
+}
