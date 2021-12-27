@@ -35,6 +35,7 @@ isMobile = localStorage.getItem('isMobile');
     ) { }
 
   ngOnInit(): void {
+    this.dialog.closeAll();
     window.scroll(0, 0);
     this.auth.user$.subscribe(user => {
       if (user) {

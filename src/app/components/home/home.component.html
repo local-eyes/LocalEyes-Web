@@ -103,8 +103,8 @@
                             <h1>There are no Posts in your City. Go ahead and <button mat-raised-button [routerLink]="['/create']" [queryParams]="{ feed: 'city' }" color="accent">Create One</button></h1>
                         </div>
                         <div class="example-card" *ngFor="let post of cityPosts; let i = index">
-                            <mat-card class="bg-light text-dark">
-                                <mat-card-header>
+                            <mat-card class="bg-light text-dark" style="cursor: pointer;">
+                                <mat-card-header (click)="openPost('city', i)">
                                     <a routerLink="profile/{{post.author.uid}}" mat-card-avatar class="example-header-image" style="background-image: url({{post.author.image}});"></a>
                                     <mat-card-title><a routerLink="profile/{{post.author.uid}}">{{post.author.name}}</a></mat-card-title>
                                     <mat-card-subtitle class="text-secondary">• {{getDate(post.postedOn._seconds)}}</mat-card-subtitle>

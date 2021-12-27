@@ -3,7 +3,6 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import firestore from "firebase/app";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { DataService } from 'src/app/services/data/data.service';
 
 
 @Component({
@@ -21,7 +20,6 @@ export class CommentsComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private data: DataService,
     private afs: AngularFirestore,
     private fb: FormBuilder
   ) { }
