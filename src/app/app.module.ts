@@ -35,6 +35,7 @@ import { AuthService } from './services/auth/auth.service';
 import { DataService } from "./services/data/data.service";
 import { LocationService } from './services/location/location.service';
 import { NotOpenComponent } from './components/not-open/not-open.component';
+import { ReplyComponent } from './components/reply/reply.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NotOpenComponent } from './components/not-open/not-open.component';
     FileUploadComponent,
     EditProfileComponent,
     IntroScreenComponent,
-    NotOpenComponent
+    NotOpenComponent,
+    ReplyComponent
   ],
   imports: [
     BrowserModule,

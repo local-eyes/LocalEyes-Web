@@ -4,12 +4,11 @@ import firestore from "firebase/app";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SignInCheckerComponent } from '../sign-in-checker/sign-in-checker.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Clipboard } from "@angular/cdk/clipboard";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -21,14 +20,14 @@ export class PostComponent implements OnInit {
   answersLoaded:boolean = false;
   deviceInfo = null;
   isMobile: boolean;
+  showReply: boolean[] = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public post: any, 
     private data: DataService,
-    private snackbar: MatSnackBar,
-    private clipboard: Clipboard,
     public af: AngularFirestore,
     public dialog: MatDialog,
     public auth: AuthService,
+    private router: Router,
     private deviceDetector: DeviceDetectorService,
     private bottomSheet: MatBottomSheet
     ) { 
@@ -69,6 +68,27 @@ export class PostComponent implements OnInit {
   addComment(newComment: string) {
     this.post.answers += 1;
     this.answers.push(newComment);
+  }
+
+  addReply(i:number, newComment: string) {
+    this.post.answers += 1;
+    this.answers.push(newComment);
+    this.showReply[i] = false;
+  }
+
+  showReplyForm(i:any) {
+    this.showReply[i] = !this.showReply[i];
+  }
+
+  formatAnswer(i: number, answer: any) {
+    // replace @username with link
+    return document.getElementById(`answer${i}`).innerHTML = (answer.answer).replace(/@([A-Za-z0-9_]+)/g, `<span class="highlight" style="cursor:pointer">@$1</span>`);
+  }
+
+  navigateToProfile(answer:any) {
+    answer.answer.replace(/@([A-Za-z0-9_]+)/g, (match, p1) => {
+      this.router.navigate(['/profile', answer.mentionUid]);
+    }); 
   }
 
 }
