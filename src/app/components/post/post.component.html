@@ -64,8 +64,12 @@
 <mat-card *ngFor="let answer of answers; let i = index;" class="bg-light text-dark m-3">
     <mat-card-header>
         <img src="{{answer.author.image}}" mat-card-avatar>
-        <mat-card-title><a routerLink="profile/{{answer.author.uid}}">{{answer.author.fullname}}<mat-icon *ngIf="answer.author.role=='admin'" style="color: #5851DB; font-size: 20px;" class="mx-2">verified</mat-icon></a></mat-card-title>
-        <mat-chip *ngIf="answer.author.uid==post.author.uid" color="accent" selected class="text-capitalize chip-s">author</mat-chip>
+        <mat-card-title>
+            <a routerLink="profile/{{answer.author.uid}}">{{answer.author.fullname}}
+                <mat-icon *ngIf="answer.author.role=='admin'" style="color: #4056ED; font-size: 20px;" class="mx-2">verified_user</mat-icon>
+                <mat-icon *ngIf="answer.author.uid==post.author.uid" style="color:#62C9D5; font-size: 20px;" class="mx-2">self_improvement</mat-icon>
+            </a>
+        </mat-card-title>
         <mat-card-subtitle class="text-secondary">• Living in <span class="highlight text-capitalize">{{answer.author.locality}}</span> since {{answer.author.living_since}} Years</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -74,10 +78,10 @@
     <mat-divider></mat-divider>
     <mat-card-footer>
         <button mat-icon-button (click)="showReplyForm(i)">
-            <mat-icon>reply</mat-icon>
-            Reply
+            <mat-icon>{{showReply[i].icon}}</mat-icon>
+            {{showReply[i].title}}
         </button>
-        <app-reply (newReplyEvent)="addReply(i, $event)" *ngIf="showReply[i] === true" [replyData]="answer"></app-reply>
+        <app-reply (newReplyEvent)="addReply(i, $event)" *ngIf="showReply[i].showReplyButton === true" [replyData]="answer"></app-reply>
     </mat-card-footer>
 </mat-card>
 <div *ngIf="auth.userData">

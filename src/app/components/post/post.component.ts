@@ -20,7 +20,7 @@ export class PostComponent implements OnInit {
   answersLoaded:boolean = false;
   deviceInfo = null;
   isMobile: boolean;
-  showReply: boolean[] = [];
+  showReply: any = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public post: any, 
     private data: DataService,
@@ -46,6 +46,13 @@ export class PostComponent implements OnInit {
   fetchAnswers(postId){
     this.data.getAnswers(postId).forEach(res => {
       this.answers = res;
+      for (let i = 0; i < this.answers.length; i++) {
+        this.showReply.push({
+          title: "Reply",
+          icon: "reply",
+          showReplyButton: false
+        })
+      }
       this.answersLoaded = true;
     })
   }
@@ -73,11 +80,32 @@ export class PostComponent implements OnInit {
   addReply(i:number, newComment: string) {
     this.post.answers += 1;
     this.answers.push(newComment);
-    this.showReply[i] = false;
+    this.showReply.push({
+      title: "Reply",
+      icon: "reply",
+      showReplyButton: false
+    })
+    this.showReply[i] = {
+      title: "Reply",
+      icon: "reply",
+      showReplyButton: false
+    }
   }
 
   showReplyForm(i:any) {
-    this.showReply[i] = !this.showReply[i];
+    if (this.showReply[i].showReplyButton === false) {
+    this.showReply[i] = {
+      title: "Cancel",
+      icon: "cancel",
+      showReplyButton: true,
+    }
+    } else {
+      this.showReply[i] = {
+        title: "Reply",
+        icon: "reply",
+        showReplyButton: false,
+      }
+    }
   }
 
   formatAnswer(i: number, answer: any) {

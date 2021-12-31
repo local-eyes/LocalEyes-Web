@@ -2,14 +2,12 @@
     <form [formGroup]="reply" (ngSubmit)="postReply()" *ngIf="auth.userData.is_completed==true; else completeProfile">
         <div class="row align-items-center justify-content-start w-100">
             <mat-form-field appearance="outline" [ngClass]="{'col-10': isMobile=='false', 'col-9': isMobile=='true' }">
-                <mat-label>Comment</mat-label>
-                <!-- <span class="input-group-text" id="basic-addon1">@{{replyData.author.fullname}}</span> -->
                 <input type="text" matInput placeholder="Type your Reply to {{replyData.author.fullname}}" formControlName="answer">
-                <span matPrefix class="highlight mr-2">@{{replyData.author.fullname}}</span>
+                <span matPrefix class="highlight m-2">@{{replyData.author.fullname}}</span>
             </mat-form-field>
             <div class="col-auto">
                 <button mat-raised-button [disabled]="answer.invalid" color="primary" type="submit">
-                    <mat-icon>add_comment</mat-icon>
+                    <mat-icon>send</mat-icon>
                 </button>
             </div>
         </div>

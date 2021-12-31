@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import firestore from 'firebase/app'
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DataService } from 'src/app/services/data/data.service';
@@ -24,11 +24,13 @@ routeSub: any;
 collection: string;
 postId: string;
 loadComplete: boolean = false;
+showReply: any = []
 answersLoaded: boolean = false;
 isMobile = localStorage.getItem('isMobile');
 
   constructor(
     public router: ActivatedRoute,
+    private _router: Router,
     private data: DataService,
     public auth: AuthService,
     public af: AngularFirestore,
@@ -51,6 +53,13 @@ isMobile = localStorage.getItem('isMobile');
     })
     this.data.getAnswers(id).subscribe(comments => {
       this.commentsData = comments;
+      for (let i = 0; i < this.commentsData.length; i++) {
+        this.showReply.push({
+          title: "Reply",
+          icon: "reply",
+          showReplyButton: false,
+        })
+      }
       this.answersLoaded = true
     })
   }
@@ -73,6 +82,50 @@ isMobile = localStorage.getItem('isMobile');
   addComment(newComment: string) {
     this.postData.answers += 1;
     this.commentsData.push(newComment)
+  }
+
+  addReply(i:number, newComment: string) {
+    this.postData.answers += 1;
+    this.commentsData.push(newComment);
+    this.showReply.push({
+      title: "Reply",
+      icon: "reply",
+      showReplyButton: false,
+    })
+    this.showReply[i] = {
+      title: "Reply",
+      icon: "reply",
+      showReplyButton: false,
+    }
+  }
+
+  showReplyForm(i:any) {
+    if (this.showReply[i].showReplyButton === false) {
+    this.showReply[i] = {
+      title: "Cancel",
+      icon: "cancel",
+      showReplyButton: true,
+    }
+    } else {
+      this.showReply[i] = {
+        title: "Reply",
+        icon: "reply",
+        showReplyButton: false,
+      }
+    }
+  }
+
+  formatAnswer(i: number, answer: any) {
+    // replace @username with link
+    if (answer.answer != null) {
+      return document.getElementById(`answer${i}`).innerHTML = (answer.answer).replace(/@([A-Za-z0-9_]+)/g, `<span class="highlight" style="cursor:pointer">@$1</span>`);
+    }
+  }
+
+  navigateToProfile(answer:any) {
+    answer.answer.replace(/@([A-Za-z0-9_]+)/g, (match, p1) => {
+      this._router.navigate(['/profile', answer.mentionUid]);
+    }); 
   }
 
   openShareSheet(collection: string, id: string, name: string, title: string) {

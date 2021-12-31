@@ -20,6 +20,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from "@angular/material/menu";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 const MaterialComponents = [
   MatButtonModule,
@@ -42,7 +43,8 @@ const MaterialComponents = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatMenuModule,
-  MatBottomSheetModule
+  MatBottomSheetModule,
+  MatProgressSpinnerModule
 ]
 
 @NgModule({
