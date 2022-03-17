@@ -27,6 +27,7 @@ loadComplete: boolean = false;
 showReply: any = []
 answersLoaded: boolean = false;
 isMobile = localStorage.getItem('isMobile');
+os = localStorage.getItem('os').toLowerCase() || null;
 
   constructor(
     public router: ActivatedRoute,
@@ -40,10 +41,15 @@ isMobile = localStorage.getItem('isMobile');
     ) { }
 
   ngOnInit(): void {
-    window.scroll(0, 0);
-    this.collection = this.router.snapshot.paramMap.get('collection');
-    this.postId = this.router.snapshot.paramMap.get('id');
-    this.getPostByPostId(this.collection, this.postId);
+    if (this.os !== null && this.os === 'android') {
+      location.href = 'https://play.google.com/store/apps/details?id=tech.dagurmittal.app';
+      this._router.navigate(['/']);
+    } else {
+      window.scroll(0, 0);
+      this.collection = this.router.snapshot.paramMap.get('collection');
+      this.postId = this.router.snapshot.paramMap.get('id');
+      this.getPostByPostId(this.collection, this.postId);
+    }
   }
 
   getPostByPostId(collection:string, id:string) {
