@@ -155,7 +155,7 @@ export class HomeComponent implements OnInit {
     if (location.hostname === "localhost") {
       this.clipboard.copy(`http://localhost:4200/post/${collection}/${id}`);
     } else {
-      this.clipboard.copy(`https://local-eyes.tech/app/post/${collection}/${id}`);
+      this.clipboard.copy(`https://localeyes.in/app/post/${collection}/${id}`);
     }
   }
 

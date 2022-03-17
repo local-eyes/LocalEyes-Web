@@ -30,7 +30,7 @@ export class SidenavComponent implements OnInit {
       const msg = `Checkout this post by ${this.data.name}:\n*${this.data.title}*\n\nhttp://localhost:4200/post/${this.data.collection}/${this.data.id}`
       this.clipboard.copy(msg);
     } else {
-      const msg = `Checkout this post by ${this.data.name}:\n*${this.data.title}*\n\nhttps://local-eyes.tech/app/post/${this.data.collection}/${this.data.id}`
+      const msg = `https://localeyes.in/app/post/${this.data.collection}/${this.data.id}`
       this.clipboard.copy(msg);
     }
   }
@@ -44,7 +44,7 @@ export class SidenavComponent implements OnInit {
       url += "?text=" + msg;
       window.open(url)
     } else {
-      const link = "https://local-eyes.tech/app/"
+      const link = "https://localeyes.in/app/"
       let msg = "Checkout this post by " + this.data.name + ":\n*" + this.data.title + "*\n\n" + link + "post/" + this.data.collection + "/" + this.data.id;
       msg = encodeURIComponent(msg)
       url += "?text=" + msg;
@@ -61,7 +61,7 @@ export class SidenavComponent implements OnInit {
       url += "?text=" + msg;
       window.open(url)
     } else {
-      const link = "https://local-eyes.tech/app/"
+      const link = "https://localeyes.in/app/"
       let msg = "Checkout this post by " + this.data.name + ":\n*" + this.data.title + "*\n\n" + link + "post/" + this.data.collection + "/" + this.data.id;
       msg = encodeURIComponent(msg)
       url += "?text=" + msg;
