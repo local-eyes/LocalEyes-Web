@@ -5,6 +5,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { ExploreComponent } from './components/explore/explore.component';
 import { ForYouComponent } from './components/for-you/for-you.component';
 import { HomeComponent } from './components/home/home.component';
+import { InviteComponent } from './components/invite/invite.component';
 import { NewComponent } from './components/new/new.component';
 import { NotOpenComponent } from './components/not-open/not-open.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'unanswered', component: ForYouComponent, canActivate: [CityGuard]},
   {path: 'launching-soon', component: NotOpenComponent},
   {path: 'profile/:uid/edit', component: EditProfileComponent, canActivate: [GuardGuard]},
+  {path: 'invite', component: InviteComponent},
   {path: '**', redirectTo: ''}
 ];
 
