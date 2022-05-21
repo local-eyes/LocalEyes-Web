@@ -1,1 +1,16 @@
-<p>invite works!</p>
+<div class="container text-center">
+    <div class="m-3 d-flex flex-column align-items-center">
+        <div *ngIf="isLoading == false">
+            <h1 style="font-size: 40px; margin: 40px 0;"><b>You're Invited!</b></h1>
+            <h1 *ngIf="referrerName"><b>{{referrerName}}</b> Invited you to join Local<span class="highlight">Eyes</span>.</h1>
+            <h1 *ngIf="!referrerName">Download the Local<span class="highlight">Eyes</span> App and Connect with your locality in a Never-Seen-Before way.</h1>
+            <h3 *ngIf="referrerCode">Use Code <b><span class="highlight">{{referrerCode}}</span></b> while sign up to Avail Rs. 5 as Joining Bonus.</h3>
+            <img src="https://www.buyandship.com.my/contents/uploads/2019/10/FriendReferral-500x261.png" alt="Not Open Here" style="width: 70vw;">
+            <h2>You are being redirected to the Play Store in {{seconds}} Seconds. If it doesn't happen automatically, <a href="https://play.google.com/store/apps/details?id=tech.dagurmittal.app&utm-campaign=referral-campaing&utm-source=referral-link&utm-medium=invite-link">Click Here.</a>
+            </h2>
+        </div>
+        <div *ngIf="isLoading == true">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div>
+</div>

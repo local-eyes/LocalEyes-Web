@@ -36,6 +36,7 @@ import { DataService } from "./services/data/data.service";
 import { LocationService } from './services/location/location.service';
 import { NotOpenComponent } from './components/not-open/not-open.component';
 import { ReplyComponent } from './components/reply/reply.component';
+import { InviteComponent } from './components/invite/invite.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ReplyComponent } from './components/reply/reply.component';
     EditProfileComponent,
     IntroScreenComponent,
     NotOpenComponent,
-    ReplyComponent
+    ReplyComponent,
+    InviteComponent
   ],
   imports: [
     BrowserModule,
