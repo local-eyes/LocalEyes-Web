@@ -9,9 +9,8 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
-
   constructor(
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {collection: string, id: string, name: string, title: string},
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {collection: string, id: string, name: string, title: string, type?: string},
     private bottomSheetRef: MatBottomSheetRef<SidenavComponent>,
     private clipboard: Clipboard,
     private snackbar: MatSnackBar

@@ -1,31 +1,51 @@
-<h1>Share or Copy to Clipboard.</h1>
+<ng-container *ngIf="data.type === 'prompt'; else clipboard">
+    <h1 class="text-center"><b>Open Local<span class="highlight">Eyes</span> in..</b></h1>
+    <mat-divider></mat-divider>
+    <div class="d-flex flex-column justify-content-between p-4">
+        <div class="d-flex flex-row align-items-center p-3">
+            <img src="../../../assets/imgs/LOgo-13.png" alt="logo" width="40px" height="40px" class="me-4">
+            <h3 style="margin-right: 72px;"><b>LocalEyes App</b></h3>
+            <a class="prompt-button" href="https://play.google.com/store/apps/details?id=tech.dagurmittal.app&utm-source=android_sharesheet&utm-medium=prompt&utm-campaign=landing_page" target="_blank">Open</a>
+        </div>
+        <div class="d-flex flex-row align-items-center p-3">
+            <img src="https://www.redditstatic.com/mweb2x/img/chrome.png" alt="chrome" width="40px" height="40px" class="me-4">
+            <h3 style="margin-right: 72px;"><b>Chrome</b></h3>
+            <button class="prompt-button-disabled" (click)="dismissSheet()">Continue</button>
+        </div>
+    </div>
+</ng-container>
 
-<!-- share on whatsapp -->
-<div class="row">
-    <div class="col-12 m-3">
-        <div class="d-flex justify-content-center">
-            <button mat-raised-button color="primary" (click)="sendWhatsapp()" class="col-6">
+<ng-template #clipboard>
+
+    <h1>Share or Copy to Clipboard.</h1>
+
+    <!-- share on whatsapp -->
+    <div class="row">
+        <div class="col-12 m-3">
+            <div class="d-flex justify-content-center">
+                <button mat-raised-button color="primary" (click)="sendWhatsapp()" class="col-6">
                 <mat-icon fontSet="material-icons-outlined">whatsapp</mat-icon>
                 <span class="mx-2">Share on WhatsApp</span>
             </button>
+            </div>
         </div>
-    </div>
 
-    <div class="col-12 m-3">
-        <div class="d-flex justify-content-center">
-            <button mat-raised-button color="primary" (click)="sendTweet()" class="col-6">
+        <div class="col-12 m-3">
+            <div class="d-flex justify-content-center">
+                <button mat-raised-button color="primary" (click)="sendTweet()" class="col-6">
                 <mat-icon fontSet="material-icons-outlined">assistant</mat-icon>
                 <span class="mx-2">Tweet about it</span>
             </button>
+            </div>
         </div>
-    </div>
-    <!-- Clipboard -->
-    <div class="col-12 m-3">
-        <div class="d-flex justify-content-center">
-            <button mat-raised-button color="primary" (click)="copyToClipboard()" class="col-6">
+        <!-- Clipboard -->
+        <div class="col-12 m-3">
+            <div class="d-flex justify-content-center">
+                <button mat-raised-button color="primary" (click)="copyToClipboard()" class="col-6">
                 <mat-icon fontSet="material-icons-outlined">content_copy</mat-icon>
                 <span class="mx-2">Copy to clipboard</span>
             </button>
+            </div>
         </div>
     </div>
-</div>
+</ng-template>

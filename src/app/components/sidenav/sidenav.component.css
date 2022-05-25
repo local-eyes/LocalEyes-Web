@@ -1,0 +1,39 @@
+.prompt-button {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #62c9d5;
+    border: 1px solid black;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 12px;
+    position: absolute;
+    right: 15px;
+    text-align: center;
+    text-transform: capitalize;
+    width: 94px;
+    color: white;
+    text-decoration: none;
+}
+
+.prompt-button-disabled {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #afafaf;
+    border: 1px solid black;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 12px;
+    position: absolute;
+    right: 15px;
+    text-align: center;
+    text-transform: capitalize;
+    width: 94px;
+    color: rgb(104, 104, 104);
+    text-decoration: none;
+}

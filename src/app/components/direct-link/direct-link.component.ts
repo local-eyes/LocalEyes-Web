@@ -42,14 +42,18 @@ os = localStorage.getItem('os').toLowerCase() || null;
 
   ngOnInit(): void {
     if (this.os !== null && this.os === 'android') {
-      location.href = 'https://play.google.com/store/apps/details?id=tech.dagurmittal.app';
-      this._router.navigate(['/']);
+      window.scroll(0, 0);
+      this.isMobile = "true";
     } else {
       window.scroll(0, 0);
-      this.collection = this.router.snapshot.paramMap.get('collection');
-      this.postId = this.router.snapshot.paramMap.get('id');
-      this.getPostByPostId(this.collection, this.postId);
     }
+    this.collection = this.router.snapshot.paramMap.get('collection');
+    this.postId = this.router.snapshot.paramMap.get('id');
+    this.getPostByPostId(this.collection, this.postId);
+    setTimeout(() => {
+      // disable close mat bottome sheet
+      this.bottomSheet.open(SidenavComponent, {data: {collection: this.collection, id:this.postId, name: this.postData.name, title: this.postData.title, type: 'prompt'}, disableClose: true})
+    }, 1000);
   }
 
   getPostByPostId(collection:string, id:string) {
