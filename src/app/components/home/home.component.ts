@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID, Component, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from "@angular/common";
 import { DataService } from 'src/app/services/data/data.service';
 import { LocationService } from 'src/app/services/location/location.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -36,6 +37,8 @@ export class HomeComponent implements OnInit {
   swipeTime: any;
   selectedTabIndex = 0;
   constructor(
+    @Inject(PLATFORM_ID)
+    private platformId: any,
     private data: DataService, 
     private location: LocationService, 
     public dialog: MatDialog,
@@ -47,14 +50,19 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    window.scroll(0, 0);
-    this.location.getPosition().then(pos=>
-      {
+    if (isPlatformBrowser(this.platformId)) {
+      this.location.getPosition().then(pos => {
         this.lon = pos.lng;
         this.lat = pos.lat;
         this.getPosts(this.lat, this.lon, this.radius, null);
         this.getAddressDynamically(this.lat, this.lon);
       });
+    } else {
+      this.lon = 26.9124;
+      this.lat = 75.7873;
+      this.getPosts(this.lat, this.lon, this.radius, null);
+      this.getAddressDynamically(this.lat, this.lon);
+    }
   }
 
   getAddressDynamically(lat, lon) {

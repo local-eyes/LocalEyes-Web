@@ -27,10 +27,6 @@ export class AppComponent implements OnInit{
     private sanitizer: DomSanitizer
     ) {
     this.detectDevice();
-    this.registerIcon.addSvgIcon(
-      `claps`,
-      this.sanitizer.bypassSecurityTrustResourceUrl("../assets/imgs/clap.svg")
-    );
   }
   ngOnInit() {
     this.getUserData();
@@ -42,14 +38,6 @@ export class AppComponent implements OnInit{
       }
       localStorage.setItem("intro_screen_displayed", "true")
     }
-    setTimeout(() => {
-      if (!this.auth.userData) {
-        console.log("User not logged in");
-        this.openSignInChecker();
-      } else {
-        console.log("user Logged In");
-      }
-    }, 60000);
   }
 
   getUserData() {

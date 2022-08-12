@@ -60,7 +60,7 @@ import { InviteComponent } from './components/invite/invite.component';
     InviteComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,

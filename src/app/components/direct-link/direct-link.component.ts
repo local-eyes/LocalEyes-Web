@@ -42,10 +42,7 @@ os = localStorage.getItem('os').toLowerCase() || null;
 
   ngOnInit(): void {
     if (this.os !== null && this.os === 'android') {
-      window.scroll(0, 0);
       this.isMobile = "true";
-    } else {
-      window.scroll(0, 0);
     }
     this.collection = this.router.snapshot.paramMap.get('collection');
     this.postId = this.router.snapshot.paramMap.get('id');

@@ -9,16 +9,15 @@ import { InviteComponent } from './components/invite/invite.component';
 import { NewComponent } from './components/new/new.component';
 import { NotOpenComponent } from './components/not-open/not-open.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { CityGuard } from './services/city/city.guard';
 import { GuardGuard } from './services/guard/guard.guard';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [CityGuard]},
+  {path: '', component: HomeComponent},
   {path: 'profile/:uid', component: ProfileComponent},
   {path: 'post/:collection/:id', component: DirectLinkComponent},
-  {path: 'notifications', component: ExploreComponent, canActivate: [GuardGuard, CityGuard]},
-  {path: 'create', component: NewComponent, canActivate: [GuardGuard, CityGuard]},
-  {path: 'unanswered', component: ForYouComponent, canActivate: [CityGuard]},
+  {path: 'notifications', component: ExploreComponent, canActivate: [GuardGuard]},
+  {path: 'create', component: NewComponent, canActivate: [GuardGuard]},
+  {path: 'unanswered', component: ForYouComponent},
   {path: 'launching-soon', component: NotOpenComponent},
   {path: 'profile/:uid/edit', component: EditProfileComponent, canActivate: [GuardGuard]},
   {path: 'invite', component: InviteComponent},
@@ -26,7 +25,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
