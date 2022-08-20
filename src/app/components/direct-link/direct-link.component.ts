@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID, Component, OnInit } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from "@angular/common";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import firestore from 'firebase/app'
@@ -9,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Location } from "@angular/common";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { Title, Meta } from '@angular/platform-browser';
 
 
 @Component({
@@ -30,6 +32,8 @@ isMobile = localStorage.getItem('isMobile');
 os = localStorage.getItem('os').toLowerCase() || null;
 
   constructor(
+    @Inject(PLATFORM_ID)
+    private platformId: any,
     public router: ActivatedRoute,
     private _router: Router,
     private data: DataService,
@@ -37,8 +41,10 @@ os = localStorage.getItem('os').toLowerCase() || null;
     public af: AngularFirestore,
     public dialog: MatDialog,
     private bottomSheet: MatBottomSheet,
-    private _location: Location
-    ) { }
+    private _location: Location,
+    private _title: Title,
+    private meta: Meta
+  ) { }
 
   ngOnInit(): void {
     if (this.os !== null && this.os === 'android') {
@@ -49,13 +55,29 @@ os = localStorage.getItem('os').toLowerCase() || null;
     this.getPostByPostId(this.collection, this.postId);
     setTimeout(() => {
       // disable close mat bottome sheet
-      this.bottomSheet.open(SidenavComponent, {data: {collection: this.collection, id:this.postId, name: this.postData.name, title: this.postData.title, type: 'prompt'}, disableClose: true})
+      this.bottomSheet.open(SidenavComponent, {data: {collection: this.collection, id:this.postId, name: this.postData.author.name, title: this.postData.content.title, type: 'prompt'}, disableClose: true})
     }, 1000);
   }
 
   getPostByPostId(collection:string, id:string) {
     this.data.getSinglePost(id, collection).subscribe(res => {
       this.postData = res;
+      const newTitle = `${this.collection.toLocaleUpperCase()} ${this.postData.type.toLocaleUpperCase()} by ${this.postData.author.name} on LocalEyes`;
+      this._title.setTitle(this.postData.content.title);
+      this.meta.updateTag({ name: 'title', content: this.postData.content.title });
+      this.meta.updateTag({ name: 'description', content: `${newTitle.toLowerCase().replace(/\b\w/g, s => s.toUpperCase())}` });
+      this.meta.updateTag({ name: 'author', content: this.postData.author.name });
+      this.meta.updateTag({ name: 'keywords', content: 'near me, hyperlocal, localeyes, local eyes, local eye, community, jaipur' });
+      this.meta.updateTag({ property: 'og:description', content: `${newTitle.toLowerCase().replace(/\b\w/g, s => s.toUpperCase())}` });
+      this.meta.updateTag({ property: 'og:title', content: this.postData.content.title });
+      this.meta.updateTag({ property: 'og:image', content: this.postData.content.image ? this.postData.content.image : "https://localeyes.in/assets/imgs/Logo-14-bg.png" });
+      this.meta.updateTag({ property: 'og:url', content: `https://localeyes.in/` });
+      this.meta.updateTag({ name: 'twitter:title', content: this.postData.content.title });
+      this.meta.updateTag({ name: 'twitter:description', content: `${newTitle.toLowerCase().replace(/\b\w/g, s => s.toUpperCase())}` });
+      this.meta.updateTag({ name: 'twitter:image', content: this.postData.content.image ? this.postData.content.image : "https://localeyes.in/assets/imgs/Logo-14-bg.png" });
+      this.meta.updateTag({ name: 'twitter:image:alt', content: this.postData.content.image ? `image posted by ${this.postData.author.name}` : "LocalEyes Logo" });
+      this.meta.updateTag({ name: 'twitter:url', content: `https://localeyes.in/app/${this.collection}/${this.postId}` });
+      this.meta.updateTag({ name: 'robots', content: 'index, follow' });
       this.loadComplete = true;
     })
     this.data.getAnswers(id).subscribe(comments => {
@@ -124,8 +146,10 @@ os = localStorage.getItem('os').toLowerCase() || null;
 
   formatAnswer(i: number, answer: any) {
     // replace @username with link
-    if (answer.answer != null) {
-      return document.getElementById(`answer${i}`).innerHTML = (answer.answer).replace(/@([A-Za-z0-9_]+)/g, `<span class="highlight" style="cursor:pointer">@$1</span>`);
+    if (isPlatformBrowser(this.platformId)) {
+      if (answer.answer != null) {
+        return document.getElementById(`answer${i}`).innerHTML = (answer.answer).replace(/@([A-Za-z0-9_]+)/g, `<span class="highlight" style="cursor:pointer">@$1</span>`);
+      }
     }
   }
 

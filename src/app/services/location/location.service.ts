@@ -48,7 +48,7 @@ export class LocationService {
       console.log(`https://maps.googleapis.com/maps/api/geocode/json`, {params})
       return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json`, {params})
     } else {
-      return this.http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=26.9124,75.7873&key=AIzaSyDdBGKa4y35oLNIppUD4M3NMhLW2aU1eb8&result_type=sublocality|political")
+      return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=26.9124,75.7873&key=${geoCodingAPI}&result_type=sublocality|political`)
     }
   }
 }
