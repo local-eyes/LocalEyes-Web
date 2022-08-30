@@ -5,8 +5,6 @@ import { SignInCheckerComponent } from './components/sign-in-checker/sign-in-che
 import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
-import { MatBottomSheet, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { IntroScreenComponent } from './components/intro-screen/intro-screen.component';
 
 @Component({
   selector: 'app-root',
