@@ -30,14 +30,6 @@ export class AppComponent implements OnInit{
   }
   ngOnInit() {
     this.getUserData();
-    if (!localStorage.getItem("intro_screen_displayed")){
-      if (this.isMobile==false){
-        this.dialog.open(IntroScreenComponent, {width: "60vw"});
-      } else {
-        this.dialog.open(IntroScreenComponent, {width: "100vw"});
-      }
-      localStorage.setItem("intro_screen_displayed", "true")
-    }
   }
 
   getUserData() {
