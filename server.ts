@@ -1,5 +1,6 @@
 (global as any).WebSocket = require('ws');
 (global as any).XMLHttpRequest = require('xhr2');
+const http = require('http');
 
 
 import 'localstorage-polyfill'
@@ -40,6 +41,12 @@ export function app(): express.Express {
   server.get('*', (req, res) => {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
+
+  server.get('/sitemap.xml', (req, res) => {
+    http.get('https://www.localeyes.com/sitemap.xml', (response) => {
+      console.log(response);
+    })
+  })
 
   return server;
 }
